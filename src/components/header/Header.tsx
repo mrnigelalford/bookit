@@ -9,6 +9,12 @@ import logodark2x from '../../assets/images/logo/logo_dark@2x.png'
 import imgsun from '../../assets/images/icon/sun.png'
 import avt from '../../assets/images/avatar/avt-2.jpg'
 
+import { TezosToolkit } from '@taquito/taquito'
+import { BeaconWallet } from '@taquito/beacon-wallet'
+import { NetworkType } from '@airgap/beacon-sdk'
+
+global.Buffer = global.Buffer || require('buffer').Buffer
+
 const Header = () => {
   const { pathname } = useLocation()
 
@@ -23,11 +29,11 @@ const Header = () => {
     const header = document.querySelector('.js-header')
     const scrollTop = window.scrollY
     scrollTop >= 300
-      ? header.classList.add('is-fixed')
-      : header.classList.remove('is-fixed')
+      ? header?.classList.add('is-fixed')
+      : header?.classList.remove('is-fixed')
     scrollTop >= 400
-      ? header.classList.add('is-small')
-      : header.classList.remove('is-small')
+      ? header?.classList.add('is-small')
+      : header?.classList.remove('is-small')
   }
 
   const menuLeft = useRef(null)
@@ -35,17 +41,32 @@ const Header = () => {
   const btnSearch = useRef(null)
 
   const menuToggle = () => {
+    // @ts-ignore
     menuLeft.current.classList.toggle('active')
+    // @ts-ignore
     btnToggle.current.classList.toggle('active')
   }
 
   const searchBtn = () => {
+    // @ts-ignore
     btnSearch.current.classList.toggle('active')
   }
 
   const [activeIndex, setActiveIndex] = useState(null)
   const handleOnClick = (index) => {
     setActiveIndex(index)
+  }
+
+  const Tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
+  const wallet = new BeaconWallet({
+    name: 'Bookit - Book NFT marketplace',
+    preferredNetwork: NetworkType.ITHACANET,
+  })
+  Tezos.setWalletProvider(wallet)
+
+  const getWalletPermissions = async () => {
+    const permissions = await wallet.client.requestPermissions()
+    console.log('Got permissions:', permissions.address)
   }
 
   return (
@@ -136,7 +157,7 @@ const Header = () => {
                           placeholder="Search..."
                           name="s"
                           title="Search for"
-                          required=""
+                          required={false}
                         />
                         <button
                           className="search search-submit"
@@ -149,12 +170,13 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="sc-btn-top mg-r-12" id="site-header">
-                    <Link
-                      to="/wallet-connect"
+                    <div
+                      style={{ cursor: 'pointer' }}
                       className="sc-button header-slider style style-1 wallet fl-button pri-1"
+                      onClick={() => getWalletPermissions()}
                     >
                       <span>Wallet connect</span>
-                    </Link>
+                    </div>
                   </div>
 
                   <div className="admin_active" id="header_admin">
