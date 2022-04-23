@@ -8,8 +8,8 @@ function App() {
     return (
         <Routes >
             {
-            routes.map((data,index) => (
-                <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={data.path} element={data.component} key={index} />
+            routes.map(({path, component},index) => (
+                <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={path} element={component} key={index} />
             ))
             }
       </Routes>
