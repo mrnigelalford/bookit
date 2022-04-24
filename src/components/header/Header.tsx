@@ -1,73 +1,120 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import menus from '../../pages/menu'
-import DarkMode from './DarkMode'
-import logoheader from '../../assets/images/logo/logo.png'
-import logoheader2x from '../../assets/images/logo/logo@2x.png'
-import logodark from '../../assets/images/logo/logo_dark.png'
-import logodark2x from '../../assets/images/logo/logo_dark@2x.png'
-import imgsun from '../../assets/images/icon/sun.png'
-import avt from '../../assets/images/avatar/avt-2.jpg'
+import React, { useRef, useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import menus from '../../pages/menu';
+import DarkMode from './DarkMode';
+import logoheader from '../../assets/images/logo/logo.png';
+import logoheader2x from '../../assets/images/logo/logo@2x.png';
+import logodark from '../../assets/images/logo/logo_dark.png';
+import logodark2x from '../../assets/images/logo/logo_dark@2x.png';
+import imgsun from '../../assets/images/icon/sun.png';
+import avt from '../../assets/images/avatar/avt-2.jpg';
 
-import { TezosToolkit } from '@taquito/taquito'
-import { BeaconWallet } from '@taquito/beacon-wallet'
-import { NetworkType } from '@airgap/beacon-sdk'
+import { TezosToolkit } from '@taquito/taquito';
+import { BeaconWallet } from '@taquito/beacon-wallet';
+import { NetworkType } from '@airgap/beacon-sdk';
+import { PermissionScope } from '@airgap/beacon-sdk';
 
-global.Buffer = global.Buffer || require('buffer').Buffer
+global.Buffer = global.Buffer || require('buffer').Buffer;
 
 const Header = () => {
-  const { pathname } = useLocation()
-
-  const headerRef = useRef(null)
-  useEffect(() => {
-    window.addEventListener('scroll', isSticky)
-    return () => {
-      window.removeEventListener('scroll', isSticky)
-    }
-  })
-  const isSticky = (e) => {
-    const header = document.querySelector('.js-header')
-    const scrollTop = window.scrollY
-    scrollTop >= 300
-      ? header?.classList.add('is-fixed')
-      : header?.classList.remove('is-fixed')
-    scrollTop >= 400
-      ? header?.classList.add('is-small')
-      : header?.classList.remove('is-small')
-  }
-
-  const menuLeft = useRef(null)
-  const btnToggle = useRef(null)
-  const btnSearch = useRef(null)
-
-  const menuToggle = () => {
-    // @ts-ignore
-    menuLeft.current.classList.toggle('active')
-    // @ts-ignore
-    btnToggle.current.classList.toggle('active')
-  }
-
-  const searchBtn = () => {
-    // @ts-ignore
-    btnSearch.current.classList.toggle('active')
-  }
-
-  const [activeIndex, setActiveIndex] = useState(null)
-  const handleOnClick = (index) => {
-    setActiveIndex(index)
-  }
-
-  const Tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
+  const Tezos = new TezosToolkit('https://rpczero.tzbeta.net/');
   const wallet = new BeaconWallet({
     name: 'Bookit - Book NFT marketplace',
     preferredNetwork: NetworkType.ITHACANET,
-  })
-  Tezos.setWalletProvider(wallet)
+  });
+  Tezos.setWalletProvider(wallet);
+
+  const { pathname } = useLocation();
+
+  const headerRef = useRef(null);
+  useEffect(() => {
+    window.addEventListener('scroll', isSticky);
+    return () => {
+      window.removeEventListener('scroll', isSticky);
+    };
+  });
+  const isSticky = (e) => {
+    const header = document.querySelector('.js-header');
+    const scrollTop = window.scrollY;
+    scrollTop >= 300
+      ? header?.classList.add('is-fixed')
+      : header?.classList.remove('is-fixed');
+    scrollTop >= 400
+      ? header?.classList.add('is-small')
+      : header?.classList.remove('is-small');
+  };
+
+  const menuLeft = useRef(null);
+  const btnToggle = useRef(null);
+  const btnSearch = useRef(null);
+
+  const menuToggle = () => {
+    // @ts-ignore
+    menuLeft.current.classList.toggle('active');
+    // @ts-ignore
+    btnToggle.current.classList.toggle('active');
+  };
+
+  const searchBtn = () => {
+    // @ts-ignore
+    btnSearch.current.classList.toggle('active');
+  };
+
+  const [activeIndex, setActiveIndex] = useState(null);
+  const handleOnClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const [address, setAddress] = useState<string>();
+  const [activeAccount, setActiveAccount] = useState<any>();
+  const [profileVisible, setProfileVisible] = useState<boolean>(false);
+
+  const scopes: PermissionScope[] = [
+    PermissionScope.OPERATION_REQUEST,
+    PermissionScope.SIGN,
+  ];
+
+  useEffect(() => {
+    wallet.client.getActiveAccount().then((aa) => {
+      if (aa) {
+        setActiveAccount(aa);
+        setAddress(aa?.address);
+        console.log('run it: ', aa);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getWalletPermissions = async () => {
-    const permissions = await wallet.client.requestPermissions()
-    console.log('Got permissions:', permissions.address)
-  }
+    let myAddress: string | undefined;
+
+    if (activeAccount) {
+      // If defined, the user is connected to a wallet.
+      // You can now do an operation request, sign request, or send another permission request to switch wallet
+      console.log('Already connected:', activeAccount.address);
+      myAddress = activeAccount.address;
+    } else {
+      await wallet.client.requestPermissions({
+        scopes,
+        network: {
+          type: NetworkType.ITHACANET,
+        },
+      });
+
+      myAddress = await wallet.getPKH();
+
+      setAddress(myAddress);
+      console.log('New connection:', myAddress);
+    }
+  };
+
+  const disconnectWallet = () => {
+    if (activeAccount) {
+      wallet.clearActiveAccount();
+      setActiveAccount(null);
+      setAddress(undefined);
+    }
+  };
 
   return (
     <header id="header_main" className="header_1 js-header" ref={headerRef}>
@@ -169,60 +216,79 @@ const Header = () => {
                       </form>
                     </div>
                   </div>
-                  <div className="sc-btn-top mg-r-12" id="site-header">
-                    <div
-                      style={{ cursor: 'pointer' }}
-                      className="sc-button header-slider style style-1 wallet fl-button pri-1"
-                      onClick={() => getWalletPermissions()}
-                    >
-                      <span>Wallet connect</span>
-                    </div>
-                  </div>
-
-                  <div className="admin_active" id="header_admin">
-                    <div className="header_avatar">
-                      <div className="price">
-                        <span>
-                          2.45 <strong>ETH</strong>{' '}
-                        </span>
+                  {!address && (
+                    <div className="sc-btn-top mg-r-12" id="site-header">
+                      <div
+                        style={{ cursor: 'pointer' }}
+                        className="sc-button header-slider style style-1 wallet fl-button pri-1"
+                        onClick={() => getWalletPermissions()}
+                      >
+                        <span>Wallet connect</span>
                       </div>
-                      <img className="avatar" src={avt} alt="avatar" />
-                      <div className="avatar_popup mt-20">
-                        <div className="d-flex align-items-center copy-text justify-content-between">
-                          <span> 13b9ebda035r178... </span>
-                          <Link to="/" className="ml-2">
-                            <i className="fal fa-copy"></i>
-                          </Link>
+                    </div>
+                  )}
+
+                  {address && (
+                    <div id="header_admin">
+                      <div className="header_avatar">
+                        <div
+                          className="price"
+                          onClick={() => setProfileVisible(!profileVisible)}
+                        >
+                          <span>
+                            {activeAccount.Balance || 0} <strong>XTZ</strong>{' '}
+                          </span>
                         </div>
-                        <div className="d-flex align-items-center mt-10">
-                          <img className="coin" src={imgsun} alt="/" />
-                          <div className="info ml-10">
-                            <p className="text-sm font-book text-gray-400">
-                              Balance
-                            </p>
-                            <p className="w-full text-sm font-bold text-green-500">
-                              16.58 ETH
-                            </p>
+                        <img
+                          className="avatar"
+                          src={avt}
+                          alt="avatar"
+                          onClick={() => setProfileVisible(!profileVisible)}
+                        />
+                        <div
+                          className={`avatar_popup mt-20 ${
+                            profileVisible ? 'visible' : ''
+                          }`}
+                        >
+                          <div className="d-flex align-items-center copy-text justify-content-between">
+                            <span> {address}... </span>
+                            <Link to="/" className="ml-2">
+                              <i className="fal fa-copy"></i>
+                            </Link>
+                          </div>
+                          <div className="d-flex align-items-center mt-10">
+                            <img className="coin" src={imgsun} alt="/" />
+                            <div className="info ml-10">
+                              <p className="text-sm font-book text-gray-400">
+                                Balance
+                              </p>
+                              <p className="w-full text-sm font-bold text-green-500">
+                                16.58 ETH
+                              </p>
+                            </div>
+                          </div>
+                          <div className="hr"></div>
+                          <div className="links mt-20">
+                            <Link to="#">
+                              <i className="fab fa-accusoft"></i>{' '}
+                              <span> My items</span>
+                            </Link>
+                            <a className="mt-10" href="/edit-profile">
+                              <i className="fas fa-pencil-alt"></i>{' '}
+                              <span> Edit Profile</span>
+                            </a>
+                            <div
+                              className="mt-10 copy-text"
+                              onClick={() => disconnectWallet()}
+                            >
+                              <i className="fal fa-sign-out"></i>{' '}
+                              <span> Disconnect </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="hr"></div>
-                        <div className="links mt-20">
-                          <Link to="#">
-                            <i className="fab fa-accusoft"></i>{' '}
-                            <span> My items</span>
-                          </Link>
-                          <a className="mt-10" href="/edit-profile">
-                            <i className="fas fa-pencil-alt"></i>{' '}
-                            <span> Edit Profile</span>
-                          </a>
-                          <a className="mt-10" href="/login" id="logout">
-                            <i className="fal fa-sign-out"></i>{' '}
-                            <span> Logout</span>
-                          </a>
-                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -231,7 +297,7 @@ const Header = () => {
       </div>
       <DarkMode />
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

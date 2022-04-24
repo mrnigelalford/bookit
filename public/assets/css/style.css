@@ -1367,9 +1367,6 @@ header {
   display: flex;
   align-items: center;
 }
-.admin_active {
-  display: none;
-}
 
 .connect-wal .admin_active {
   display: block;
@@ -1499,7 +1496,8 @@ header {
   margin-left: 10px;
 }
 .avatar_popup .copy-text a,
-.avatar_popup .copy-text span {
+.avatar_popup .copy-text span,
+.avatar_popup .copy-text .fal {
   color: #14141f;
 }
 
