@@ -11,8 +11,7 @@ import avt from '../../assets/images/avatar/avt-2.jpg';
 
 import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
-import { NetworkType } from '@airgap/beacon-sdk';
-import { PermissionScope } from '@airgap/beacon-sdk';
+import { NetworkType, PermissionScope, AccountInfo } from '@airgap/beacon-sdk';
 
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
@@ -66,20 +65,28 @@ const Header = () => {
   };
 
   const [address, setAddress] = useState<string>();
+  const [accountBalance, setAccountBalance] = useState<number>();
   const [activeAccount, setActiveAccount] = useState<any>();
   const [profileVisible, setProfileVisible] = useState<boolean>(false);
 
-  const scopes: PermissionScope[] = [
-    PermissionScope.OPERATION_REQUEST,
-    PermissionScope.SIGN,
-  ];
+  // const scopes: PermissionScope[] = [
+  //   PermissionScope.OPERATION_REQUEST,
+  //   PermissionScope.SIGN,
+  // ];
+
+  const setWalletBalance = async (account: AccountInfo) => {
+    const balance = await Tezos.tz.getBalance(account.address);
+    console.log('balance: ', balance.toNumber());
+    setAccountBalance(balance.toNumber());
+  };
 
   useEffect(() => {
-    wallet.client.getActiveAccount().then((aa) => {
-      if (aa) {
-        setActiveAccount(aa);
-        setAddress(aa?.address);
-        console.log('run it: ', aa);
+    wallet.client.getActiveAccount().then((activeAccount) => {
+      if (activeAccount) {
+        setActiveAccount(activeAccount);
+        setAddress(activeAccount?.address);
+        setWalletBalance(activeAccount);
+        console.log('acc: ', accountBalance);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,23 +95,18 @@ const Header = () => {
   const getWalletPermissions = async () => {
     let myAddress: string | undefined;
 
+    // If defined, the user is connected to a wallet.
     if (activeAccount) {
-      // If defined, the user is connected to a wallet.
-      // You can now do an operation request, sign request, or send another permission request to switch wallet
-      console.log('Already connected:', activeAccount.address);
       myAddress = activeAccount.address;
     } else {
       await wallet.client.requestPermissions({
-        scopes,
         network: {
           type: NetworkType.ITHACANET,
         },
       });
 
       myAddress = await wallet.getPKH();
-
       setAddress(myAddress);
-      console.log('New connection:', myAddress);
     }
   };
 
@@ -236,7 +238,7 @@ const Header = () => {
                           onClick={() => setProfileVisible(!profileVisible)}
                         >
                           <span>
-                            {activeAccount.Balance || 0} <strong>XTZ</strong>{' '}
+                            {accountBalance} <strong>xtz</strong>{' '}
                           </span>
                         </div>
                         <img
