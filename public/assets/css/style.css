@@ -3302,3 +3302,15 @@ header {
   top: 0px;
   color: #fff;
 }
+
+#categoryDropdown .dropdown-menu,
+#outputDropdown .dropdown-menu {
+  width: 100%;
+  font-size: large;
+  text-align: center;
+}
+
+.is_dark .sc-button.fl-button.pri-3:hover {
+  border: 2px solid rgb(64, 55, 166);
+  background-color: rgb(64, 55, 166);
+}

@@ -9,20 +9,18 @@ import logodark2x from '../../assets/images/logo/logo_dark@2x.png';
 import imgsun from '../../assets/images/icon/sun.png';
 import avt from '../../assets/images/avatar/avt-2.jpg';
 
-import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
-import { NetworkType, PermissionScope, AccountInfo } from '@airgap/beacon-sdk';
+import { NetworkType, AccountInfo } from '@airgap/beacon-sdk';
+import { TezosToolkit } from '@taquito/taquito';
 
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
-const Header = () => {
-  const Tezos = new TezosToolkit('https://rpczero.tzbeta.net/');
-  const wallet = new BeaconWallet({
-    name: 'Bookit - Book NFT marketplace',
-    preferredNetwork: NetworkType.ITHACANET,
-  });
-  Tezos.setWalletProvider(wallet);
+interface HeaderProps {
+  wallet?: BeaconWallet;
+  Tezos?: TezosToolkit;
+}
 
+const Header = ({ wallet, Tezos }: HeaderProps) => {
   const { pathname } = useLocation();
 
   const headerRef = useRef(null);
@@ -75,13 +73,13 @@ const Header = () => {
   // ];
 
   const setWalletBalance = async (account: AccountInfo) => {
-    const balance = await Tezos.tz.getBalance(account.address);
-    console.log('balance: ', balance.toNumber());
-    setAccountBalance(balance.toNumber());
+    const balance = await Tezos?.tz.getBalance(account.address);
+    console.log('balance: ', balance?.toNumber());
+    setAccountBalance(balance?.toNumber());
   };
 
   useEffect(() => {
-    wallet.client.getActiveAccount().then((activeAccount) => {
+    wallet?.client.getActiveAccount().then((activeAccount) => {
       if (activeAccount) {
         setActiveAccount(activeAccount);
         setAddress(activeAccount?.address);
@@ -95,24 +93,24 @@ const Header = () => {
   const getWalletPermissions = async () => {
     let myAddress: string | undefined;
 
-    // If defined, the user is connected to a wallet.
+    // If defined, the user is connected to a wallet?.
     if (activeAccount) {
       myAddress = activeAccount.address;
     } else {
-      await wallet.client.requestPermissions({
+      await wallet?.client.requestPermissions({
         network: {
           type: NetworkType.ITHACANET,
         },
       });
 
-      myAddress = await wallet.getPKH();
+      myAddress = await wallet?.getPKH();
       setAddress(myAddress);
     }
   };
 
   const disconnectWallet = () => {
     if (activeAccount) {
-      wallet.clearActiveAccount();
+      wallet?.clearActiveAccount();
       setActiveAccount(null);
       setAddress(undefined);
     }

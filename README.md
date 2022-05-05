@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Tezos Documentation
+
+[list of RPC nodes](https://tezostaquito.io/docs/rpc_nodes/)
+
+Usefull info for book authors
+[Choosing the right ebook format](https://learn.g2.com/ebook-formats)
