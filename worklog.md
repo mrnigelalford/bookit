@@ -1,5 +1,6 @@
 ## todo
 
+[] test against different networks
 [] mint book against contract
 [] convert document to ebook format (only support two formats, epub & mobi)
 [] smart contract integration

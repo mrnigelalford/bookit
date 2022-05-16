@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import Countdown from 'react-countdown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import avt from '../assets/images/avatar/avt-9.jpg';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { pinFileToIPFS } from '../global/pinata';
 import { Originate } from '../global/smartContract';
 import { BeaconWallet } from '@taquito/beacon-wallet';
@@ -25,7 +24,7 @@ enum BookType {
 interface UploadProps {
   title: string;
   description: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onBlur: React.ChangeEventHandler<HTMLInputElement> | undefined;
 }
 
 interface CreateItemProps {
@@ -37,14 +36,17 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   const [fileSelected, setFileSelected] = useState<File>(); // also tried <string | Blob>
   const [bookUpload, setBookUpload] = useState<File>(); // also tried <string | Blob>
   const [fileName, setFileName] = useState<string>();
-  const [price, setPrice] = useState<number>();
+  const [price, setPrice] = useState<number>(100);
   const [title, setTitle] = useState<string | null>('Sample Title');
-  const [description, setDescription] = useState<string | null>();
-  const [category, setCategory] = useState<string>();
+  const [description, setDescription] = useState<string | null>(
+    'picture perfect description'
+  );
+  const [category, setCategory] = useState<string>('Art');
   const [bookType, setBookType] = useState<BookType>(BookType.epub);
   const [royalties, setRoyalty] = useState<number>(2);
   const [quantity, setQuantity] = useState<number>(1);
-  const [authorName, setAuthorName] = useState<string>();
+  const [authorName, setAuthorName] = useState<string>('test author');
+  const [activeAccount, setActiveAccount] = useState<any>();
 
   const categories = [
     'Abstraction',
@@ -80,10 +82,10 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
 
     // send form to IPFS
     if (formData.has('file')) {
-      const { data } = await pinFileToIPFS(formData);
-      console.log('ipfs: ', data);
+      // const { data } = await pinFileToIPFS(formData);
+      // console.log('ipfs: ', data);
       const nftInfo = {
-        IpfsHash: data.IpfsHash,
+        IpfsHash: 'mockHash', // data.IpfsHash,
         price,
         title,
         description,
@@ -94,8 +96,8 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
         authorName,
       };
 
-      if (Tezos) {
-        Originate({ Tezos, nftInfo, owner: 'abcd1234' });
+      if (Tezos && activeAccount) {
+        Originate({ Tezos, nftInfo, owner: activeAccount?.address });
       }
     }
   };
@@ -114,7 +116,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
           type="file"
           className="inputfile form-control"
           name="fileUpload"
-          onChange={props.onChange}
+          onBlur={props.onBlur}
           style={{ right: '1em' }}
         />
       </label>
@@ -137,7 +139,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {categories.map((cat) => (
-          <Dropdown.Item>{cat}</Dropdown.Item>
+          <Dropdown.Item key={cat}>{cat}</Dropdown.Item>
         ))}
       </Dropdown.Menu>
     </Dropdown>
@@ -159,7 +161,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {Object.keys(BookType).map((format) => (
-          <Dropdown.Item>{BookType[format]}</Dropdown.Item>
+          <Dropdown.Item key={format}>{BookType[format]}</Dropdown.Item>
         ))}
       </Dropdown.Menu>
     </Dropdown>
@@ -187,6 +189,14 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   //     </ul>
   //   </div>
   // );
+
+  useEffect(() => {
+    wallet?.client.getActiveAccount().then((activeAccount) => {
+      if (activeAccount) {
+        setActiveAccount(activeAccount);
+      }
+    });
+  }, [wallet]);
 
   return (
     <div className="create-item">
@@ -232,7 +242,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                   </div>
                   <div className="price">
                     <span>Current Bid</span>
-                    <h5> 4.89 ETH</h5>
+                    <h5> 4.89 xtz</h5>
                   </div>
                 </div>
                 <div className="card-bottom">
@@ -266,7 +276,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                   description={
                     fileSelected?.name || '.pdf. .docx, or .txt. Max 200mb.'
                   }
-                  onChange={handleFileChange}
+                  onBlur={handleFileChange}
                 />
                 <div className="flat-tabs tab-create-item">
                   <h4 className="title-create-item">Select method</h4>
@@ -292,7 +302,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                               type="number"
                               style={{ backgroundColor: 'transparent' }}
                               placeholder="Enter price for one item (xtz)"
-                              onChange={() => setPrice}
+                              onBlur={() => setPrice}
                             />
                           </div>
                           <div className="col-4">
@@ -301,9 +311,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                               type="number"
                               placeholder="5%"
                               value={royalties}
-                              onChange={(e) =>
-                                setRoyalty(Number(e.target.value))
-                              }
+                              onBlur={(e) => setRoyalty(Number(e.target.value))}
                             />
                           </div>
 
@@ -313,7 +321,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                               type="number"
                               placeholder="e.g. “# of books to be minted”"
                               value={quantity}
-                              onChange={(e) =>
+                              onBlur={(e) =>
                                 setQuantity(Number(e.target.value))
                               }
                             />
@@ -324,7 +332,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                         <input
                           type="text"
                           placeholder="Item Name"
-                          onChange={(e) => {
+                          onBlur={(e) => {
                             setTitle(e.target.value);
                           }}
                         />
@@ -332,7 +340,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                         <h4 className="title-create-item">Description</h4>
                         <textarea
                           placeholder="e.g. “This is very limited item”"
-                          onChange={(e) => setDescription(e.target.value)}
+                          onBlur={(e) => setDescription(e.target.value)}
                         ></textarea>
 
                         <div

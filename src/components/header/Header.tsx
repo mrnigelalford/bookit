@@ -12,6 +12,7 @@ import avt from '../../assets/images/avatar/avt-2.jpg';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { NetworkType, AccountInfo } from '@airgap/beacon-sdk';
 import { TezosToolkit } from '@taquito/taquito';
+import { PermissionScope } from '@airgap/beacon-sdk';
 
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
@@ -67,10 +68,10 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
   const [activeAccount, setActiveAccount] = useState<any>();
   const [profileVisible, setProfileVisible] = useState<boolean>(false);
 
-  // const scopes: PermissionScope[] = [
-  //   PermissionScope.OPERATION_REQUEST,
-  //   PermissionScope.SIGN,
-  // ];
+  const scopes: PermissionScope[] = [
+    PermissionScope.OPERATION_REQUEST,
+    PermissionScope.SIGN,
+  ];
 
   const setWalletBalance = async (account: AccountInfo) => {
     const balance = await Tezos?.tz.getBalance(account.address);
@@ -101,6 +102,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
         network: {
           type: NetworkType.ITHACANET,
         },
+        scopes,
       });
 
       myAddress = await wallet?.getPKH();

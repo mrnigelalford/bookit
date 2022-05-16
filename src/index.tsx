@@ -8,7 +8,7 @@ import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { NetworkType } from '@airgap/beacon-sdk';
 
-const Tezos = new TezosToolkit('https://rpczero.tzbeta.net/');
+const Tezos = new TezosToolkit('https://ithacanet.ecadinfra.com');
 
 const wallet = new BeaconWallet({
   name: 'Bookit - Book NFT marketplace',
@@ -25,3 +25,5 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
+
+// JyndNY34437!n
