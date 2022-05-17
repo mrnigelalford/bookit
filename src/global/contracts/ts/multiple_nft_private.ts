@@ -81,7 +81,16 @@ export const code = [
                             args: [
                               {
                                 prim: 'big_map',
-                                args: [{ prim: 'nat' }, { prim: 'address' }],
+                                args: [
+                                  {
+                                    prim: 'pair',
+                                    args: [
+                                      { prim: 'nat' },
+                                      { prim: 'address' },
+                                    ],
+                                  },
+                                  { prim: 'nat' },
+                                ],
                                 annots: ['%ledger'],
                               },
                               {
@@ -105,7 +114,7 @@ export const code = [
                                       },
                                       { prim: 'unit' },
                                     ],
-                                    annots: ['%operator'],
+                                    annots: ['%operators'],
                                   },
                                   {
                                     prim: 'pair',
@@ -211,7 +220,7 @@ export const code = [
                                                   },
                                                   { prim: 'unit' },
                                                 ],
-                                                annots: ['%operator_for_all'],
+                                                annots: ['%operators_for_all'],
                                               },
                                               {
                                                 prim: 'pair',
@@ -587,32 +596,38 @@ export const code = [
                                   {
                                     prim: 'pair',
                                     args: [
+                                      { prim: 'nat', annots: ['%iamount'] },
                                       {
-                                        prim: 'map',
-                                        args: [
-                                          { prim: 'string' },
-                                          { prim: 'bytes' },
-                                        ],
-                                        annots: ['%itokenMetadata'],
-                                      },
-                                      {
-                                        prim: 'list',
+                                        prim: 'pair',
                                         args: [
                                           {
-                                            prim: 'pair',
+                                            prim: 'map',
+                                            args: [
+                                              { prim: 'string' },
+                                              { prim: 'bytes' },
+                                            ],
+                                            annots: ['%itokenMetadata'],
+                                          },
+                                          {
+                                            prim: 'list',
                                             args: [
                                               {
-                                                prim: 'address',
-                                                annots: ['%partAccount'],
-                                              },
-                                              {
-                                                prim: 'nat',
-                                                annots: ['%partValue'],
+                                                prim: 'pair',
+                                                args: [
+                                                  {
+                                                    prim: 'address',
+                                                    annots: ['%partAccount'],
+                                                  },
+                                                  {
+                                                    prim: 'nat',
+                                                    annots: ['%partValue'],
+                                                  },
+                                                ],
                                               },
                                             ],
+                                            annots: ['%iroyalties'],
                                           },
                                         ],
-                                        annots: ['%iroyalties'],
                                       },
                                     ],
                                   },
@@ -629,7 +644,14 @@ export const code = [
               },
             ],
           },
-          { prim: 'nat', annots: ['%burn'] },
+          {
+            prim: 'pair',
+            args: [
+              { prim: 'nat', annots: ['%itokenid'] },
+              { prim: 'nat', annots: ['%iamount'] },
+            ],
+            annots: ['%burn'],
+          },
         ],
       },
     ],
@@ -681,7 +703,13 @@ export const code = [
               args: [
                 {
                   prim: 'big_map',
-                  args: [{ prim: 'nat' }, { prim: 'address' }],
+                  args: [
+                    {
+                      prim: 'pair',
+                      args: [{ prim: 'nat' }, { prim: 'address' }],
+                    },
+                    { prim: 'nat' },
+                  ],
                 },
                 {
                   prim: 'pair',
@@ -800,38 +828,13 @@ export const code = [
                                 { prim: 'OR' },
                               ],
                               [
+                                { prim: 'DUP', args: [{ int: '7' }] },
                                 { prim: 'SENDER' },
-                                { prim: 'DUP', args: [{ int: '8' }] },
                                 { prim: 'DUP', args: [{ int: '3' }] },
                                 { prim: 'CDR' },
                                 { prim: 'CAR' },
-                                { prim: 'GET' },
-                                {
-                                  prim: 'IF_NONE',
-                                  args: [
-                                    [
-                                      {
-                                        prim: 'PUSH',
-                                        args: [
-                                          { prim: 'string' },
-                                          { string: 'ledger' },
-                                        ],
-                                      },
-                                      {
-                                        prim: 'PUSH',
-                                        args: [
-                                          { prim: 'string' },
-                                          { string: 'AssetNotFound' },
-                                        ],
-                                      },
-                                      { prim: 'PAIR' },
-                                      { prim: 'FAILWITH' },
-                                    ],
-                                    [],
-                                  ],
-                                },
-                                { prim: 'COMPARE' },
-                                { prim: 'EQ' },
+                                { prim: 'PAIR' },
+                                { prim: 'MEM' },
                               ],
                             ],
                           },
@@ -1564,66 +1567,69 @@ export const code = [
                                         prim: 'MAP',
                                         args: [
                                           [
-                                            { prim: 'DUP' },
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '13' }],
+                                            },
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '2' }],
+                                            },
                                             { prim: 'CAR' },
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '14' }],
-                                            },
-                                            {
-                                              prim: 'DUP',
                                               args: [{ int: '3' }],
                                             },
                                             { prim: 'CDR' },
-                                            { prim: 'GET' },
-                                            {
-                                              prim: 'IF_NONE',
-                                              args: [
-                                                [
-                                                  {
-                                                    prim: 'PUSH',
-                                                    args: [
-                                                      { prim: 'string' },
-                                                      { string: 'ledger' },
-                                                    ],
-                                                  },
-                                                  {
-                                                    prim: 'PUSH',
-                                                    args: [
-                                                      { prim: 'string' },
-                                                      {
-                                                        string: 'AssetNotFound',
-                                                      },
-                                                    ],
-                                                  },
-                                                  { prim: 'PAIR' },
-                                                  { prim: 'FAILWITH' },
-                                                ],
-                                                [],
-                                              ],
-                                            },
-                                            { prim: 'COMPARE' },
-                                            { prim: 'EQ' },
-                                            {
-                                              prim: 'DUP',
-                                              args: [{ int: '14' }],
-                                            },
-                                            {
-                                              prim: 'DUP',
-                                              args: [{ int: '3' }],
-                                            },
-                                            { prim: 'CDR' },
+                                            { prim: 'PAIR' },
                                             { prim: 'MEM' },
-                                            { prim: 'AND' },
                                             {
                                               prim: 'IF',
                                               args: [
                                                 [
                                                   {
-                                                    prim: 'PUSH',
+                                                    prim: 'DUP',
+                                                    args: [{ int: '13' }],
+                                                  },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '2' }],
+                                                  },
+                                                  { prim: 'CAR' },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '3' }],
+                                                  },
+                                                  { prim: 'CDR' },
+                                                  { prim: 'PAIR' },
+                                                  { prim: 'GET' },
+                                                  {
+                                                    prim: 'IF_NONE',
                                                     args: [
-                                                      { prim: 'nat' },
-                                                      { int: '1' },
+                                                      [
+                                                        {
+                                                          prim: 'PUSH',
+                                                          args: [
+                                                            { prim: 'string' },
+                                                            {
+                                                              string: 'ledger',
+                                                            },
+                                                          ],
+                                                        },
+                                                        {
+                                                          prim: 'PUSH',
+                                                          args: [
+                                                            { prim: 'string' },
+                                                            {
+                                                              string:
+                                                                'AssetNotFound',
+                                                            },
+                                                          ],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'FAILWITH' },
+                                                      ],
+                                                      [],
                                                     ],
                                                   },
                                                 ],
@@ -2403,86 +2409,144 @@ export const code = [
                                                   {
                                                     prim: 'IF',
                                                     args: [
-                                                      [
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'string' },
-                                                            {
-                                                              string:
-                                                                'operator',
-                                                            },
-                                                          ],
-                                                        },
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'string' },
-                                                            {
-                                                              string:
-                                                                'KeyExists',
-                                                            },
-                                                          ],
-                                                        },
-                                                        { prim: 'PAIR' },
-                                                        { prim: 'FAILWITH' },
-                                                      ],
+                                                      [],
                                                       [
                                                         {
                                                           prim: 'DUP',
                                                           args: [{ int: '10' }],
                                                         },
                                                         {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'unit' },
-                                                            { prim: 'Unit' },
-                                                          ],
+                                                          prim: 'DUP',
+                                                          args: [{ int: '2' }],
                                                         },
-                                                        { prim: 'SOME' },
+                                                        { prim: 'CAR' },
                                                         {
                                                           prim: 'DUP',
                                                           args: [{ int: '3' }],
                                                         },
-                                                        { prim: 'CAR' },
-                                                        {
-                                                          prim: 'DUP',
-                                                          args: [{ int: '4' }],
-                                                        },
                                                         { prim: 'CDR' },
                                                         { prim: 'CDR' },
                                                         { prim: 'PAIR' },
                                                         {
                                                           prim: 'DUP',
-                                                          args: [{ int: '4' }],
+                                                          args: [{ int: '3' }],
                                                         },
                                                         { prim: 'CDR' },
                                                         { prim: 'CAR' },
                                                         { prim: 'PAIR' },
-                                                        { prim: 'UPDATE' },
+                                                        { prim: 'MEM' },
                                                         {
-                                                          prim: 'DIP',
+                                                          prim: 'IF',
                                                           args: [
-                                                            { int: '1' },
                                                             [
                                                               {
-                                                                prim: 'DIG',
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'operators',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'KeyExists',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'FAILWITH',
+                                                              },
+                                                            ],
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '10' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'unit',
+                                                                  },
+                                                                  {
+                                                                    prim: 'Unit',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'SOME' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '3' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CAR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CAR' },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'UPDATE',
+                                                              },
+                                                              {
+                                                                prim: 'DIP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                  [
+                                                                    {
+                                                                      prim: 'DIG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '9',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUG',
                                                                 args: [
                                                                   { int: '9' },
                                                                 ],
                                                               },
-                                                              {
-                                                                prim: 'DROP',
-                                                                args: [
-                                                                  { int: '1' },
-                                                                ],
-                                                              },
                                                             ],
                                                           ],
-                                                        },
-                                                        {
-                                                          prim: 'DUG',
-                                                          args: [{ int: '9' }],
                                                         },
                                                       ],
                                                     ],
@@ -2649,73 +2713,116 @@ export const code = [
                                                   {
                                                     prim: 'IF',
                                                     args: [
-                                                      [
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'string' },
-                                                            {
-                                                              string:
-                                                                'operator_for_all',
-                                                            },
-                                                          ],
-                                                        },
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'string' },
-                                                            {
-                                                              string:
-                                                                'KeyExists',
-                                                            },
-                                                          ],
-                                                        },
-                                                        { prim: 'PAIR' },
-                                                        { prim: 'FAILWITH' },
-                                                      ],
+                                                      [],
                                                       [
                                                         {
                                                           prim: 'DUP',
                                                           args: [{ int: '13' }],
                                                         },
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'unit' },
-                                                            { prim: 'Unit' },
-                                                          ],
-                                                        },
-                                                        { prim: 'SOME' },
                                                         { prim: 'SENDER' },
                                                         {
                                                           prim: 'DUP',
-                                                          args: [{ int: '4' }],
+                                                          args: [{ int: '3' }],
                                                         },
                                                         { prim: 'PAIR' },
-                                                        { prim: 'UPDATE' },
+                                                        { prim: 'MEM' },
                                                         {
-                                                          prim: 'DIP',
+                                                          prim: 'IF',
                                                           args: [
-                                                            { int: '1' },
                                                             [
                                                               {
-                                                                prim: 'DIG',
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'operators_for_all',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'KeyExists',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'FAILWITH',
+                                                              },
+                                                            ],
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'unit',
+                                                                  },
+                                                                  {
+                                                                    prim: 'Unit',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'SOME' },
+                                                              {
+                                                                prim: 'SENDER',
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'UPDATE',
+                                                              },
+                                                              {
+                                                                prim: 'DIP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                  [
+                                                                    {
+                                                                      prim: 'DIG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '12',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUG',
                                                                 args: [
                                                                   { int: '12' },
                                                                 ],
                                                               },
-                                                              {
-                                                                prim: 'DROP',
-                                                                args: [
-                                                                  { int: '1' },
-                                                                ],
-                                                              },
                                                             ],
                                                           ],
-                                                        },
-                                                        {
-                                                          prim: 'DUG',
-                                                          args: [{ int: '12' }],
                                                         },
                                                       ],
                                                     ],
@@ -4867,19 +4974,439 @@ export const code = [
                                                         },
                                                         {
                                                           prim: 'DUP',
-                                                          args: [{ int: '2' }],
+                                                          args: [{ int: '6' }],
                                                         },
-                                                        { prim: 'MEM' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '3' }],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'GET' },
+                                                        {
+                                                          prim: 'IF_NONE',
+                                                          args: [
+                                                            [
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'ledger',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'AssetNotFound',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'FAILWITH',
+                                                              },
+                                                            ],
+                                                            [],
+                                                          ],
+                                                        },
+                                                        { prim: 'DUP' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '5' }],
+                                                        },
+                                                        { prim: 'CDR' },
+                                                        { prim: 'CDR' },
+                                                        { prim: 'COMPARE' },
+                                                        { prim: 'GT' },
                                                         {
                                                           prim: 'IF',
                                                           args: [
                                                             [
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'FA2_INSUFFICIENT_BALANCE',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'FAILWITH',
+                                                              },
+                                                            ],
+                                                            [
+                                                              { prim: 'DUP' },
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
                                                                   { int: '5' },
                                                                 ],
                                                               },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CDR' },
+                                                              {
+                                                                prim: 'COMPARE',
+                                                              },
+                                                              { prim: 'EQ' },
+                                                              {
+                                                                prim: 'IF',
+                                                                args: [
+                                                                  [
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '20',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'NONE',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'nat',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '8',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '5',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'UPDATE',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DIP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                        [
+                                                                          {
+                                                                            prim: 'DIG',
+                                                                            args: [
+                                                                              {
+                                                                                int: '19',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'DROP',
+                                                                            args: [
+                                                                              {
+                                                                                int: '1',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                        ],
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '19',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                  [
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '20',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '7',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '4',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'GET',
+                                                                    },
+                                                                    {
+                                                                      prim: 'IF_NONE',
+                                                                      args: [
+                                                                        [
+                                                                          {
+                                                                            prim: 'PUSH',
+                                                                            args: [
+                                                                              {
+                                                                                prim: 'string',
+                                                                              },
+                                                                              {
+                                                                                string:
+                                                                                  'ledger',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'PUSH',
+                                                                            args: [
+                                                                              {
+                                                                                prim: 'string',
+                                                                              },
+                                                                              {
+                                                                                string:
+                                                                                  'AssetNotFound',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'PAIR',
+                                                                          },
+                                                                          {
+                                                                            prim: 'FAILWITH',
+                                                                          },
+                                                                        ],
+                                                                        [],
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '21',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'int',
+                                                                        },
+                                                                        {
+                                                                          int: '0',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '7',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'INT',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '4',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'SUB',
+                                                                    },
+                                                                    {
+                                                                      prim: 'COMPARE',
+                                                                    },
+                                                                    {
+                                                                      prim: 'GE',
+                                                                    },
+                                                                    {
+                                                                      prim: 'IF',
+                                                                      args: [
+                                                                        [
+                                                                          {
+                                                                            prim: 'DUP',
+                                                                            args: [
+                                                                              {
+                                                                                int: '6',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'CDR',
+                                                                          },
+                                                                          {
+                                                                            prim: 'CDR',
+                                                                          },
+                                                                          {
+                                                                            prim: 'INT',
+                                                                          },
+                                                                          {
+                                                                            prim: 'DUP',
+                                                                            args: [
+                                                                              {
+                                                                                int: '3',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'SUB',
+                                                                          },
+                                                                          {
+                                                                            prim: 'ABS',
+                                                                          },
+                                                                        ],
+                                                                        [
+                                                                          {
+                                                                            prim: 'PUSH',
+                                                                            args: [
+                                                                              {
+                                                                                prim: 'string',
+                                                                              },
+                                                                              {
+                                                                                string:
+                                                                                  'NatAssign',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'FAILWITH',
+                                                                          },
+                                                                        ],
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'SOME',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '9',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '6',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'UPDATE',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DIP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                        [
+                                                                          {
+                                                                            prim: 'DIG',
+                                                                            args: [
+                                                                              {
+                                                                                int: '20',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'DROP',
+                                                                            args: [
+                                                                              {
+                                                                                int: '1',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                        ],
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '20',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                            ],
+                                                          ],
+                                                        },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '20' }],
+                                                        },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '5' }],
+                                                        },
+                                                        { prim: 'CAR' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '4' }],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'MEM' },
+                                                        {
+                                                          prim: 'IF',
+                                                          args: [
+                                                            [
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
@@ -4889,9 +5416,17 @@ export const code = [
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
-                                                                  { int: '3' },
+                                                                  { int: '5' },
                                                                 ],
                                                               },
+                                                              { prim: 'CAR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
                                                               { prim: 'GET' },
                                                               {
                                                                 prim: 'IF_NONE',
@@ -4932,108 +5467,41 @@ export const code = [
                                                                 ],
                                                               },
                                                               {
-                                                                prim: 'COMPARE',
-                                                              },
-                                                              { prim: 'EQ' },
-                                                              { prim: 'NOT' },
-                                                              {
-                                                                prim: 'IF',
+                                                                prim: 'DUP',
                                                                 args: [
-                                                                  [
-                                                                    {
-                                                                      prim: 'PUSH',
-                                                                      args: [
-                                                                        {
-                                                                          prim: 'string',
-                                                                        },
-                                                                        {
-                                                                          string:
-                                                                            'FA2_INSUFFICIENT_BALANCE',
-                                                                        },
-                                                                      ],
-                                                                    },
-                                                                    {
-                                                                      prim: 'FAILWITH',
-                                                                    },
-                                                                  ],
-                                                                  [],
+                                                                  { int: '21' },
                                                                 ],
                                                               },
-                                                            ],
-                                                            [
-                                                              {
-                                                                prim: 'PUSH',
-                                                                args: [
-                                                                  {
-                                                                    prim: 'string',
-                                                                  },
-                                                                  {
-                                                                    string:
-                                                                      'FA2_TOKEN_UNDEFINED',
-                                                                  },
-                                                                ],
-                                                              },
-                                                              {
-                                                                prim: 'FAILWITH',
-                                                              },
-                                                            ],
-                                                          ],
-                                                        },
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'nat' },
-                                                            { int: '1' },
-                                                          ],
-                                                        },
-                                                        {
-                                                          prim: 'DUP',
-                                                          args: [{ int: '4' }],
-                                                        },
-                                                        { prim: 'CDR' },
-                                                        { prim: 'CDR' },
-                                                        { prim: 'COMPARE' },
-                                                        { prim: 'NEQ' },
-                                                        {
-                                                          prim: 'IF',
-                                                          args: [
-                                                            [
-                                                              {
-                                                                prim: 'PUSH',
-                                                                args: [
-                                                                  {
-                                                                    prim: 'string',
-                                                                  },
-                                                                  {
-                                                                    string:
-                                                                      'FA2_INVALID_AMOUNT',
-                                                                  },
-                                                                ],
-                                                              },
-                                                              {
-                                                                prim: 'FAILWITH',
-                                                              },
-                                                            ],
-                                                            [
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
-                                                                  { int: '19' },
+                                                                  { int: '6' },
                                                                 ],
                                                               },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CDR' },
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
                                                                   { int: '3' },
                                                                 ],
                                                               },
+                                                              { prim: 'ADD' },
                                                               { prim: 'SOME' },
                                                               {
                                                                 prim: 'DUP',
                                                                 args: [
-                                                                  { int: '3' },
+                                                                  { int: '7' },
                                                                 ],
                                                               },
+                                                              { prim: 'CAR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '6' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
                                                               {
                                                                 prim: 'UPDATE',
                                                               },
@@ -5046,7 +5514,7 @@ export const code = [
                                                                       prim: 'DIG',
                                                                       args: [
                                                                         {
-                                                                          int: '18',
+                                                                          int: '20',
                                                                         },
                                                                       ],
                                                                     },
@@ -5064,7 +5532,173 @@ export const code = [
                                                               {
                                                                 prim: 'DUG',
                                                                 args: [
-                                                                  { int: '18' },
+                                                                  { int: '20' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DROP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                ],
+                                                              },
+                                                            ],
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '20' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '5' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CAR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              { prim: 'MEM' },
+                                                              {
+                                                                prim: 'IF',
+                                                                args: [
+                                                                  [
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'string',
+                                                                        },
+                                                                        {
+                                                                          string:
+                                                                            'ledger',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'string',
+                                                                        },
+                                                                        {
+                                                                          string:
+                                                                            'KeyExists',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'FAILWITH',
+                                                                    },
+                                                                  ],
+                                                                  [
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '20',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '5',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'nat',
+                                                                        },
+                                                                        {
+                                                                          int: '0',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'ADD',
+                                                                    },
+                                                                    {
+                                                                      prim: 'SOME',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '6',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'CAR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '5',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'UPDATE',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DIP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                        [
+                                                                          {
+                                                                            prim: 'DIG',
+                                                                            args: [
+                                                                              {
+                                                                                int: '19',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                          {
+                                                                            prim: 'DROP',
+                                                                            args: [
+                                                                              {
+                                                                                int: '1',
+                                                                              },
+                                                                            ],
+                                                                          },
+                                                                        ],
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '19',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
                                                                 ],
                                                               },
                                                             ],
@@ -5072,7 +5706,7 @@ export const code = [
                                                         },
                                                         {
                                                           prim: 'DROP',
-                                                          args: [{ int: '3' }],
+                                                          args: [{ int: '4' }],
                                                         },
                                                       ],
                                                     ],
@@ -5731,22 +6365,61 @@ export const code = [
                                               prim: 'ITER',
                                               args: [
                                                 [
+                                                  { prim: 'DUP' },
+                                                  { prim: 'CDR' },
+                                                  { prim: 'CAR' },
                                                   {
-                                                    prim: 'PUSH',
-                                                    args: [
-                                                      { prim: 'nat' },
-                                                      { int: '1' },
-                                                    ],
+                                                    prim: 'DUP',
+                                                    args: [{ int: '12' }],
                                                   },
                                                   {
                                                     prim: 'DUP',
-                                                    args: [{ int: '2' }],
+                                                    args: [{ int: '5' }],
+                                                  },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '3' }],
+                                                  },
+                                                  { prim: 'PAIR' },
+                                                  { prim: 'GET' },
+                                                  {
+                                                    prim: 'IF_NONE',
+                                                    args: [
+                                                      [
+                                                        {
+                                                          prim: 'PUSH',
+                                                          args: [
+                                                            { prim: 'string' },
+                                                            {
+                                                              string: 'ledger',
+                                                            },
+                                                          ],
+                                                        },
+                                                        {
+                                                          prim: 'PUSH',
+                                                          args: [
+                                                            { prim: 'string' },
+                                                            {
+                                                              string:
+                                                                'AssetNotFound',
+                                                            },
+                                                          ],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'FAILWITH' },
+                                                      ],
+                                                      [],
+                                                    ],
+                                                  },
+                                                  { prim: 'DUP' },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '4' }],
                                                   },
                                                   { prim: 'CDR' },
                                                   { prim: 'CDR' },
                                                   { prim: 'COMPARE' },
-                                                  { prim: 'EQ' },
-                                                  { prim: 'NOT' },
+                                                  { prim: 'GT' },
                                                   {
                                                     prim: 'IF',
                                                     args: [
@@ -5757,26 +6430,309 @@ export const code = [
                                                             { prim: 'string' },
                                                             {
                                                               string:
-                                                                'FA2_INVALID_AMOUNT',
+                                                                'FA2_INSUFFICIENT_BALANCE',
                                                             },
                                                           ],
                                                         },
                                                         { prim: 'FAILWITH' },
                                                       ],
-                                                      [],
+                                                      [
+                                                        { prim: 'DUP' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '4' }],
+                                                        },
+                                                        { prim: 'CDR' },
+                                                        { prim: 'CDR' },
+                                                        { prim: 'COMPARE' },
+                                                        { prim: 'EQ' },
+                                                        {
+                                                          prim: 'IF',
+                                                          args: [
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'NONE',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'nat',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '7' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '5' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'UPDATE',
+                                                              },
+                                                              {
+                                                                prim: 'DIP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                  [
+                                                                    {
+                                                                      prim: 'DIG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '12',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUG',
+                                                                args: [
+                                                                  { int: '12' },
+                                                                ],
+                                                              },
+                                                            ],
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '6' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              { prim: 'GET' },
+                                                              {
+                                                                prim: 'IF_NONE',
+                                                                args: [
+                                                                  [
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'string',
+                                                                        },
+                                                                        {
+                                                                          string:
+                                                                            'ledger',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'string',
+                                                                        },
+                                                                        {
+                                                                          string:
+                                                                            'AssetNotFound',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'PAIR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'FAILWITH',
+                                                                    },
+                                                                  ],
+                                                                  [],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '14' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'int',
+                                                                  },
+                                                                  { int: '0' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '6' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'INT' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'SUB' },
+                                                              {
+                                                                prim: 'COMPARE',
+                                                              },
+                                                              { prim: 'GE' },
+                                                              {
+                                                                prim: 'IF',
+                                                                args: [
+                                                                  [
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '5',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'CDR',
+                                                                    },
+                                                                    {
+                                                                      prim: 'INT',
+                                                                    },
+                                                                    {
+                                                                      prim: 'DUP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '3',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'SUB',
+                                                                    },
+                                                                    {
+                                                                      prim: 'ABS',
+                                                                    },
+                                                                  ],
+                                                                  [
+                                                                    {
+                                                                      prim: 'PUSH',
+                                                                      args: [
+                                                                        {
+                                                                          prim: 'string',
+                                                                        },
+                                                                        {
+                                                                          string:
+                                                                            'NatAssign',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'FAILWITH',
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              { prim: 'SOME' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '8' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '6' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'UPDATE',
+                                                              },
+                                                              {
+                                                                prim: 'DIP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                  [
+                                                                    {
+                                                                      prim: 'DIG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '13',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUG',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DROP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                ],
+                                                              },
+                                                            ],
+                                                          ],
+                                                        },
+                                                      ],
                                                     ],
                                                   },
-                                                  { prim: 'DUP' },
-                                                  { prim: 'CDR' },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '13' }],
+                                                  },
+                                                  {
+                                                    prim: 'DUP',
+                                                    args: [{ int: '4' }],
+                                                  },
                                                   { prim: 'CAR' },
                                                   {
                                                     prim: 'DUP',
-                                                    args: [{ int: '12' }],
+                                                    args: [{ int: '4' }],
                                                   },
-                                                  {
-                                                    prim: 'DUP',
-                                                    args: [{ int: '2' }],
-                                                  },
+                                                  { prim: 'PAIR' },
                                                   { prim: 'MEM' },
                                                   {
                                                     prim: 'IF',
@@ -5784,16 +6740,18 @@ export const code = [
                                                       [
                                                         {
                                                           prim: 'DUP',
-                                                          args: [{ int: '4' }],
-                                                        },
-                                                        {
-                                                          prim: 'DUP',
                                                           args: [{ int: '13' }],
                                                         },
                                                         {
                                                           prim: 'DUP',
-                                                          args: [{ int: '3' }],
+                                                          args: [{ int: '4' }],
                                                         },
+                                                        { prim: 'CAR' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '4' }],
+                                                        },
+                                                        { prim: 'PAIR' },
                                                         { prim: 'GET' },
                                                         {
                                                           prim: 'IF_NONE',
@@ -5831,9 +6789,78 @@ export const code = [
                                                             [],
                                                           ],
                                                         },
-                                                        { prim: 'COMPARE' },
-                                                        { prim: 'EQ' },
-                                                        { prim: 'NOT' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '14' }],
+                                                        },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '5' }],
+                                                        },
+                                                        { prim: 'CDR' },
+                                                        { prim: 'CDR' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '3' }],
+                                                        },
+                                                        { prim: 'ADD' },
+                                                        { prim: 'SOME' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '6' }],
+                                                        },
+                                                        { prim: 'CAR' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '6' }],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'UPDATE' },
+                                                        {
+                                                          prim: 'DIP',
+                                                          args: [
+                                                            { int: '1' },
+                                                            [
+                                                              {
+                                                                prim: 'DIG',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DROP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                ],
+                                                              },
+                                                            ],
+                                                          ],
+                                                        },
+                                                        {
+                                                          prim: 'DUG',
+                                                          args: [{ int: '13' }],
+                                                        },
+                                                        {
+                                                          prim: 'DROP',
+                                                          args: [{ int: '1' }],
+                                                        },
+                                                      ],
+                                                      [
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '13' }],
+                                                        },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '4' }],
+                                                        },
+                                                        { prim: 'CAR' },
+                                                        {
+                                                          prim: 'DUP',
+                                                          args: [{ int: '4' }],
+                                                        },
+                                                        { prim: 'PAIR' },
+                                                        { prim: 'MEM' },
                                                         {
                                                           prim: 'IF',
                                                           args: [
@@ -5846,71 +6873,109 @@ export const code = [
                                                                   },
                                                                   {
                                                                     string:
-                                                                      'FA2_INSUFFICIENT_BALANCE',
+                                                                      'ledger',
                                                                   },
                                                                 ],
                                                               },
                                                               {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'string',
+                                                                  },
+                                                                  {
+                                                                    string:
+                                                                      'KeyExists',
+                                                                  },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
                                                                 prim: 'FAILWITH',
                                                               },
                                                             ],
-                                                            [],
+                                                            [
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '13' },
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '4' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CDR' },
+                                                              { prim: 'CDR' },
+                                                              {
+                                                                prim: 'PUSH',
+                                                                args: [
+                                                                  {
+                                                                    prim: 'nat',
+                                                                  },
+                                                                  { int: '0' },
+                                                                ],
+                                                              },
+                                                              { prim: 'ADD' },
+                                                              { prim: 'SOME' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '5' },
+                                                                ],
+                                                              },
+                                                              { prim: 'CAR' },
+                                                              {
+                                                                prim: 'DUP',
+                                                                args: [
+                                                                  { int: '5' },
+                                                                ],
+                                                              },
+                                                              { prim: 'PAIR' },
+                                                              {
+                                                                prim: 'UPDATE',
+                                                              },
+                                                              {
+                                                                prim: 'DIP',
+                                                                args: [
+                                                                  { int: '1' },
+                                                                  [
+                                                                    {
+                                                                      prim: 'DIG',
+                                                                      args: [
+                                                                        {
+                                                                          int: '12',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                    {
+                                                                      prim: 'DROP',
+                                                                      args: [
+                                                                        {
+                                                                          int: '1',
+                                                                        },
+                                                                      ],
+                                                                    },
+                                                                  ],
+                                                                ],
+                                                              },
+                                                              {
+                                                                prim: 'DUG',
+                                                                args: [
+                                                                  { int: '12' },
+                                                                ],
+                                                              },
+                                                            ],
                                                           ],
                                                         },
                                                       ],
-                                                      [
-                                                        {
-                                                          prim: 'PUSH',
-                                                          args: [
-                                                            { prim: 'string' },
-                                                            {
-                                                              string:
-                                                                'FA2_TOKEN_UNDEFINED',
-                                                            },
-                                                          ],
-                                                        },
-                                                        { prim: 'FAILWITH' },
-                                                      ],
                                                     ],
-                                                  },
-                                                  {
-                                                    prim: 'DUP',
-                                                    args: [{ int: '12' }],
-                                                  },
-                                                  {
-                                                    prim: 'DUP',
-                                                    args: [{ int: '3' }],
-                                                  },
-                                                  { prim: 'CAR' },
-                                                  { prim: 'SOME' },
-                                                  {
-                                                    prim: 'DUP',
-                                                    args: [{ int: '3' }],
-                                                  },
-                                                  { prim: 'UPDATE' },
-                                                  {
-                                                    prim: 'DIP',
-                                                    args: [
-                                                      { int: '1' },
-                                                      [
-                                                        {
-                                                          prim: 'DIG',
-                                                          args: [{ int: '11' }],
-                                                        },
-                                                        {
-                                                          prim: 'DROP',
-                                                          args: [{ int: '1' }],
-                                                        },
-                                                      ],
-                                                    ],
-                                                  },
-                                                  {
-                                                    prim: 'DUG',
-                                                    args: [{ int: '11' }],
                                                   },
                                                   {
                                                     prim: 'DROP',
-                                                    args: [{ int: '2' }],
+                                                    args: [{ int: '3' }],
                                                   },
                                                 ],
                                               ],
@@ -5934,10 +6999,12 @@ export const code = [
                                       { prim: 'SWAP' },
                                       { prim: 'UNPAIR' },
                                       { prim: 'SWAP' },
-                                      { prim: 'DUP', args: [{ int: '8' }] },
+                                      { prim: 'UNPAIR' },
+                                      { prim: 'SWAP' },
+                                      { prim: 'DUP', args: [{ int: '9' }] },
                                       { prim: 'SENDER' },
                                       { prim: 'MEM' },
-                                      { prim: 'DUP', args: [{ int: '6' }] },
+                                      { prim: 'DUP', args: [{ int: '7' }] },
                                       { prim: 'SENDER' },
                                       { prim: 'COMPARE' },
                                       { prim: 'EQ' },
@@ -5959,8 +7026,8 @@ export const code = [
                                           [],
                                         ],
                                       },
-                                      { prim: 'DUP', args: [{ int: '23' }] },
-                                      { prim: 'DUP', args: [{ int: '8' }] },
+                                      { prim: 'DUP', args: [{ int: '24' }] },
+                                      { prim: 'DUP', args: [{ int: '9' }] },
                                       {
                                         prim: 'PUSH',
                                         args: [
@@ -5995,70 +7062,8 @@ export const code = [
                                           [],
                                         ],
                                       },
-                                      { prim: 'DUP', args: [{ int: '10' }] },
-                                      { prim: 'DUP', args: [{ int: '5' }] },
-                                      { prim: 'MEM' },
-                                      {
-                                        prim: 'IF',
-                                        args: [
-                                          [
-                                            {
-                                              prim: 'PUSH',
-                                              args: [
-                                                { prim: 'string' },
-                                                { string: 'ledger' },
-                                              ],
-                                            },
-                                            {
-                                              prim: 'PUSH',
-                                              args: [
-                                                { prim: 'string' },
-                                                { string: 'KeyExists' },
-                                              ],
-                                            },
-                                            { prim: 'PAIR' },
-                                            { prim: 'FAILWITH' },
-                                          ],
-                                          [
-                                            {
-                                              prim: 'DUP',
-                                              args: [{ int: '10' }],
-                                            },
-                                            {
-                                              prim: 'DUP',
-                                              args: [{ int: '4' }],
-                                            },
-                                            { prim: 'SOME' },
-                                            {
-                                              prim: 'DUP',
-                                              args: [{ int: '6' }],
-                                            },
-                                            { prim: 'UPDATE' },
-                                            {
-                                              prim: 'DIP',
-                                              args: [
-                                                { int: '1' },
-                                                [
-                                                  {
-                                                    prim: 'DIG',
-                                                    args: [{ int: '9' }],
-                                                  },
-                                                  {
-                                                    prim: 'DROP',
-                                                    args: [{ int: '1' }],
-                                                  },
-                                                ],
-                                              ],
-                                            },
-                                            {
-                                              prim: 'DUG',
-                                              args: [{ int: '9' }],
-                                            },
-                                          ],
-                                        ],
-                                      },
-                                      { prim: 'DUP', args: [{ int: '12' }] },
-                                      { prim: 'DUP', args: [{ int: '5' }] },
+                                      { prim: 'DUP', args: [{ int: '13' }] },
+                                      { prim: 'DUP', args: [{ int: '6' }] },
                                       { prim: 'MEM' },
                                       {
                                         prim: 'IF',
@@ -6084,7 +7089,7 @@ export const code = [
                                           [
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '12' }],
+                                              args: [{ int: '13' }],
                                             },
                                             {
                                               prim: 'DUP',
@@ -6092,13 +7097,13 @@ export const code = [
                                             },
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '6' }],
+                                              args: [{ int: '7' }],
                                             },
                                             { prim: 'PAIR' },
                                             { prim: 'SOME' },
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '6' }],
+                                              args: [{ int: '7' }],
                                             },
                                             { prim: 'UPDATE' },
                                             {
@@ -6108,7 +7113,7 @@ export const code = [
                                                 [
                                                   {
                                                     prim: 'DIG',
-                                                    args: [{ int: '11' }],
+                                                    args: [{ int: '12' }],
                                                   },
                                                   {
                                                     prim: 'DROP',
@@ -6119,13 +7124,13 @@ export const code = [
                                             },
                                             {
                                               prim: 'DUG',
-                                              args: [{ int: '11' }],
+                                              args: [{ int: '12' }],
                                             },
                                           ],
                                         ],
                                       },
-                                      { prim: 'DUP', args: [{ int: '9' }] },
-                                      { prim: 'DUP', args: [{ int: '5' }] },
+                                      { prim: 'DUP', args: [{ int: '10' }] },
+                                      { prim: 'DUP', args: [{ int: '6' }] },
                                       { prim: 'MEM' },
                                       {
                                         prim: 'IF',
@@ -6151,7 +7156,7 @@ export const code = [
                                           [
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '9' }],
+                                              args: [{ int: '10' }],
                                             },
                                             {
                                               prim: 'DUP',
@@ -6160,7 +7165,7 @@ export const code = [
                                             { prim: 'SOME' },
                                             {
                                               prim: 'DUP',
-                                              args: [{ int: '6' }],
+                                              args: [{ int: '7' }],
                                             },
                                             { prim: 'UPDATE' },
                                             {
@@ -6170,7 +7175,7 @@ export const code = [
                                                 [
                                                   {
                                                     prim: 'DIG',
-                                                    args: [{ int: '8' }],
+                                                    args: [{ int: '9' }],
                                                   },
                                                   {
                                                     prim: 'DROP',
@@ -6181,12 +7186,81 @@ export const code = [
                                             },
                                             {
                                               prim: 'DUG',
-                                              args: [{ int: '8' }],
+                                              args: [{ int: '9' }],
                                             },
                                           ],
                                         ],
                                       },
-                                      { prim: 'DROP', args: [{ int: '4' }] },
+                                      { prim: 'DUP', args: [{ int: '11' }] },
+                                      { prim: 'DUP', args: [{ int: '5' }] },
+                                      { prim: 'DUP', args: [{ int: '7' }] },
+                                      { prim: 'PAIR' },
+                                      { prim: 'MEM' },
+                                      {
+                                        prim: 'IF',
+                                        args: [
+                                          [
+                                            {
+                                              prim: 'PUSH',
+                                              args: [
+                                                { prim: 'string' },
+                                                { string: 'ledger' },
+                                              ],
+                                            },
+                                            {
+                                              prim: 'PUSH',
+                                              args: [
+                                                { prim: 'string' },
+                                                { string: 'KeyExists' },
+                                              ],
+                                            },
+                                            { prim: 'PAIR' },
+                                            { prim: 'FAILWITH' },
+                                          ],
+                                          [
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '11' }],
+                                            },
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '4' }],
+                                            },
+                                            { prim: 'SOME' },
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '6' }],
+                                            },
+                                            {
+                                              prim: 'DUP',
+                                              args: [{ int: '8' }],
+                                            },
+                                            { prim: 'PAIR' },
+                                            { prim: 'UPDATE' },
+                                            {
+                                              prim: 'DIP',
+                                              args: [
+                                                { int: '1' },
+                                                [
+                                                  {
+                                                    prim: 'DIG',
+                                                    args: [{ int: '10' }],
+                                                  },
+                                                  {
+                                                    prim: 'DROP',
+                                                    args: [{ int: '1' }],
+                                                  },
+                                                ],
+                                              ],
+                                            },
+                                            {
+                                              prim: 'DUG',
+                                              args: [{ int: '10' }],
+                                            },
+                                          ],
+                                        ],
+                                      },
+                                      { prim: 'DROP', args: [{ int: '5' }] },
                                       { prim: 'PAIR', args: [{ int: '12' }] },
                                       { prim: 'DIG', args: [{ int: '1' }] },
                                       { prim: 'PAIR' },
@@ -6204,8 +7278,10 @@ export const code = [
               },
             ],
             [
-              { prim: 'DUP', args: [{ int: '20' }] },
-              { prim: 'DUP', args: [{ int: '5' }] },
+              { prim: 'UNPAIR' },
+              { prim: 'SWAP' },
+              { prim: 'DUP', args: [{ int: '21' }] },
+              { prim: 'DUP', args: [{ int: '6' }] },
               {
                 prim: 'PUSH',
                 args: [{ prim: 'string' }, { string: 'CONTRACT_PAUSED' }],
@@ -6234,124 +7310,186 @@ export const code = [
                   [],
                 ],
               },
+              { prim: 'DUP', args: [{ int: '8' }] },
               { prim: 'SENDER' },
-              { prim: 'DUP', args: [{ int: '8' }] },
-              { prim: 'DUP', args: [{ int: '3' }] },
-              { prim: 'GET' },
-              {
-                prim: 'IF_NONE',
-                args: [
-                  [
-                    {
-                      prim: 'PUSH',
-                      args: [{ prim: 'string' }, { string: 'ledger' }],
-                    },
-                    {
-                      prim: 'PUSH',
-                      args: [{ prim: 'string' }, { string: 'AssetNotFound' }],
-                    },
-                    { prim: 'PAIR' },
-                    { prim: 'FAILWITH' },
-                  ],
-                  [],
-                ],
-              },
-              { prim: 'COMPARE' },
-              { prim: 'EQ' },
-              { prim: 'DUP', args: [{ int: '8' }] },
-              { prim: 'DUP', args: [{ int: '3' }] },
+              { prim: 'DUP', args: [{ int: '4' }] },
+              { prim: 'PAIR' },
               { prim: 'MEM' },
-              { prim: 'AND' },
               {
                 prim: 'IF',
                 args: [
                   [
-                    { prim: 'DUP', args: [{ int: '7' }] },
-                    { prim: 'NONE', args: [{ prim: 'address' }] },
-                    { prim: 'DUP', args: [{ int: '3' }] },
-                    { prim: 'UPDATE' },
+                    { prim: 'DUP', args: [{ int: '8' }] },
+                    { prim: 'SENDER' },
+                    { prim: 'DUP', args: [{ int: '4' }] },
+                    { prim: 'PAIR' },
+                    { prim: 'GET' },
                     {
-                      prim: 'DIP',
+                      prim: 'IF_NONE',
                       args: [
-                        { int: '1' },
                         [
-                          { prim: 'DIG', args: [{ int: '6' }] },
+                          {
+                            prim: 'PUSH',
+                            args: [{ prim: 'string' }, { string: 'ledger' }],
+                          },
+                          {
+                            prim: 'PUSH',
+                            args: [
+                              { prim: 'string' },
+                              { string: 'AssetNotFound' },
+                            ],
+                          },
+                          { prim: 'PAIR' },
+                          { prim: 'FAILWITH' },
+                        ],
+                        [],
+                      ],
+                    },
+                    { prim: 'DUP', args: [{ int: '2' }] },
+                    { prim: 'DUP', args: [{ int: '2' }] },
+                    { prim: 'COMPARE' },
+                    { prim: 'GT' },
+                    {
+                      prim: 'IF',
+                      args: [
+                        [
+                          { prim: 'DUP', args: [{ int: '9' }] },
+                          { prim: 'SENDER' },
+                          { prim: 'DUP', args: [{ int: '5' }] },
+                          { prim: 'PAIR' },
+                          { prim: 'GET' },
+                          {
+                            prim: 'IF_NONE',
+                            args: [
+                              [
+                                {
+                                  prim: 'PUSH',
+                                  args: [
+                                    { prim: 'string' },
+                                    { string: 'ledger' },
+                                  ],
+                                },
+                                {
+                                  prim: 'PUSH',
+                                  args: [
+                                    { prim: 'string' },
+                                    { string: 'AssetNotFound' },
+                                  ],
+                                },
+                                { prim: 'PAIR' },
+                                { prim: 'FAILWITH' },
+                              ],
+                              [],
+                            ],
+                          },
+                          { prim: 'DUP', args: [{ int: '10' }] },
+                          {
+                            prim: 'PUSH',
+                            args: [{ prim: 'int' }, { int: '0' }],
+                          },
+                          { prim: 'DUP', args: [{ int: '5' }] },
+                          { prim: 'INT' },
+                          { prim: 'DUP', args: [{ int: '4' }] },
+                          { prim: 'SUB' },
+                          { prim: 'COMPARE' },
+                          { prim: 'GE' },
+                          {
+                            prim: 'IF',
+                            args: [
+                              [
+                                { prim: 'DUP', args: [{ int: '4' }] },
+                                { prim: 'INT' },
+                                { prim: 'DUP', args: [{ int: '3' }] },
+                                { prim: 'SUB' },
+                                { prim: 'ABS' },
+                              ],
+                              [
+                                {
+                                  prim: 'PUSH',
+                                  args: [
+                                    { prim: 'string' },
+                                    { string: 'NatAssign' },
+                                  ],
+                                },
+                                { prim: 'FAILWITH' },
+                              ],
+                            ],
+                          },
+                          { prim: 'SOME' },
+                          { prim: 'SENDER' },
+                          { prim: 'DUP', args: [{ int: '7' }] },
+                          { prim: 'PAIR' },
+                          { prim: 'UPDATE' },
+                          {
+                            prim: 'DIP',
+                            args: [
+                              { int: '1' },
+                              [
+                                { prim: 'DIG', args: [{ int: '9' }] },
+                                { prim: 'DROP', args: [{ int: '1' }] },
+                              ],
+                            ],
+                          },
+                          { prim: 'DUG', args: [{ int: '9' }] },
                           { prim: 'DROP', args: [{ int: '1' }] },
+                        ],
+                        [
+                          { prim: 'DUP', args: [{ int: '2' }] },
+                          { prim: 'DUP', args: [{ int: '2' }] },
+                          { prim: 'COMPARE' },
+                          { prim: 'EQ' },
+                          {
+                            prim: 'IF',
+                            args: [
+                              [
+                                { prim: 'DUP', args: [{ int: '9' }] },
+                                { prim: 'NONE', args: [{ prim: 'nat' }] },
+                                { prim: 'SENDER' },
+                                { prim: 'DUP', args: [{ int: '6' }] },
+                                { prim: 'PAIR' },
+                                { prim: 'UPDATE' },
+                                {
+                                  prim: 'DIP',
+                                  args: [
+                                    { int: '1' },
+                                    [
+                                      { prim: 'DIG', args: [{ int: '8' }] },
+                                      { prim: 'DROP', args: [{ int: '1' }] },
+                                    ],
+                                  ],
+                                },
+                                { prim: 'DUG', args: [{ int: '8' }] },
+                              ],
+                              [
+                                {
+                                  prim: 'PUSH',
+                                  args: [
+                                    { prim: 'string' },
+                                    { string: 'FA2_INSUFFICIENT_BALANCE' },
+                                  ],
+                                },
+                                { prim: 'FAILWITH' },
+                              ],
+                            ],
+                          },
                         ],
                       ],
                     },
-                    { prim: 'DUG', args: [{ int: '6' }] },
-                    { prim: 'DUP', args: [{ int: '9' }] },
-                    {
-                      prim: 'NONE',
-                      args: [
-                        {
-                          prim: 'pair',
-                          args: [
-                            { prim: 'nat' },
-                            {
-                              prim: 'map',
-                              args: [{ prim: 'string' }, { prim: 'bytes' }],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    { prim: 'DUP', args: [{ int: '3' }] },
-                    { prim: 'UPDATE' },
-                    {
-                      prim: 'DIP',
-                      args: [
-                        { int: '1' },
-                        [
-                          { prim: 'DIG', args: [{ int: '8' }] },
-                          { prim: 'DROP', args: [{ int: '1' }] },
-                        ],
-                      ],
-                    },
-                    { prim: 'DUG', args: [{ int: '8' }] },
-                    { prim: 'DUP', args: [{ int: '6' }] },
-                    {
-                      prim: 'NONE',
-                      args: [
-                        {
-                          prim: 'list',
-                          args: [
-                            {
-                              prim: 'pair',
-                              args: [{ prim: 'address' }, { prim: 'nat' }],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    { prim: 'DUP', args: [{ int: '3' }] },
-                    { prim: 'UPDATE' },
-                    {
-                      prim: 'DIP',
-                      args: [
-                        { int: '1' },
-                        [
-                          { prim: 'DIG', args: [{ int: '5' }] },
-                          { prim: 'DROP', args: [{ int: '1' }] },
-                        ],
-                      ],
-                    },
-                    { prim: 'DUG', args: [{ int: '5' }] },
+                    { prim: 'DROP', args: [{ int: '1' }] },
                   ],
                   [
                     {
                       prim: 'PUSH',
                       args: [
                         { prim: 'string' },
-                        { string: 'CALLER_NOT_OWNER' },
+                        { string: 'FA2_INSUFFICIENT_BALANCE' },
                       ],
                     },
                     { prim: 'FAILWITH' },
                   ],
                 ],
               },
-              { prim: 'DROP', args: [{ int: '1' }] },
+              { prim: 'DROP', args: [{ int: '2' }] },
               { prim: 'PAIR', args: [{ int: '12' }] },
               { prim: 'DIG', args: [{ int: '1' }] },
               { prim: 'PAIR' },

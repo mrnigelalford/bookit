@@ -75,7 +75,6 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
 
   const setWalletBalance = async (account: AccountInfo) => {
     const balance = await Tezos?.tz.getBalance(account.address);
-    console.log('balance: ', balance?.toNumber());
     setAccountBalance(balance?.toNumber());
   };
 
@@ -85,7 +84,6 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
         setActiveAccount(activeAccount);
         setAddress(activeAccount?.address);
         setWalletBalance(activeAccount);
-        console.log('acc: ', accountBalance);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

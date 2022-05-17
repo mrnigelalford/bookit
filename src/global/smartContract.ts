@@ -1,6 +1,7 @@
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
-import { code } from './contracts/fa2';
+// import { code } from './contracts/ts/fa2';
+import { code } from './contracts/ts/multiple_nft_private';
 
 interface ConnectProps {
   Tezos: TezosToolkit;
@@ -23,9 +24,11 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   royalties.set('1', [{ partAccount: owner, partValue: nftInfo.royalties }]);
 
   const ledger = new MichelsonMap();
-  ledger.set('1', owner);
+  ledger.set({ 0: '1', 1: owner }, 20);
 
-  const operator = new MichelsonMap();
+  const operators = new MichelsonMap();
+  // operators.set({ 0: owner, 1: '1' }, { 0: '1', 1: owner });
+
   const token_info = new MichelsonMap();
   token_info.set('01', '01');
 
@@ -38,15 +41,9 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const permits = new MichelsonMap();
   permits.set(owner, { counter: 0, user_expiry: 0, user_permits });
 
-  const operator_for_all = new MichelsonMap();
+  const operators_for_all = new MichelsonMap();
   const metadata = new MichelsonMap();
-  metadata.set(nftInfo, '01');
-
-  const idea = new MichelsonMap();
-  idea.set(100, {
-    desc: 'first vote',
-    nbvotes: 0,
-  });
+  metadata.set(JSON.stringify(nftInfo), '01');
 
   const voter = new MichelsonMap();
   voter.set(owner, 1);
@@ -54,22 +51,18 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   return Tezos.wallet
     .originate({
       code,
-      // storage: {
-      //   owner,
-      //   royalties,
-      //   ledger,
-      //   operator,
-      //   token_metadata,
-      //   permits,
-      //   operator_for_all,
-      //   default_expiry: 9999,
-      //   metadata,
-      //   minters: [owner],
-      // },
       storage: {
-        idea,
-        voter,
-        selected: [1],
+        owner,
+        minters: [owner],
+        itokenid: 'abcd123',
+        royalties,
+        ledger,
+        operators,
+        token_metadata,
+        permits,
+        operators_for_all,
+        default_expiry: '9999',
+        metadata,
       },
     })
     .send()

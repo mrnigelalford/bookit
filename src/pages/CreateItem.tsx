@@ -81,25 +81,25 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
     formData.append('bookType', bookType);
 
     // send form to IPFS
-    if (formData.has('file')) {
-      // const { data } = await pinFileToIPFS(formData);
-      // console.log('ipfs: ', data);
-      const nftInfo = {
-        IpfsHash: 'mockHash', // data.IpfsHash,
-        price,
-        title,
-        description,
-        category,
-        bookType,
-        royalties,
-        quantity,
-        authorName,
-      };
+    // if (formData.has('file')) {
+    // const { data } = await pinFileToIPFS(formData);
+    // console.log('ipfs: ', data);
+    const nftInfo = {
+      IpfsHash: 'mockHash', // data.IpfsHash,
+      price,
+      title,
+      description,
+      category,
+      bookType,
+      royalties,
+      quantity,
+      authorName,
+    };
 
-      if (Tezos && activeAccount) {
-        Originate({ Tezos, nftInfo, owner: activeAccount?.address });
-      }
+    if (Tezos && activeAccount) {
+      Originate({ Tezos, nftInfo, owner: activeAccount?.address });
     }
+    // }
   };
 
   const FileUpload: React.FC<UploadProps> = (props: UploadProps) => (
