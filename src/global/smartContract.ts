@@ -45,9 +45,6 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const metadata = new MichelsonMap();
   metadata.set(JSON.stringify(nftInfo), '01');
 
-  const voter = new MichelsonMap();
-  voter.set(owner, 1);
-
   return Tezos.wallet
     .originate({
       code,
