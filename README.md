@@ -1,15 +1,22 @@
-# Getting Started with Create React App
+# Welcome to Bookit!
+![logo](https://ih1.redbubble.net/image.3109823072.5662/st,small,507x507-pad,600x600,f8f8f8.jpg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+---
+## Task management
+
+Here's the github [project management page](https://github.com/users/mrnigelalford/projects/2)
+
+---
 
 ## Local Development
 
@@ -42,6 +49,7 @@ After downloading the appropriate json file use the tezos-client to send funds t
 I use the kukai wallet for testing. This is the link to the ithacanet wallet. Create a new wallet/address here if needed.
 [Kukai Ithacanet](https://ithacanet.kukai.app/)
 
+---
 ## Tezos Documentation
 
 [list of RPC nodes](https://tezostaquito.io/docs/rpc_nodes/)
