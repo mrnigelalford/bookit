@@ -64,7 +64,7 @@ const menus = [
       {
         id: 3,
         sub: 'Explore 03',
-        links: '/explore-03',
+        links: '/explore',
       },
       {
         id: 4,
