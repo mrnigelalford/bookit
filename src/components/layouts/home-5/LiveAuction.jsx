@@ -117,16 +117,16 @@ const LiveAuction = () => {
                             <div className="sc-card-product">
                               <div className="card-media">
                                 <Link to="/item-details-01">
-                                  <img src={item.img} alt="axies" />
+                                  <img src={item.img} alt={item.alt || 'bookitBookCover'} />
                                 </Link>
-                                <Link
+                                {/* <Link
                                   to="/login"
                                   className="wishlist-button heart"
                                 >
                                   <span className="number-like">
                                     {item.wishlist}
                                   </span>
-                                </Link>
+                                </Link> */}
                                 <div className="featured-countdown">
                                   <span className="slogan"></span>
                                   <Countdown date={Date.now() + 500000000}>

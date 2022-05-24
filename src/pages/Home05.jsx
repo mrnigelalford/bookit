@@ -14,7 +14,7 @@ const Home05 = () => {
     <div className="home-5">
       <SliderStyle2 data={heroSliderData} />
       {/* <CategorySelect /> */}
-      <LiveAuction />
+      {/* <LiveAuction /> */}
       <TodayPicks data={todayPickData} />
       <PopularCollection />
       <TopSeller />
