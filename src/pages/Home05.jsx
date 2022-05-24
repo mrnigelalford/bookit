@@ -7,7 +7,7 @@ import TopSeller from '../components/layouts/home-5/TopSeller'
 import TodayPicks from '../components/layouts/home-5/TodayPicks'
 import todayPickData from '../assets/fake-data/data-today-pick'
 import PopularCollection from '../components/layouts/home-5/PopularCollection'
-import Create from '../components/layouts/home-2/Create'
+import Create from '../components/layouts/home-5/Create-alt'
 
 const Home05 = () => {
   return (
