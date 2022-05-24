@@ -181,14 +181,13 @@ const Activity02 = () => {
   }
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
           <div className="row">
             <div className="col-md-12">
               <div className="page-title-heading mg-bt-12">
-                <h1 className="heading text-center">Activity 2</h1>
+                <h1 className="heading text-center">Latest Activity</h1>
               </div>
               <div className="breadcrumbs style2">
                 <ul>
@@ -198,7 +197,7 @@ const Activity02 = () => {
                   <li>
                     <Link to="#">Activity</Link>
                   </li>
-                  <li>Activity 2</li>
+                  <li>Activity</li>
                 </ul>
               </div>
             </div>

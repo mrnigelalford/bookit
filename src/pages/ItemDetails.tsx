@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import { Link } from 'react-router-dom'
 import Countdown from 'react-countdown'
@@ -63,7 +62,6 @@ const ItemDetails02 = () => {
   ])
   return (
     <div className="item-details">
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

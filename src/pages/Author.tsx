@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import CardModal from '../components/layouts/CardModal'
 
@@ -505,7 +504,6 @@ const Author = () => {
 
   return (
     <div className="authors-2">
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

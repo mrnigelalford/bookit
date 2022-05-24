@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import img1 from '../assets/images/box-item/img3rank.jpg'
 import img2 from '../assets/images/box-item/img4rank.jpg'
@@ -163,7 +162,6 @@ const Ranking = () => {
   }
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import { Link } from 'react-router-dom'
 import liveAuctionData from '../assets/fake-data/data-live-auction'
@@ -13,7 +12,6 @@ const NoResult = () => {
   const [modalShow, setModalShow] = useState(false)
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

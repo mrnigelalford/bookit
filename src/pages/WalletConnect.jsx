@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 
 import img1 from '../assets/images/icon/connect-1.png'
@@ -65,7 +64,6 @@ const WalletConnect = () => {
   ])
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

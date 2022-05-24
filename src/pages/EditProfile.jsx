@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 import avt from '../assets/images/avatar/avata_profile.jpg'
 import bg1 from '../assets/images/backgroup-secsion/option1_bg_profile.jpg'
@@ -9,7 +8,6 @@ import bg2 from '../assets/images/backgroup-secsion/option2_bg_profile.jpg'
 const EditProfile = () => {
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">

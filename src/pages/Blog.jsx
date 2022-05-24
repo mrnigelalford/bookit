@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import blogData from '../assets/fake-data/data-blog'
-import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
 
 const Blog = () => {
@@ -13,7 +12,6 @@ const Blog = () => {
   }
   return (
     <div>
-      <Header />
       <section className="flat-title-page inner">
         <div className="overlay"></div>
         <div className="themesflat-container">
