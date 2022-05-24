@@ -18,7 +18,7 @@ const Footer = () => {
     },
     {
       title: 'Create Item',
-      link: '/create-item',
+      link: '/create-book',
     },
   ]
   const resourcesList = [

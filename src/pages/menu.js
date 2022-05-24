@@ -101,7 +101,7 @@ const menus = [
       {
         id: 2,
         sub: 'Activity 02',
-        links: '/activity-02',
+        links: '/activity',
       },
     ],
   },

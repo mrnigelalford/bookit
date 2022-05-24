@@ -33,7 +33,7 @@ const EditProfile = () => {
           </div>
         </div>
       </section>
-      <div className="tf-create-item tf-section">
+      <div className="tf-create-book tf-section">
         <div className="themesflat-container">
           <div className="row">
             <div className="col-xl-3 col-lg-4 col-md-6 col-12">
@@ -59,7 +59,7 @@ const EditProfile = () => {
             </div>
             <div className="col-xl-9 col-lg-8 col-md-12 col-12">
               <div className="form-upload-profile">
-                <h4 className="title-create-item">Choice your Cover image</h4>
+                <h4 className="title-create-book">Choice your Cover image</h4>
                 <div className="option-profile clearfix">
                   <form action="#">
                     <label className="uploadFile">
@@ -81,7 +81,7 @@ const EditProfile = () => {
                 <form action="#" className="form-profile">
                   <div className="form-infor-profile">
                     <div className="info-account">
-                      <h4 className="title-create-item">Account info</h4>
+                      <h4 className="title-create-book">Account info</h4>
                       <fieldset>
                         <h4 className="title-infor-account">Display name</h4>
                         <input
@@ -112,7 +112,7 @@ const EditProfile = () => {
                       </fieldset>
                     </div>
                     <div className="info-social">
-                      <h4 className="title-create-item">Your Social media</h4>
+                      <h4 className="title-create-book">Your Social media</h4>
                       <fieldset>
                         <h4 className="title-infor-account">Facebook</h4>
                         <input

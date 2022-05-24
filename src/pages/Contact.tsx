@@ -46,13 +46,13 @@ const Contact02 = () => {
                 <div className="form-inner">
                   <form
                     id="contactform"
-                    noValidate="novalidate"
+                    data-noValidate="novalidate"
                     className="form-submit"
                   >
                     <input
                       id="name"
                       name="name"
-                      tabIndex="1"
+                      data-tabIndex="1"
                       aria-required="true"
                       required
                       type="text"
@@ -61,7 +61,7 @@ const Contact02 = () => {
                     <input
                       id="email"
                       name="email"
-                      tabIndex="2"
+                      data-tabIndex="2"
                       aria-required="true"
                       required
                       type="email"
@@ -78,7 +78,7 @@ const Contact02 = () => {
                     <textarea
                       id="message"
                       name="message"
-                      tabIndex="3"
+                      data-tabIndex="3"
                       aria-required="true"
                       required
                       placeholder="Message"

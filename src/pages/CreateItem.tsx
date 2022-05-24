@@ -104,7 +104,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
 
   const FileUpload: React.FC<UploadProps> = (props: UploadProps) => (
     <form style={{ marginTop: '1em' }} action="#">
-      <h4 className="title-create-item">{props.title}</h4>
+      <h4 className="title-create-book">{props.title}</h4>
       <label className="uploadFile" style={{ padding: '2em' }}>
         <p
           className="filename"
@@ -199,15 +199,15 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   }, [wallet]);
 
   return (
-    <div className="create-item">
+    <div className="create-book">
       <section className="flat-title-page inner">
-        <h1 className="heading text-center">Create Item</h1>
+        <h1 className="heading text-center">Mint Book</h1>
       </section>
-      <div className="tf-create-item tf-section">
+      <div className="tf-create-book tf-section">
         <div className="themesflat-container">
           <div className="row">
             <div className="col-xl-3 col-lg-6 col-md-6 col-12">
-              <h4 className="title-create-item">Preview item</h4>
+              <h4 className="title-create-book">Preview item</h4>
               <div className="sc-card-product">
                 <div className="card-media">
                   {fileSelected && (
@@ -270,7 +270,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
               </button>
             </div>
             <div className="col-xl-9 col-lg-6 col-md-12 col-12">
-              <div className="form-create-item">
+              <div className="form-create-book">
                 <FileUpload
                   title="Upload Cover Art"
                   description={
@@ -278,8 +278,8 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                   }
                   onBlur={handleFileChange}
                 />
-                <div className="flat-tabs tab-create-item">
-                  <h4 className="title-create-item">Select method</h4>
+                <div className="flat-tabs tab-create-book">
+                  <h4 className="title-create-book">Select method</h4>
                   <Tabs>
                     <TabList>
                       <Tab>
@@ -297,7 +297,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                       <form action="#">
                         <div className="row">
                           <div className="col-4">
-                            <h4 className="title-create-item">Price</h4>
+                            <h4 className="title-create-book">Price</h4>
                             <input
                               type="number"
                               style={{ backgroundColor: 'transparent' }}
@@ -306,7 +306,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                             />
                           </div>
                           <div className="col-4">
-                            <h4 className="title-create-item">Royalties</h4>
+                            <h4 className="title-create-book">Royalties</h4>
                             <input
                               type="number"
                               placeholder="5%"
@@ -316,7 +316,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           </div>
 
                           <div className="col-4">
-                            <h4 className="title-create-item">Quantity</h4>
+                            <h4 className="title-create-book">Quantity</h4>
                             <input
                               type="number"
                               placeholder="e.g. “# of books to be minted”"
@@ -328,7 +328,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           </div>
                         </div>
 
-                        <h4 className="title-create-item">Title</h4>
+                        <h4 className="title-create-book">Title</h4>
                         <input
                           type="text"
                           placeholder="Item Name"
@@ -337,7 +337,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           }}
                         />
 
-                        <h4 className="title-create-item">Description</h4>
+                        <h4 className="title-create-book">Description</h4>
                         <textarea
                           placeholder="e.g. “This is very limited item”"
                           onBlur={(e) => setDescription(e.target.value)}
@@ -351,14 +351,14 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           }}
                         >
                           <div className="col-4" style={{ padding: 'revert' }}>
-                            <h4 className="title-create-item">eBook Format</h4>
+                            <h4 className="title-create-book">eBook Format</h4>
                             <BookFormatPicker />
                           </div>
                           <div
                             className="col-4"
                             style={{ padding: 'revert', marginRight: '2em' }}
                           >
-                            <h4 className="title-create-item">Category</h4>
+                            <h4 className="title-create-book">Category</h4>
                             <CategoryDropdown />
                           </div>
                         </div>
@@ -366,11 +366,11 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                     </TabPanel>
                     <TabPanel>
                       <form action="#">
-                        <h4 className="title-create-item">Minimum bid</h4>
+                        <h4 className="title-create-book">Minimum bid</h4>
                         <input type="text" placeholder="enter minimum bid" />
                         <div className="row">
                           <div className="col-md-6">
-                            <h5 className="title-create-item">Starting date</h5>
+                            <h5 className="title-create-book">Starting date</h5>
                             <input
                               type="date"
                               name="bid_starting_date"
@@ -380,7 +380,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                             />
                           </div>
                           <div className="col-md-6">
-                            <h4 className="title-create-item">
+                            <h4 className="title-create-book">
                               Expiration date
                             </h4>
                             <input
@@ -392,27 +392,27 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           </div>
                         </div>
 
-                        <h4 className="title-create-item">Title</h4>
+                        <h4 className="title-create-book">Title</h4>
                         <input type="text" placeholder="Item Name" />
 
-                        <h4 className="title-create-item">Description</h4>
+                        <h4 className="title-create-book">Description</h4>
                         <textarea placeholder="e.g. “This is very limited item”"></textarea>
                       </form>
                     </TabPanel>
                     <TabPanel>
                       <form action="#">
-                        <h4 className="title-create-item">Price</h4>
+                        <h4 className="title-create-book">Price</h4>
                         <input
                           type="number"
                           placeholder="Enter price for one item (xtz)"
                         />
 
-                        <h4 className="title-create-item">Minimum bid</h4>
+                        <h4 className="title-create-book">Minimum bid</h4>
                         <input type="text" placeholder="enter minimum bid" />
 
                         <div className="row">
                           <div className="col-md-6">
-                            <h5 className="title-create-item">Starting date</h5>
+                            <h5 className="title-create-book">Starting date</h5>
                             <input
                               type="date"
                               name="bid_starting_date"
@@ -422,7 +422,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                             />
                           </div>
                           <div className="col-md-6">
-                            <h4 className="title-create-item">
+                            <h4 className="title-create-book">
                               Expiration date
                             </h4>
                             <input
@@ -434,10 +434,10 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           </div>
                         </div>
 
-                        <h4 className="title-create-item">Title</h4>
+                        <h4 className="title-create-book">Title</h4>
                         <input type="text" placeholder="Item Name" />
 
-                        <h4 className="title-create-item">Description</h4>
+                        <h4 className="title-create-book">Description</h4>
                         <textarea placeholder="e.g. “This is very limited item”"></textarea>
                       </form>
                     </TabPanel>

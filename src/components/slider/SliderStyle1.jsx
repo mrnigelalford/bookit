@@ -72,7 +72,7 @@ const SliderItem = (props) => (
                       <span>Explore</span>
                     </Link>
                     <Link
-                      to="/create-item"
+                      to="/create-book"
                       className="sc-button header-slider style style-1 note fl-button pri-1"
                     >
                       <span>Create</span>

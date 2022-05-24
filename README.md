@@ -1,5 +1,5 @@
 # Welcome to Bookit!
-![logo](https://ih1.redbubble.net/image.3109823072.5662/st,small,507x507-pad,600x600,f8f8f8.jpg)
+![logo](https://64.media.tumblr.com/0d1384f5926bf41dfa090ad86595346b/b2c02e89d3182d04-c3/s540x810/ae67933ba43db02d83e4be3c54deee60ba32c230.gif)
 
 
 ## Available Scripts

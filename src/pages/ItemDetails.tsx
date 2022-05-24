@@ -14,9 +14,9 @@ import img4 from '../assets/images/avatar/avt-5.jpg'
 import img5 from '../assets/images/avatar/avt-7.jpg'
 import img6 from '../assets/images/avatar/avt-8.jpg'
 import img7 from '../assets/images/avatar/avt-2.jpg'
-import imgdetail1 from '../assets/images/box-item/images-item-details.jpg'
+import imgdetail1 from '../assets/images/box-item/images-item-details2.jpg'
 
-const ItemDetails01 = () => {
+const ItemDetails02 = () => {
   const [dataHistory] = useState([
     {
       img: img1,
@@ -70,7 +70,7 @@ const ItemDetails01 = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="page-title-heading mg-bt-12">
-                <h1 className="heading text-center">Item Details 1</h1>
+                <h1 className="heading text-center">Item Details 2</h1>
               </div>
               <div className="breadcrumbs style2">
                 <ul>
@@ -80,14 +80,14 @@ const ItemDetails01 = () => {
                   <li>
                     <Link to="#">Explore</Link>
                   </li>
-                  <li>Item Details 1</li>
+                  <li>Item Details 2</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <div className="tf-section tf-item-details">
+      <div className="tf-section tf-item-details style-2">
         <div className="themesflat-container">
           <div className="row">
             <div className="col-xl-6 col-md-12">
@@ -100,22 +100,15 @@ const ItemDetails01 = () => {
             <div className="col-xl-6 col-md-12">
               <div className="content-right">
                 <div className="sc-item-details">
-                  <h2 className="style2">
-                    “The Fantasy Flower illustration ”{' '}
-                  </h2>
                   <div className="meta-item">
                     <div className="left">
-                      <span className="viewed eye">225</span>
-                      <span
-                        to="/login"
-                        className="liked heart wishlist-button mg-l-8"
-                      >
-                        <span className="number-like">100</span>
-                      </span>
+                      <h2>“The Pretty Fantasy Flower illustration ”</h2>
                     </div>
                     <div className="right">
-                      <Link to="#" className="share"></Link>
-                      <Link to="#" className="option"></Link>
+                      <span className="viewed eye mg-r-8">225</span>
+                      <span data-to="/login" className="liked heart wishlist-button">
+                        <span className="number-like">100</span>
+                      </span>
                     </div>
                   </div>
                   <div className="client-infor sc-card-product">
@@ -155,21 +148,42 @@ const ItemDetails01 = () => {
                     faucibus cursus lectus pulvinar dolor non ultrices eget.
                     Facilisi lobortisal morbi fringilla urna amet sed ipsum
                   </p>
-                  <div className="meta-item-details style2">
-                    <div className="item meta-price">
-                      <span className="heading">Current Bid</span>
-                      <div className="price">
-                        <div className="price-box">
-                          <h5> 4.89 ETH</h5>
-                          <span>= $12.246</span>
+                  <div className="meta-item-details">
+                    <div className="item-style-2 item-details">
+                      <ul className="list-details">
+                        <li>
+                          <span>Artist : </span>
+                          <h6>Ralph Garraway</h6>{' '}
+                        </li>
+                        <li>
+                          <span>Size : </span>
+                          <h6>3000 x 3000</h6>{' '}
+                        </li>
+                        <li>
+                          <span>Create : </span>
+                          <h6>04 April , 2021</h6>{' '}
+                        </li>
+                        <li>
+                          <span>Collection : </span>
+                          <h6>Cyberpunk City Art</h6>{' '}
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="item-style-2">
+                      <div className="item meta-price">
+                        <span className="heading">Current Bid</span>
+                        <div className="price">
+                          <div className="price-box">
+                            <h5> 4.89 ETH</h5>
+                            <span>= $12.246</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="item count-down">
-                      <span className="heading style-2">Countdown</span>
-                      <Countdown date={Date.now() + 500000000}>
-                        <span>You are good to go!</span>
-                      </Countdown>
+                      <div className="item count-down">
+                        <Countdown date={Date.now() + 500000000}>
+                          <span>You are good to go!</span>
+                        </Countdown>
+                      </div>
                     </div>
                   </div>
                   <Link
@@ -189,6 +203,7 @@ const ItemDetails01 = () => {
                       <TabPanel>
                         <ul className="bid-history-list">
                           {dataHistory.map((item, index) => (
+                            // @ts-ignore
                             <li key={index} item={item}>
                               <div className="content">
                                 <div className="client">
@@ -291,4 +306,4 @@ const ItemDetails01 = () => {
   )
 }
 
-export default ItemDetails01
+export default ItemDetails02

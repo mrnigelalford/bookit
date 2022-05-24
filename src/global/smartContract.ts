@@ -26,11 +26,20 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const ledger = new MichelsonMap();
   ledger.set({ 0: '1', 1: owner }, 20);
 
+  console.log('ow: ', owner);
+
   const operators = new MichelsonMap();
-  // operators.set({ 0: owner, 1: '1' }, { 0: '1', 1: owner });
+  operators.set(
+    {
+      0: owner, // address
+      1: '1', // nat
+      2: owner, // address
+    },
+    100
+  );
 
   const token_info = new MichelsonMap();
-  token_info.set('01', '01');
+  token_info.set(JSON.stringify(nftInfo), '01');
 
   const token_metadata = new MichelsonMap();
   token_metadata.set(100, { token_id: 1, token_info });
@@ -43,7 +52,12 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
 
   const operators_for_all = new MichelsonMap();
   const metadata = new MichelsonMap();
-  metadata.set(JSON.stringify(nftInfo), '01');
+
+  Object.keys(nftInfo).forEach((k, i) => {
+    metadata.set(k, (nftInfo[k].toString().toLowerCase()));
+  });
+
+  // metadata.set(JSON.stringify(nftInfo), '01');
 
   return Tezos.wallet
     .originate({
