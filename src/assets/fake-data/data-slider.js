@@ -1,9 +1,11 @@
-import img1 from '../images/slider/slide_1.png'
-import img2 from '../images/slider/slide_1.png'
-import imgbg1 from '../images/slider/bg_slide_1.png'
-import imgbg2 from '../images/slider/bg_slide_1.png'
+import imgbg1 from '../images/slider/bg_slide_1.png';
+import imgbg2 from '../images/slider/bg_slide_1.png';
 
-const heroSliderData = [
+import img1 from '../../assets/images/box-item/green-ottez.png';
+import img2 from '../../assets/images/box-item/space-rabbit.png';
+import img3 from '../../assets/images/box-item/vr-kid.png';
+
+const data = [
   {
     title_1: 'Discover, find,',
     title_2: 'Sell extraordinary',
@@ -30,10 +32,16 @@ const heroSliderData = [
     title_3: 'Monster NFTs',
     description:
       'Marketplace for monster character cllections non fungible token NFTs',
-    img: img2,
+    img: img3,
     imgbg: imgbg2,
     class: 'right',
   },
-]
+];
 
-export default heroSliderData
+const HeroSliderProps = {
+  title: 'Discover your next favorite author',
+  description: 'book NFT Marketplace',
+  data,
+};
+
+export default HeroSliderProps;
