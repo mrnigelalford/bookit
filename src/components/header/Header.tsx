@@ -294,7 +294,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
             </div>
           </div>
         </div>
-      <DarkMode />
+      {/* <DarkMode /> */}
       </div>
     </header>
   );

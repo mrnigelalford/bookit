@@ -1360,6 +1360,7 @@ header {
   height: 80px;
   width: 100%;
   border-bottom: 1px solid rgba(235, 235, 235, 0.2);
+  background: linear-gradient(227.3deg, #8a208c 0%, #181b81 100.84%);
 }
 .header_1.header_2.style2 {
   height: 104px;

@@ -1,6 +1,6 @@
 import React from 'react'
 import Footer from '../components/footer/Footer'
-import SliderStyle2 from '../components/slider/SliderStyle2'
+import SliderComponent from '../components/slider/SliderComponent'
 import heroSliderData from '../assets/fake-data/data-slider'
 import LiveAuction from '../components/layouts/home-5/LiveAuction'
 import TopSeller from '../components/layouts/home-5/TopSeller'
@@ -9,10 +9,10 @@ import todayPickData from '../assets/fake-data/data-today-pick'
 import PopularCollection from '../components/layouts/home-5/PopularCollection'
 import Create from '../components/layouts/home-5/Create-alt'
 
-const Home05 = () => {
+const HomeComponent = () => {
   return (
     <div className="home-5">
-      <SliderStyle2 data={heroSliderData} />
+      <SliderComponent data={heroSliderData} />
       {/* <CategorySelect /> */}
       {/* <LiveAuction /> */}
       <TodayPicks data={todayPickData} />
@@ -24,4 +24,4 @@ const Home05 = () => {
   )
 }
 
-export default Home05
+export default HomeComponent

@@ -8,7 +8,7 @@ import img1 from '../../assets/images/box-item/green-ottez.png'
 import img2 from '../../assets/images/box-item/space-rabbit.png'
 import img3 from '../../assets/images/box-item/vr-kid.png'
 
-const SliderStyle2 = () => {
+const SliderComponent = () => {
   const title = 'Discover your next favorite author'
   const description =
     'book NFT Marketplace'
@@ -159,4 +159,4 @@ const SliderStyle2 = () => {
   )
 }
 
-export default SliderStyle2
+export default SliderComponent
