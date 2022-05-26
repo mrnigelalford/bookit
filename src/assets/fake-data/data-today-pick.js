@@ -1,11 +1,11 @@
-import img1 from '../images/box-item/card-item-3.jpg'
-import imga1 from '../images/avatar/ottezProfile.png'
-import imga2 from '../images/avatar/jestProfile.png'
-import imgCollection1 from '../images/avatar/avt-18.jpg'
+import img1 from '../images/box-item/card-item-3.jpg';
+import imga1 from '../images/avatar/ottezProfile.png';
+import imga2 from '../images/avatar/jestProfile.png';
+import imgCollection1 from '../images/avatar/avt-18.jpg';
 
 const todayPickData = [
   {
-    img: img1,
+    img: imga1,
     title: 'The RenaiXance Rising the sun ',
     tags: 'bsc',
     imgAuthor: imga1,
@@ -78,6 +78,80 @@ const todayPickData = [
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
   },
-]
+  {
+    img: imga1,
+    title: 'The RenaiXance Rising the sun ',
+    tags: 'bsc',
+    imgAuthor: imga1,
+    nameAuthor: 'SalvadorDali',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+  {
+    img: img1,
+    title: 'Space babe - Night 2/25 ',
+    tags: 'bsc',
+    imgAuthor: imga2,
+    nameAuthor: 'Trista Francis',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    feature: 'coming soon',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+  {
+    img: img1,
+    title: 'CyberPrimal 042 LAN',
+    tags: 'bsc',
+    imgAuthor: imga1,
+    nameAuthor: 'Freddie Carpenter',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+  {
+    img: img1,
+    title: 'The RenaiXance Rising the sun ',
+    tags: 'bsc',
+    imgAuthor: imga1,
+    nameAuthor: 'SalvadorDali',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+  {
+    img: img1,
+    title: 'Space babe - Night 2/25 ',
+    tags: 'bsc',
+    imgAuthor: imga2,
+    nameAuthor: 'Trista Francis',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    feature: 'coming soon',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+  {
+    img: img1,
+    title: 'CyberPrimal 042 LAN',
+    tags: 'bsc',
+    imgAuthor: imga1,
+    nameAuthor: 'Freddie Carpenter',
+    price: '4.89 xtz',
+    priceChange: '$12.246',
+    wishlist: '100',
+    imgCollection: imgCollection1,
+    nameCollection: 'Creative Art 3D',
+  },
+];
 
-export default todayPickData
+export default todayPickData;
