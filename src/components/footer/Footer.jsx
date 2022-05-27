@@ -1,111 +1,88 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import logodark from '../../assets/images/logo/logo_dark.png'
-import logofooter from '../../assets/images/logo/logo2.png'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import logodark from '../../assets/images/logo/logo_dark.png';
+import logofooter from '../../assets/images/logo/logo2.png';
+import ModalComponent from './ModalComponent';
 const Footer = () => {
   const accountList = [
-    {
-      title: 'Authors',
-      link: '/authors-01',
-    },
-    {
-      title: 'Collection',
-      link: '/wallet-connect',
-    },
-    {
-      title: 'Author Profile',
-      link: '/edit-profile',
-    },
+    // {
+    //   title: 'Authors',
+    //   link: '/authors-01',
+    // },
+    // {
+    //   title: 'Collection',
+    //   link: '/wallet-connect',
+    // },
+    // {
+    //   title: 'Author Profile',
+    //   link: '/edit-profile',
+    // },
     {
       title: 'Create Item',
       link: '/create-book',
     },
-  ]
+  ];
   const resourcesList = [
+    // {
+    //   title: 'Help & Support',
+    //   link: '/help-center',
+    // },
+    // {
+    //   title: 'Live Auctions',
+    //   link: '/live-auctions',
+    // },
+    // {
+    //   title: 'Item Details',
+    //   link: '/item-details-01',
+    // },
     {
-      title: 'Help & Support',
-      link: '/help-center',
-    },
-    {
-      title: 'Live Auctions',
-      link: '/live-auctions',
-    },
-    {
-      title: 'Item Details',
-      link: '/item-details-01',
-    },
-    {
-      title: 'Activity',
+      title: 'Activity List',
       link: '/activity-01',
     },
-  ]
+  ];
   const companyList = [
     {
       title: 'Explore',
-      link: '/explore-01',
+      link: '/explore',
     },
     {
       title: 'Contact Us',
-      link: '/contact-01',
+      link: '/contact',
     },
-    {
-      title: 'Our Blog',
-      link: '/blog',
-    },
-    {
-      title: 'FAQ',
-      link: '/faq',
-    },
-  ]
+  ];
   const socialList = [
     {
-      icon: 'fab fa-twitter',
-      link: '#',
+      icon: 'fab fa-twitter', // twitter
+      link: 'https://twitter.com/alforddesign',
     },
     {
-      icon: 'fab fa-facebook',
+      icon: 'icon-fl-vt', // discord
       link: '#',
     },
-    {
-      icon: 'fab fa-telegram-plane',
-      link: '#',
-    },
-    {
-      icon: 'fab fa-youtube',
-      link: '#',
-    },
-    {
-      icon: 'icon-fl-tik-tok-2',
-      link: '#',
-    },
-    {
-      icon: 'icon-fl-vt',
-      link: '#',
-    },
-  ]
+  ];
 
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 500) {
-        setIsVisible(true)
+        setIsVisible(true);
       } else {
-        setIsVisible(false)
+        setIsVisible(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', toggleVisibility)
+    window.addEventListener('scroll', toggleVisibility);
 
-    return () => window.removeEventListener('scroll', toggleVisibility)
-  }, [])
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
 
   return (
     <div>
@@ -174,8 +151,8 @@ const Footer = () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-7 col-12">
               <div className="widget widget-subcribe">
-                <h5 className="title-widget">Subscribe Us</h5>
-                <div className="form-subcribe">
+                <h5 className="title-widget">Follow us Social</h5>
+                <div style={{ display: 'none' }} className="form-subcribe">
                   <form
                     id="subscribe-form"
                     action="#"
@@ -212,69 +189,9 @@ const Footer = () => {
         </div>
       </footer>
       {isVisible && <Link onClick={scrollToTop} to="#" id="scroll-top"></Link>}
-
-      <div
-        className="modal fade popup"
-        id="popup_bid"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div className="modal-body space-y-20 pd-40">
-              <h3>Place a Bid</h3>
-              <p className="text-center">
-                You must bid at least{' '}
-                <span className="price color-popup">4.89 ETH</span>
-              </p>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="00.00 ETH"
-              />
-              <p>
-                Enter quantity. <span className="color-popup">5 available</span>
-              </p>
-              <input type="number" className="form-control" placeholder="1" />
-              <div className="hr"></div>
-              <div className="d-flex justify-content-between">
-                <p> You must bid at least:</p>
-                <p className="text-right price color-popup"> 4.89 ETH </p>
-              </div>
-              <div className="d-flex justify-content-between">
-                <p> Service free:</p>
-                <p className="text-right price color-popup"> 0,89 ETH </p>
-              </div>
-              <div className="d-flex justify-content-between">
-                <p> Total bid amount:</p>
-                <p className="text-right price color-popup"> 4 ETH </p>
-              </div>
-              <Link
-                to="#"
-                className="btn btn-primary"
-                data-toggle="modal"
-                data-target="#popup_bid_success"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                {' '}
-                Place a bid
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* <ModalComponent /> */}
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
