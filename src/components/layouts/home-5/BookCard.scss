@@ -11,6 +11,22 @@
 //   }
 // }
 
+.sc-card-product {
+  display: flex;
+  flex-direction: column;
+}
+
+.media {
+  display: flex;
+  margin-bottom: 2em;
+
+  .metadata {
+    align-self: flex-end;
+    width: 50%;
+    text-align: right;
+  }
+}
+
 .card-title .style2 {
   max-width: revert !important;
 }
@@ -23,13 +39,8 @@
     margin: '0.4em auto';
   }
 
-  button {
-    padding: 7px 20px;
-    width: 9em;
+  .more-details {
+    margin-top: 7px;
     align-self: flex-end;
-
-    a {
-      color: white;
-    }
   }
 }
