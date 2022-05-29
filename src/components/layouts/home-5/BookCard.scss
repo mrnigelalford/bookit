@@ -36,7 +36,12 @@
   flex-direction: column;
 
   p {
-    margin: '0.4em auto';
+    margin: 0.4em auto;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box;
   }
 
   .more-details {

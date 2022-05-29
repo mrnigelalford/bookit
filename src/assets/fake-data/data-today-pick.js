@@ -15,7 +15,9 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
-    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
+    description: `I'm baby ramps typewriter banjo, franzen lomo praxis taiyaki meh everyday carry kale chips yr meditation freegan. Shaman chartreuse humblebrag, PBR&B synth meh palo santo try-hard paleo yuccie banjo jianbing freegan. Try-hard quinoa hammock direct trade, sartorial 8-bit coloring book poke. Cloud bread selfies salvia, jianbing hella unicorn paleo semiotics. 3 wolf moon fixie gentrify synth cardigan.
+
+    Taxidermy art party sustainable tumeric yes plz pug mlkshk skateboard cold-pressed flexitarian jean shorts. Cold-pressed blue bottle pok pok ennui brooklyn yes plz next level asymmetrical`,
   },
   {
     img: img1,
