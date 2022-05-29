@@ -1,5 +1,16 @@
 ### TODO
 
+### In progress
+
+- [ ] Homepage buttons route as expected
+- [ ] Homepage unused sections are removed
+- [ ] create item card uses new home page card component
+- [ ] walk user flow for v1 completeness:
+  1. user can create book
+  2. user can view book on home page
+  3. user can buy book
+  4. user can navigate to book via routing
+
 ### App Routing
 
 - [ ] clean back button history
