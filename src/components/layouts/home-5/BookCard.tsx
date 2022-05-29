@@ -31,6 +31,12 @@ const BookCards = (props: BookProps) => {
           className="fl-item col-xl-3 col-lg-4 col-md-4 col-sm-6"
         >
           <div className={`sc-card-product comingsoon`}>
+            <div className="card-title">
+              <h4 className="style2">
+                <Link to={`/item-details/id=${book.id}`}>{book.title}</Link>
+              </h4>
+              {/* <div className="tags">{item.tags}</div> */}
+            </div>
             <div className="media">
               {/* card image */}
               <Link to={`/item-details/id=${book.id}`}>
@@ -57,12 +63,6 @@ const BookCards = (props: BookProps) => {
               {/* <Link to="/login" className="wishlist-button heart">
               <span className="number-like">{item.wishlist}</span>
             </Link> */}
-            </div>
-            <div className="card-title">
-              <h5 className="style2">
-                <Link to={`/item-details/id=${book.id}`}>{book.title}</Link>
-              </h5>
-              {/* <div className="tags">{item.tags}</div> */}
             </div>
             <div className="description">
               <h6>Description</h6>
