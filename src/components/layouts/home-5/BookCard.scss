@@ -1,0 +1,35 @@
+// .card-media {
+//   text-align: center;
+
+//   .coming-soon {
+//     left: revert !important;
+//     right: 0.9em !important;
+//     top: revert !important;
+//     bottom: 0 !important;
+//     text-transform: lowercase !important;
+//     padding: 3px 10px !important;
+//   }
+// }
+
+.card-title .style2 {
+  max-width: revert !important;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: '0.4em auto';
+  }
+
+  button {
+    padding: 7px 20px;
+    width: 9em;
+    align-self: flex-end;
+
+    a {
+      color: white;
+    }
+  }
+}

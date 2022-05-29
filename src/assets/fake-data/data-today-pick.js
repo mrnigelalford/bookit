@@ -15,6 +15,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -28,6 +29,7 @@ const todayPickData = [
     feature: 'coming soon',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -40,6 +42,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -52,6 +55,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -65,6 +69,7 @@ const todayPickData = [
     feature: 'coming soon',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -77,6 +82,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: imga1,
@@ -89,6 +95,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -102,6 +109,7 @@ const todayPickData = [
     feature: 'coming soon',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -114,6 +122,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -126,6 +135,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -139,6 +149,7 @@ const todayPickData = [
     feature: 'coming soon',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
   {
     img: img1,
@@ -151,6 +162,7 @@ const todayPickData = [
     wishlist: '100',
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
+    description: `I'm baby cliche meditation vinyl slow-carb kickstarter retro. Swag meditation biodiesel, flannel cray bespoke aesthetic. Cardigan microdosing helvetica, selvage deep v lomo synth single-origin coffee taxidermy beard occupy fam blue bottle.`,
   },
 ];
 
