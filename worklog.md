@@ -26,7 +26,7 @@
 - [ ] Today's pick item filter needs to work
   - items should load from data vs hardcoded data in each component
 - [ ] Top Sellers and Buyers logic?
-- [ ] Today's Pick (styling)
+- [x] Today's Pick (styling)
   - Show book description
   - Book title is too large
   - shrink author name
