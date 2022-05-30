@@ -26,7 +26,11 @@ const TodayPicks = (props) => {
               </Link>
             </div>
             {/* <FilterComponent /> */}
-            <BookCards books={data} maxCards={visible} />
+            <BookCards
+              books={data}
+              maxCards={visible}
+              className="col-xl-3 col-lg-4 col-md-4 col-sm-6"
+            />
             {visible < data.length && (
               <div className="col-md-12 wrap-inner load-more text-center">
                 <Link
