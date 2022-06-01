@@ -2,9 +2,9 @@
 
 ### In progress
 
-- [ ] Homepage buttons route as expected
-- [ ] Homepage unused sections are removed
-- [ ] create item card uses new home page card component
+- [x] Homepage buttons route as expected
+- [x] Homepage unused sections are removed
+- [x] create item card uses new home page card component
 - [ ] walk user flow for v1 completeness:
   1. user can create book
   2. user can view book on home page

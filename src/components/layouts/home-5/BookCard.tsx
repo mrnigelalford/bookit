@@ -21,6 +21,8 @@ interface BookProps {
   cardClassName?: string;
 }
 
+const longText =
+  "I'm baby salvia fingerstache thundercats pug. Sartorial next level asymmetrical man braid. Yuccie enamel pin lumbersexual unicorn ennui, taxidermy sustainable venmo put a bird on it helvetica tbh";
 const tempStyle = 'col-xl-3 col-lg-4 col-md-4 col-sm-6';
 
 const BookCards = (props: BookProps) => {
@@ -39,16 +41,16 @@ const BookCards = (props: BookProps) => {
             <div className="media">
               {/* card details */}
               <div className="metadata">
-                <b> author</b>
+                <h6> author</h6>
 
                 {/* if not defined make the link disabled */}
-                <p>
+                <p style={{ fontWeight: 600 }}>
                   <Link to={`/authors/${book.AuthorId}`}>
-                    {book.nameAuthor}
+                    {book.nameAuthor + longText}
                   </Link>{' '}
                 </p>
-                <b> price</b>
-                <p>{book.price}</p>
+                <h6> price</h6>
+                <p>{book.price} xtz</p>
                 {/* <div className="avatar">
                       <img src={book.imgAuthor} alt="axies" />
                     </div> */}

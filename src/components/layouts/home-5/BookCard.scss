@@ -11,8 +11,27 @@
 //   }
 // }
 
-.card-title h4 {
-  font-weight: 600;
+@mixin truncateText($lineClamp) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: $lineClamp;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+a {
+  color: #0275d8;
+}
+
+.card-title {
+  margin-bottom: revert !important;
+
+  h4 {
+    font-weight: 600;
+    line-height: 1.16;
+    margin-bottom: 0.5em !important;
+    @include truncateText(2);
+  }
 }
 
 .sc-card-product {
@@ -25,9 +44,17 @@
   margin-bottom: 2em;
 
   .metadata {
-    align-self: flex-end;
     width: 50%;
     text-align: left;
+
+    h6 {
+      text-transform: capitalize;
+      margin-top: 0.5em;
+    }
+
+    p {
+      @include truncateText(2);
+    }
 
     a {
       font-size: smaller;
@@ -44,12 +71,8 @@
   flex-direction: column;
 
   p {
-    margin: 0.4em revert;
-    -webkit-line-clamp: 6;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    display: -webkit-box;
+    // margin: 0.4em revert;
+    @include truncateText(6);
   }
 
   .more-details {
