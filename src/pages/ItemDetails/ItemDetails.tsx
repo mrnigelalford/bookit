@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
-import Footer from '../components/footer/Footer'
-import { Link } from 'react-router-dom'
-import Countdown from 'react-countdown'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import 'react-tabs/style/react-tabs.css'
-import liveAuctionData from '../assets/fake-data/data-live-auction'
-import LiveAuction from '../components/layouts/LiveAuction'
-import img1 from '../assets/images/avatar/avt-3.jpg'
-import img2 from '../assets/images/avatar/avt-11.jpg'
-import img3 from '../assets/images/avatar/avt-1.jpg'
-import img4 from '../assets/images/avatar/avt-5.jpg'
-import img5 from '../assets/images/avatar/avt-7.jpg'
-import img6 from '../assets/images/avatar/avt-8.jpg'
-import img7 from '../assets/images/avatar/avt-2.jpg'
-import imgdetail1 from '../assets/images/box-item/images-item-details2.jpg'
+import React, { useState } from 'react';
+import Footer from '../../components/footer/Footer';
+import { Link, useParams } from 'react-router-dom';
+import Countdown from 'react-countdown';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import liveAuctionData from '../../assets/fake-data/data-live-auction';
+import LiveAuction from '../../components/layouts/LiveAuction';
+import img1 from '../../assets/images/avatar/avt-3.jpg';
+import img2 from '../../assets/images/avatar/avt-11.jpg';
+import img3 from '../../assets/images/avatar/avt-1.jpg';
+import img4 from '../../assets/images/avatar/avt-5.jpg';
+import img5 from '../../assets/images/avatar/avt-7.jpg';
+import img6 from '../../assets/images/avatar/avt-8.jpg';
+import img7 from '../../assets/images/avatar/avt-2.jpg';
+import imgdetail1 from '../../assets/images/box-item/images-item-details2.jpg';
+import todayPickData from '../../assets/fake-data/data-today-pick';
+
+import './ItemDetails.scss';
+import { Breadcrumbs } from './Breadcrumbs';
 
 const ItemDetails02 = () => {
   const [dataHistory] = useState([
@@ -59,7 +63,17 @@ const ItemDetails02 = () => {
       price: '4.89 ETH',
       priceChange: '$12.246',
     },
-  ])
+  ]);
+
+  let { id } = useParams();
+
+  console.log('smoke crack: ', id);
+
+  const book = todayPickData.filter((b) => b.id === id)[0];
+  if (book) {
+    console.log('fb: ', book);
+  }
+
   return (
     <div className="item-details">
       <section className="flat-title-page inner">
@@ -67,20 +81,8 @@ const ItemDetails02 = () => {
         <div className="themesflat-container">
           <div className="row">
             <div className="col-md-12">
-              <div className="page-title-heading mg-bt-12">
-                <h1 className="heading text-center">Item Details 2</h1>
-              </div>
-              <div className="breadcrumbs style2">
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Explore</Link>
-                  </li>
-                  <li>Item Details 2</li>
-                </ul>
-              </div>
+              <Breadcrumbs />
+              <h1 className="heading text-center">{book.title}</h1>
             </div>
           </div>
         </div>
@@ -104,7 +106,10 @@ const ItemDetails02 = () => {
                     </div>
                     <div className="right">
                       <span className="viewed eye mg-r-8">225</span>
-                      <span data-to="/login" className="liked heart wishlist-button">
+                      <span
+                        data-to="/login"
+                        className="liked heart wishlist-button"
+                      >
                         <span className="number-like">100</span>
                       </span>
                     </div>
@@ -301,7 +306,7 @@ const ItemDetails02 = () => {
       <LiveAuction data={liveAuctionData} />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetails02
+export default ItemDetails02;

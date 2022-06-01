@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/footer/Footer';
+import Footer from '../../components/footer/Footer';
 import Countdown from 'react-countdown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import avt from '../assets/images/avatar/avt-9.jpg';
 import { Dropdown } from 'react-bootstrap';
-import { pinFileToIPFS } from '../global/pinata';
-import { Originate } from '../global/smartContract';
+import { pinFileToIPFS } from '../../global/pinata';
+import { Originate } from '../../global/smartContract';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
-import BookCards from '../components/layouts/home-5/BookCard';
+import BookCards from '../../components/layouts/home-5/BookCard';
 
 import './CreateItem.scss';
 
-import img3 from '../assets/images/box-item/green-ottez.png';
+import img3 from '../../assets/images/box-item/green-ottez.png';
 
 enum BookType {
   epub = 'epub',

@@ -1986,32 +1986,28 @@
 }
 
 /* breadcrumbs */
-.breadcrumbs {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+
+.breadcrumbs.style2 {
+  margin-bottom: 1.5em;
 }
 
 .breadcrumbs.style2 ul li {
-  padding: 0 6px 0 8px;
+  margin: 0 0.5em;
 }
 
 .breadcrumbs ul li {
   display: inline-block;
-  padding: 0 8px 0 6px;
   color: #fff;
 }
 
 .breadcrumbs ul li,
 .breadcrumbs ul li a {
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 1.1em;
 }
 
 .breadcrumbs ul li a {
   position: relative;
   color: #8a8aa0;
-  padding-right: 15px;
 }
 
 .breadcrumbs ul li a:hover {
@@ -2025,8 +2021,9 @@
   width: 1px;
   height: 14px;
   bottom: 4px;
-  right: 0;
+  right: -0.5em;
   transform: rotate(13deg);
+  top: 0.01em;
 }
 
 .sc-card-product .card-title h5 {

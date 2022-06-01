@@ -6,14 +6,14 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import HomeComponent from './HomeComponent';
 import Explore01 from './Explore01';
 import LiveAuctions from './LiveAuctions';
-import ItemDetails02 from './ItemDetails';
+import ItemDetails02 from './ItemDetails/ItemDetails';
 import Activity02 from './Activity02';
 import Blog from './Blog';
 import BlogDetails from './BlogDetails';
 import HelpCenter from './HelpCenter';
 import Author from './Author';
 import WalletConnect from './WalletConnect';
-import CreateItem from './CreateItem';
+import CreateItem from './CreateItem/CreateItem';
 import EditProfile from './EditProfile';
 import Ranking from './Ranking';
 import Login from './Login';
@@ -32,7 +32,7 @@ export const setRoutes = ({ wallet, Tezos }: RouteProps) => [
   { path: '/', component: <HomeComponent /> },
   { path: '/explore', component: <Explore01 /> },
   { path: '/live-auctions', component: <LiveAuctions /> },
-  { path: '/item-details', component: <ItemDetails02 /> },
+  { path: '/item-details/:id', component: <ItemDetails02 /> },
   { path: '/activity', component: <Activity02 /> },
   { path: '/blog', component: <Blog /> },
   { path: '/blog-details', component: <BlogDetails /> },
