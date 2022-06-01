@@ -12,6 +12,7 @@
 // }
 
 @mixin truncateText($lineClamp) {
+  padding-bottom: 0.1em;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-line-clamp: $lineClamp;
@@ -28,7 +29,6 @@ a {
 
   h4 {
     font-weight: 600;
-    line-height: 1.16;
     margin-bottom: 0.5em !important;
     @include truncateText(2);
   }

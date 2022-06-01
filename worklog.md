@@ -6,16 +6,27 @@
 - [x] Homepage unused sections are removed
 - [x] create item card uses new home page card component
 - [ ] walk user flow for v1 completeness:
-  1. user can create book
-  2. user can view book on home page
-  3. user can buy book
-  4. user can navigate to book via routing
+  1. user can create book []
+  2. user can view book on home page []
+  3. user can buy book []
+  4. user can navigate to book via routing []
+
+### Item Details
+
+- [ ] add backcover image support
+- [ ] add sample page support
+- [ ] likes and watch count component should show and work
+- [ ] book should show cover image
+- [ ] book should show background image
+- [ ] book should show sample content image?
 
 ### App Routing
 
 - [ ] clean back button history
-- [ ] pass params to components via routing
-- [ ] first component: item-details (item id?)
+- [x] pass params to components via routing
+- [x] first component: item-details (item id?)
+- [ ] first component: author info (item id?)
+- [ ] first component: collection info (item id?)
 
 ### Activity Page
 
@@ -31,6 +42,7 @@
 ### Header
 
 - [ ] darkmode button in header is not styled correctly. needs to remain in navbar at all screen sizes.
+- move header to separate component (see item details and create book component)
 
 ### Homepage
 

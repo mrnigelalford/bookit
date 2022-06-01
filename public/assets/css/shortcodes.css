@@ -24,7 +24,6 @@
 */
 
 .tf-section {
-  padding: 80px 0;
   background: var(--bg-section);
   margin-bottom: 0 !important;
   -webkit-transition: all 0.3s ease-in-out;
@@ -32,6 +31,7 @@
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  padding: 2em 0px 0px 0px;
 }
 .tf-connect-wallet.tf-section {
   padding: 80px 0 50px;
@@ -1701,9 +1701,6 @@
 -------------------------------------------------------------- */
 .flat-title-page {
   position: relative;
-  background: url(../images/backgroup-secsion/img_bg_page_title.jpg) center
-    center no-repeat;
-  background-size: cover;
   padding: 100px 0 20px;
 }
 .home-2 .flat-title-page {
@@ -1971,15 +1968,8 @@
 -------------------------------------------------------------- */
 .flat-title-page.inner {
   position: relative;
-  background: url(../images/backgroup-secsion/img_bg_page_title_inner.jpg)
-    center center no-repeat;
-  background-size: cover;
 }
-.is_dark .flat-title-page.inner {
-  background: url(../images/backgroup-secsion/img_bg_page_title_dark.jpg) center
-    center no-repeat;
-  background-size: cover;
-}
+
 .page-title-heading .heading {
   line-height: 58px;
   color: #fff;
@@ -1997,7 +1987,7 @@
 
 .breadcrumbs ul li {
   display: inline-block;
-  color: #fff;
+  color: black;
 }
 
 .breadcrumbs ul li,

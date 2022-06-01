@@ -1,4 +1,45 @@
+@import '../../components/layouts/home-5/BookCard.scss';
+
+a {
+  color: #0275d8 !important;
+}
+
 .heading {
-  color: white;
+  color: black;
   margin-bottom: 0.2em;
+}
+
+section {
+  background: revert;
+  color: black;
+  padding-bottom: 0;
+}
+
+.tf-item-details {
+  h2 {
+    margin-bottom: 20px !important;
+  }
+}
+
+.metadata {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include truncateText(2);
+  }
+}
+
+.sc-card-product {
+  margin-bottom: 2em !important;
+  padding: revert;
+  background: revert;
+  box-shadow: revert;
+  border-radius: none;
+  overflow: revert;
+  -webkit-transition: revert;
+  -moz-transition: revert;
+  -ms-transition: revert;
+  -o-transition: revert;
+  transition: revert;
 }
