@@ -13,12 +13,14 @@
 
 ### Item Details
 
-- [ ] add backcover image support
+- [ ] 1. add backcover image support
+- [ ] 2. add buy button
 - [ ] add sample page support
 - [ ] likes and watch count component should show and work
 - [ ] book should show cover image
 - [ ] book should show background image
 - [ ] book should show sample content image?
+- [ ] show bid history (read block chain data for this)
 
 ### App Routing
 

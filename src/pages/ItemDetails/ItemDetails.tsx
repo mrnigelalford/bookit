@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import { Link, useParams } from 'react-router-dom';
 import Countdown from 'react-countdown';
@@ -12,46 +12,72 @@ import img3 from '../../assets/images/avatar/avt-1.jpg';
 import img4 from '../../assets/images/avatar/avt-5.jpg';
 import img5 from '../../assets/images/avatar/avt-7.jpg';
 import img6 from '../../assets/images/avatar/avt-8.jpg';
-import img7 from '../../assets/images/avatar/avt-2.jpg';
 import ninja from '../../assets/images/avatar/ninja.png';
 import todayPickData from '../../assets/fake-data/data-today-pick';
 
 import './ItemDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
+import { getTezosPrice } from './coinPrice';
 
 interface OwnerProps {
   img: string;
   name: string;
   id: string;
   title: string;
+  className?: string;
+  children?: React.ReactChild;
+}
+
+interface PriceProps {
+  book: any;
+  currentPrice: number;
+  className: string;
 }
 
 // TODO: Re-add this component once the supporting DB logic is added
-const LikesComponent = () => {
+// const LikesComponent = () => {
+//   return (
+//     <div className="right">
+//       <span className="viewed eye mg-r-8">225</span>
+//       <span data-to="/login" className="liked heart wishlist-button">
+//         <span className="number-like">100</span>
+//       </span>
+//     </div>
+//   );
+// };
+
+const OwnerComponent = (props: OwnerProps) => (
+  <div className={'author ' + props.className}>
+    <img className="avatar" src={props.img || ninja} alt="Axies" />
+    <div className="info">
+      <h6>{props.title}</h6>
+      <p>
+        {' '}
+        <Link to={`/author/${props.id}`}>{props.id}</Link>{' '}
+      </p>
+    </div>
+
+    {props.children}
+  </div>
+);
+
+const PriceComponent = (props: PriceProps) => {
   return (
-    <div className="right">
-      <span className="viewed eye mg-r-8">225</span>
-      <span data-to="/login" className="liked heart wishlist-button">
-        <span className="number-like">100</span>
-      </span>
+    <div className={props.className}>
+      <h6>Price</h6>
+      <div className="price-box">
+        <p>
+          {' '}
+          {Number(props.book.price)}
+          {'xtz '}
+          <small>{`($ ${(props.currentPrice * Number(props.book.price)).toFixed(
+            2
+          )})`}</small>{' '}
+        </p>
+      </div>
     </div>
   );
 };
-
-const OwnerComponent = (props: OwnerProps) => (
-  <div className="meta-info">
-    <div className="author">
-      <img className="avatar" src={props.img || ninja} alt="Axies" />
-      <div className="info">
-        <span>{props.title}</span>
-        <h6>
-          {' '}
-          <Link to={`/author/${props.id}`}>{props.id}</Link>{' '}
-        </h6>
-      </div>
-    </div>
-  </div>
-);
 
 const ItemDetails02 = () => {
   const [dataHistory] = useState([
@@ -101,10 +127,13 @@ const ItemDetails02 = () => {
 
   let { id } = useParams();
 
+  const [price, setPrice] = useState<number>(0);
+
   const book = todayPickData.filter((b) => b.id === id)[0];
-  if (book) {
-    console.log('fb: ', book);
-  }
+
+  useEffect(() => {
+    getTezosPrice().then((p) => setPrice(p));
+  }, []);
 
   return (
     <div className="item-details">
@@ -122,59 +151,58 @@ const ItemDetails02 = () => {
             {/* /cover image */}
             <div className="col-sm-6 col-l-12 metadata">
               <h2>{book.title}</h2>
-              <div className="client-infor sc-card-product">
+
+              <div className="topBar">
                 <OwnerComponent
                   img={book.imgAuthor}
                   name={book.nameAuthor}
                   id={book.nameAuthor}
                   title="Owned By"
+                  className="col-12"
                 />
                 <OwnerComponent
                   img={ninja}
                   name={'Freddie-Carpenter'}
                   id={'Freddie-Carpenter'}
                   title="Created By"
-                />
+                  className="col-12"
+                >
+                  <PriceComponent
+                    book={book}
+                    currentPrice={price}
+                    className="priceComponent"
+                  />
+                </OwnerComponent>
               </div>
-              <p>
-                Habitant sollicitudin faucibus cursus lectus pulvinar dolor non
-                ultrices eget. Facilisi lobortisal morbi fringilla urna amet sed
-                ipsum vitae ipsum malesuada. Habitant sollicitudin faucibus
-                cursus lectus pulvinar dolor non ultrices eget. Facilisi
-                lobortisal morbi fringilla urna amet sed ipsum
-              </p>
-              <div className="row">
-                <div className="col-3">
-                  <h6>Artist : </h6>
+
+              <div className="description topBar">
+                <h6>Description </h6>
+                <p>
+                  Habitant sollicitudin faucibus cursus lectus pulvinar dolor
+                  non ultrices eget. Facilisi lobortisal morbi fringilla urna
+                  amet sed ipsum vitae ipsum malesuada. Habitant sollicitudin
+                  faucibus cursus lectus pulvinar dolor non ultrices eget.
+                  Facilisi lobortisal morbi fringilla urna amet sed ipsum
+                </p>
+              </div>
+
+              <div className="row details topBar">
+                {/* <h6>Tech Details </h6> */}
+                <div className="col-6">
+                  <h6>Artist</h6>
                   <p>Ralph Garraway</p>{' '}
                 </div>
-                <div className="col-3">
-                  <h6>Size : </h6>
-                  <p>3000 x 3000</p>{' '}
-                </div>
-                <div className="col-3">
-                  <h6>Create : </h6>
-                  <p>04 April , 2021</p>{' '}
-                </div>
-                <div className="col-3">
-                  <h6>Collection : </h6>
+                <div className="col-6">
+                  <h6>Collection</h6>
                   <p>Cyberpunk City Art</p>{' '}
                 </div>
-                <div className="item-style-2">
-                  <div className="item meta-price">
-                    <span className="heading">Current Bid</span>
-                    <div className="price">
-                      <div className="price-box">
-                        <h5> 4.89 ETH</h5>
-                        <span>= $12.246</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="item count-down">
-                    <Countdown date={Date.now() + 500000000}>
-                      <span>You are good to go!</span>
-                    </Countdown>
-                  </div>
+                <div className="col-6">
+                  <h6>Size</h6>
+                  <p>3000 x 3000</p>{' '}
+                </div>
+                <div className="col-6">
+                  <h6>Create Date</h6>
+                  <p>04 April , 2021</p>{' '}
                 </div>
               </div>
               <Link
@@ -183,7 +211,7 @@ const ItemDetails02 = () => {
               >
                 <span>Place a bid</span>
               </Link>
-              <div className="flat-tabs themesflat-tabs">
+              <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
                   <TabList>
                     <Tab>Bid History</Tab>
