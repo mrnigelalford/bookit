@@ -3,7 +3,7 @@ import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 
 // import Home01 from './Home01';
-import HomeComponent from './HomeComponent';
+import HomeComponent from './HomeComponent/HomeComponent';
 import Explore01 from './Explore01';
 import LiveAuctions from './LiveAuctions';
 import ItemDetails02 from './ItemDetails/ItemDetails';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import { Link, useParams } from 'react-router-dom';
 import Countdown from 'react-countdown';
@@ -147,7 +147,32 @@ const ItemDetails02 = () => {
         <div className="themesflat-container">
           <div className="row">
             {/* cover image */}
-            <img className="col-sm-6 col-l-12" src={book.img} alt="Axies" />
+            <div className="col-sm-6 col-l-12 coverImage">
+              <img src={book.img} alt="Axies" />
+              <div className="row bonus-content">
+                {/* {book.bonusContent && book.bonusContent.frontCover && (
+                  <div className="col-3">
+                    <img src={book.bonusContent.frontCover} alt="Axies" />
+                  </div>
+                )} */}
+                {book.bonusContent && book.bonusContent.backCover && (
+                  <div className="col-3">
+                    <img src={book.bonusContent.backCover} alt="Axies" />
+                    <h6>back cover</h6>
+                  </div>
+                )}
+                {book.bonusContent && book.bonusContent.exerpts.length && (
+                  <div className="col-3">
+                    {book.bonusContent.exerpts.slice(0, 3).map((b, i) => (
+                      <div style={{ display: 'inline-block' }}>
+                        <img src={b.img} alt="Axies" />
+                        <h6>excerpt {i}</h6>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
             {/* /cover image */}
             <div className="col-sm-6 col-l-12 metadata">
               <h2>{book.title}</h2>

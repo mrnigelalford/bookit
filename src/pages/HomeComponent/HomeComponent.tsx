@@ -1,18 +1,22 @@
 import React from 'react';
-import Footer from '../components/footer/Footer';
-import SliderComponent from '../components/slider/SliderComponent';
-import heroSliderProps from '../assets/fake-data/data-slider';
+import Footer from '../../components/footer/Footer';
+import SliderComponent from '../../components/slider/SliderComponent';
+import heroSliderProps from '../../assets/fake-data/data-slider';
 
-import TopSeller from '../components/layouts/home-5/TopSeller';
-import TodayPicks from '../components/layouts/home-5/TodayPicks';
-import todayPickData from '../assets/fake-data/data-today-pick';
-import PopularCollection from '../components/layouts/home-5/PopularCollection';
-import Create from '../components/layouts/home-5/Create-alt';
+import TopSeller from '../../components/layouts/home-5/TopSeller';
+import TodayPicks from '../../components/layouts/home-5/TodayPicks';
+import todayPickData from '../../assets/fake-data/data-today-pick';
+import PopularCollection from '../../components/layouts/home-5/PopularCollection';
+import Create from '../../components/layouts/home-5/Create-alt';
+
+import './HomeComponent';
 
 // this component will pull its data from the blockchain.
 // mock data is being used for no iternent development
 
 // build a mock data model to represent data post blockchain add
+
+// the sass styles are overriding this page also
 
 const HomeComponent = () => {
   return (

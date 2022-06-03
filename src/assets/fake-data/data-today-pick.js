@@ -18,6 +18,27 @@ const todayPickData = [
     imgCollection: imgCollection1,
     nameCollection: 'Creative Art 3D',
     description: `I'm baby ramps typewriter banjo, franzen lomo praxis taiyaki meh everyday carry kale chips yr meditation freegan. Shaman chartreuse humblebrag, PBR&B synth meh palo santo try-hard paleo yuccie banjo jianbing freegan. Try-hard quinoa hammock direct trade, sartorial 8-bit coloring book poke. Cloud bread selfies salvia, jianbing hella unicorn paleo semiotics. 3 wolf moon fixie gentrify synth cardigan. Taxidermy art party sustainable tumeric yes plz pug mlkshk skateboard cold-pressed flexitarian jean shorts. Cold-pressed blue bottle pok pok ennui brooklyn yes plz next level asymmetrical`,
+    bonusContent: {
+      frontCover: imga1,
+      backCover: imga2,
+      exerpts: [
+        {
+          title: 'First Excerpt',
+          text: `I'm baby ramps typewriter banjo, franzen lomo praxis taiyaki meh everyday carry kale chips yr meditation freegan. Shaman chartreuse humblebrag, PBR&B synth meh palo santo try-hard paleo yuccie banjo jianbing freegan. Try-hard quinoa hammock direct trade, sartorial 8-bit coloring book poke. Cloud bread selfies salvia, jianbing hella unicorn paleo semiotics. 3 wolf moon fixie gentrify synth cardigan. Taxidermy art party sustainable tumeric yes plz pug mlkshk skateboard cold-pressed flexitarian jean shorts. Cold-pressed blue bottle pok pok ennui brooklyn yes plz next level asymmetrical`,
+          img: imga1,
+        },
+        {
+          title: 'Second Excerpt',
+          text: `I'm baby ramps typewriter banjo, franzen lomo praxis taiyaki meh everyday carry kale chips yr meditation freegan. Shaman chartreuse humblebrag, PBR&B synth meh palo santo try-hard paleo yuccie banjo jianbing freegan. Try-hard quinoa hammock direct trade, sartorial 8-bit coloring book poke. Cloud bread selfies salvia, jianbing hella unicorn paleo semiotics. 3 wolf moon fixie gentrify synth cardigan. Taxidermy art party sustainable tumeric yes plz pug mlkshk skateboard cold-pressed flexitarian jean shorts. Cold-pressed blue bottle pok pok ennui brooklyn yes plz next level asymmetrical`,
+          img: imga2,
+        },
+        {
+          title: "Third Excerpt I'm baby salvia fingerstache thundercats pug",
+          text: `I'm baby ramps typewriter banjo, franzen lomo praxis taiyaki meh everyday carry kale chips yr meditation freegan. Shaman chartreuse humblebrag, PBR&B synth meh palo santo try-hard paleo yuccie banjo jianbing freegan. Try-hard quinoa hammock direct trade, sartorial 8-bit coloring book poke. Cloud bread selfies salvia, jianbing hella unicorn paleo semiotics. 3 wolf moon fixie gentrify synth cardigan. Taxidermy art party sustainable tumeric yes plz pug mlkshk skateboard cold-pressed flexitarian jean shorts. Cold-pressed blue bottle pok pok ennui brooklyn yes plz next level asymmetrical`,
+          img: imga1,
+        },
+      ],
+    },
   },
   {
     id: 'abcd1234Space',
