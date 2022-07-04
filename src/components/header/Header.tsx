@@ -98,7 +98,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
     } else {
       await wallet?.client.requestPermissions({
         network: {
-          type: NetworkType.ITHACANET,
+          type: NetworkType.JAKARTANET,
         },
         scopes,
       });

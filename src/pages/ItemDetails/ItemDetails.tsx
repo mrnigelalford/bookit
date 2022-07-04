@@ -148,24 +148,25 @@ const ItemDetails02 = () => {
           <div className="row">
             {/* cover image */}
             <div className="col-sm-6 col-l-12 coverImage">
-              <img src={book.img} alt="Axies" />
-              <div className="row bonus-content">
+              <img src={book.img} style={{marginBottom: '1em'}} alt="Axies" />
+              <div style={{paddingLeft: '1em'}}>
                 {/* {book.bonusContent && book.bonusContent.frontCover && (
                   <div className="col-3">
-                    <img src={book.bonusContent.frontCover} alt="Axies" />
+                  <img src={book.bonusContent.frontCover} alt="Axies" />
                   </div>
                 )} */}
+                <h4 style={{marginBottom: '1em'}}>Additional Images</h4>
                 {book.bonusContent && book.bonusContent.backCover && (
-                  <div className="col-3">
-                    <img src={book.bonusContent.backCover} alt="Axies" />
+                  <div style={{display: 'inline-block'}}>
+                    <img style={{marginBottom: '2em'}} src={book.bonusContent.backCover} alt="Axies" />
                     <h6>back cover</h6>
                   </div>
                 )}
                 {book.bonusContent && book.bonusContent.exerpts.length && (
-                  <div className="col-3">
+                  <div style={{display: 'inline-block'}}>
                     {book.bonusContent.exerpts.slice(0, 3).map((b, i) => (
-                      <div style={{ display: 'inline-block' }}>
-                        <img src={b.img} alt="Axies" />
+                      <div style={{ display: 'inline-block', width: '8em', marginLeft: '4em' }}>
+                        <img style={{marginBottom: '2em'}} src={b.img} alt="Axies" />
                         <h6>excerpt {i}</h6>
                       </div>
                     ))}

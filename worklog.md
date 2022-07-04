@@ -1,5 +1,8 @@
 ### TODO
 
+## Excerpt
+- [ ] dynamic page that shows excerpt data created by the user
+
 ### In progress
 
 - [x] Homepage buttons route as expected
@@ -13,7 +16,7 @@
 
 ### Item Details
 
-- [ ] 1. add backcover image support
+- [x] 1. add backcover image support
 - [ ] 2. add buy button
 - [ ] add sample page support
 - [ ] likes and watch count component should show and work

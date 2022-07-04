@@ -6,13 +6,14 @@ import ScrollToTop from './ScrollToTop';
 import Header from './components/header/Header';
 import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
-import { NetworkType } from '@airgap/beacon-sdk';
+import { Network, NetworkType } from '@airgap/beacon-sdk';
 
-const Tezos = new TezosToolkit('https://ithacanet.ecadinfra.com');
+const Tezos = new TezosToolkit('https://ithacanet.smartpy.io/');
+const network: Network = { type: NetworkType.JAKARTANET };
 
 const wallet = new BeaconWallet({
   name: 'Bookit - Book NFT marketplace',
-  preferredNetwork: NetworkType.ITHACANET,
+  preferredNetwork: network.type,
 });
 
 Tezos.setWalletProvider(wallet);
@@ -25,5 +26,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-
-// JyndNY34437!n

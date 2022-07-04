@@ -43,6 +43,10 @@ After downloading the appropriate json file use the tezos-client to send funds t
 #### Tezos client CLI
 
 [Tezos client info](https://assets.tqtezos.com/docs/setup/1-tezos-client/)
+set tezos-client to a different endpoint
+```
+tezos-client --endpoint https://jakartanet.tezos.marigold.dev config update
+```
 
 #### Testnet Wallet
 

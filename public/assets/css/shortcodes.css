@@ -336,6 +336,7 @@
   background-color: #eeecff;
   border: 2px solid #eeecff;
   padding: 14px 40px;
+  width: 20em;
 }
 
 .sc-button.loadmore:hover {

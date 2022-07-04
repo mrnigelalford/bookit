@@ -25,7 +25,7 @@ const SliderComponent = (props: SliderProps) => {
       <div className="overlay"></div>
       <div className="themesflat-container">
         <div className="wrap-heading flat-slider d-flex align-items-center">
-          <div className="content">
+          <div>
             <h1 className="heading">{props.title}</h1>
             <p className="sub-heading mg-t-7 mg-bt-39">{props.description}</p>
             <div className="flat-bt-slider style2 flex">
