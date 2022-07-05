@@ -19,11 +19,6 @@ import img3 from '../../assets/images/box-item/green-ottez.png';
 enum BookType {
   epub = 'epub',
   mobi = 'mobi',
-  // txt = 'txt',
-  // azw = 'azw',
-  // azw3 = 'azw3',
-  // azw4 = 'azw4',
-  // pdf = 'pdf'
 }
 
 interface UploadProps {
@@ -38,7 +33,8 @@ interface CreateItemProps {
 }
 
 const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
-  const [fileSelected, setFileSelected] = useState<File>(); // also tried <string | Blob>
+  const [frontCover, setFrontCover] = useState<File>(); // also tried <string | Blob>
+  const [backCover, setBackCover] = useState<File>(); // also tried <string | Blob>
   const [bookUpload, setBookUpload] = useState<File>(); // also tried <string | Blob>
   const [fileName, setFileName] = useState<string>();
   const [price, setPrice] = useState<number>(100);
@@ -56,7 +52,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   const previewBookCard = [
     {
       title,
-      img: fileSelected ? URL.createObjectURL(fileSelected) : img3,
+      img: frontCover ? URL.createObjectURL(frontCover) : img3,
       nameAuthor: authorName,
       price,
       AuthorId: authorName,
@@ -75,11 +71,19 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
     'Utility',
   ];
 
-  const handleFileChange = function (e: React.ChangeEvent<HTMLInputElement>) {
+  // ADD a loading icon - you can't see the file is uploading
+
+  const handleFrontCoverChange = function (e: React.ChangeEvent<HTMLInputElement>) {
     const fileList = e.target.files;
     if (!fileList) return;
-    setFileSelected(fileList[0]);
+    setFrontCover(fileList[0]);
   };
+
+  const handleBackCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+    if (!fileList) return;
+    setBackCover(fileList[0]);
+  }
 
   const handleBookUpload = function (e: React.ChangeEvent<HTMLInputElement>) {
     const fileList = e.target.files;
@@ -89,7 +93,8 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
 
   const mintForm = async () => {
     let formData = new FormData();
-    if (fileSelected) formData.append('file', fileSelected);
+    if (frontCover) formData.append('file', frontCover);
+    if (backCover) formData.append('file', backCover);
     if (price) formData.append('price', price.toString());
     if (title) formData.append('title', title);
     if (description) formData.append('description', description);
@@ -192,9 +197,9 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   // const uploadFile = function (
   //   e: React.MouseEvent<HTMLSpanElement, MouseEvent>
   // ) {
-  //   if (fileSelected) {
+  //   if (frontCover) {
   //     const formData = new FormData();
-  //     formData.append('image', fileSelected, fileSelected.name);
+  //     formData.append('image', frontCover, frontCover.name);
   //   }
   // };
 
@@ -232,13 +237,13 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
             <div className="row">
               <FileUpload
                 title="Upload front cover"
-                description={fileSelected?.name || '.jpg or .png. Max 300mb.'}
-                onBlur={handleFileChange}
+                description={frontCover?.name || '.jpg or .png. Max 300mb.'}
+                onBlur={handleFrontCoverChange}
               />
               <FileUpload
                 title="Upload back cover"
-                description={fileSelected?.name || '.jpg or .png. Max 300mb.'}
-                onBlur={handleFileChange}
+                description={backCover?.name || '.jpg or .png. Max 300mb.'}
+                onBlur={handleBackCoverChange}
               />
             </div>
             <div className="flat-tabs tab-create-book">

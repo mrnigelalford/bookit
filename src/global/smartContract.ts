@@ -2,6 +2,7 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
 // import { code } from './contracts/ts/fa2';
 import { code } from './contracts/ts/multiple_nft_private';
+import { char2Bytes } from "@taquito/utils";
 
 interface ConnectProps {
   Tezos: TezosToolkit;
@@ -54,7 +55,7 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const metadata = new MichelsonMap();
 
   Object.keys(nftInfo).forEach((k, i) => {
-    metadata.set(k, (nftInfo[k].toString().toLowerCase()));
+    metadata.set(k, char2Bytes(nftInfo[k].toString().toLowerCase()));
   });
 
   // metadata.set(JSON.stringify(nftInfo), '01');
