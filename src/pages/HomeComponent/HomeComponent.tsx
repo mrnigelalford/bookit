@@ -10,6 +10,7 @@ import PopularCollection from '../../components/layouts/home-5/PopularCollection
 import Create from '../../components/layouts/home-5/Create-alt';
 
 import './HomeComponent';
+import { doMore, getContractData } from '../../todayData';
 
 // this component will pull its data from the blockchain.
 // mock data is being used for no iternent development
@@ -19,6 +20,14 @@ import './HomeComponent';
 // the sass styles are overriding this page also
 
 const HomeComponent = () => {
+getContractData('token_metadata').then(id => {
+  doMore(id).then(data => {
+
+    //pass this over to the covnerter
+    console.log('stuff: ', data[0].value);
+  })
+});
+
   return (
     <div className="home-5">
       <SliderComponent

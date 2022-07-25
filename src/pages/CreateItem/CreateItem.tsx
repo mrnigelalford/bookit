@@ -73,7 +73,9 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
 
   // ADD a loading icon - you can't see the file is uploading
 
-  const handleFrontCoverChange = function (e: React.ChangeEvent<HTMLInputElement>) {
+  const handleFrontCoverChange = function (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) {
     const fileList = e.target.files;
     if (!fileList) return;
     setFrontCover(fileList[0]);
@@ -83,7 +85,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
     const fileList = e.target.files;
     if (!fileList) return;
     setBackCover(fileList[0]);
-  }
+  };
 
   const handleBookUpload = function (e: React.ChangeEvent<HTMLInputElement>) {
     const fileList = e.target.files;
@@ -94,7 +96,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   const mintForm = async () => {
     let formData = new FormData();
     if (frontCover) formData.append('file', frontCover);
-    if (backCover) formData.append('file', backCover);
+    if (bookUpload) formData.append('file', bookUpload);
     if (price) formData.append('price', price.toString());
     if (title) formData.append('title', title);
     if (description) formData.append('description', description);
@@ -102,25 +104,28 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
     formData.append('bookType', bookType);
 
     // send form to IPFS
-    // if (formData.has('file')) {
-    // const { data } = await pinFileToIPFS(formData);
-    // console.log('ipfs: ', data);
-    const nftInfo = {
-      IpfsHash: 'mockHash', // data.IpfsHash,
-      price,
-      title,
-      description,
-      category,
-      bookType,
-      royalties,
-      quantity,
-      authorName,
-    };
+    if (formData.has('file')) {
+      const { data } = await pinFileToIPFS(formData);
 
-    if (Tezos && activeAccount) {
-      Originate({ Tezos, nftInfo, owner: activeAccount?.address });
+      if(data) {
+        const nftInfo = {
+          IpfsHash: data.IpfsHash,
+          price,
+          title,
+          description,
+          category,
+          bookType,
+          royalties,
+          quantity,
+          authorName,
+        };
+        
+        if (Tezos && activeAccount) {
+          Originate({ Tezos, nftInfo, owner: activeAccount?.address });
+        }
+      }
+
     }
-    // }
   };
 
   const FileUpload: React.FC<UploadProps> = (props: UploadProps) => (
@@ -241,9 +246,9 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                 onBlur={handleFrontCoverChange}
               />
               <FileUpload
-                title="Upload back cover"
+                title="Upload book"
                 description={backCover?.name || '.jpg or .png. Max 300mb.'}
-                onBlur={handleBackCoverChange}
+                onBlur={handleBookUpload}
               />
             </div>
             <div className="flat-tabs tab-create-book">

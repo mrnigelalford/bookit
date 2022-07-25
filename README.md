@@ -60,3 +60,36 @@ I use the kukai wallet for testing. This is the link to the ithacanet wallet. Cr
 
 Usefull info for book authors
 [Choosing the right ebook format](https://learn.g2.com/ebook-formats)
+
+
+order of operations
+
+1. get storage
+```
+https://api.jakartanet.tzkt.io/v1/contracts/KT1DdKVXB6g3gnr3NQByMmJTNX6MDt1UMudY/storage
+
+## iterate object
+{
+    "owner": "tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y",
+    "ledger": 34443,
+    "paused": false,
+    "minters": [
+        "tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y"
+    ],
+    "permits": 34446,
+    "metadata": 34448,
+    "operators": 34444,
+    "royalties": 34442,
+    "default_expiry": "9999",
+    "token_metadata": 34445,
+    "owner_candidate": null,
+    "operators_for_all": 34447
+}
+```
+
+2. Call bigmaps & keys with id of storage
+```
+https://api.jakartanet.tzkt.io/v1/bigmaps/34445/keys?active=true&offset=0&limit=50
+```
+
+parse the return of this call with a npm module
