@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CardModal from '../CardModal';
 import FilterComponent from './FilterComponent';
-import BookCards from './BookCard';
+import BookCards, { Book } from './BookCard';
 
-const TodayPicks = (props) => {
+const TodayPicks = (props: {data: Book[]}) => {
+  
   const data = props.data;
-
+  
   const [visible, setVisible] = useState(8);
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 4);
   };
-
+  
   const [modalShow, setModalShow] = useState(false);
+
+  if(!props.data) return (<></>)
   return (
     <Fragment>
       <section className="tf-section today-pick">

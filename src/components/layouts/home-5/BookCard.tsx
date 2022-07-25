@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import './BookCard.scss';
-
-interface BookProps {
-  books: {
+export type Book = {
     img?: string;
     title?: string | null;
     tags?: string[];
@@ -16,7 +14,10 @@ interface BookProps {
     id?: string;
     AuthorId: string; // TODO: REVISIT HOW THIS IS DEFINED FOR A GIVEN USER
     description: string | null;
-  }[];
+}
+
+interface BookProps {
+  books: Book[];
   maxCards?: number;
   cardClassName?: string;
 }

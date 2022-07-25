@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import SliderComponent from '../../components/slider/SliderComponent';
 import heroSliderProps from '../../assets/fake-data/data-slider';
@@ -10,7 +10,8 @@ import PopularCollection from '../../components/layouts/home-5/PopularCollection
 import Create from '../../components/layouts/home-5/Create-alt';
 
 import './HomeComponent';
-import { doMore, getContractData } from '../../todayData';
+import { ContractBookData, getContractData, getIPFSHash } from '../../todayData';
+import { Book } from '../../components/layouts/home-5/BookCard';
 
 // this component will pull its data from the blockchain.
 // mock data is being used for no iternent development
@@ -19,14 +20,31 @@ import { doMore, getContractData } from '../../todayData';
 
 // the sass styles are overriding this page also
 
-const HomeComponent = () => {
-getContractData('token_metadata').then(id => {
-  doMore(id).then(data => {
 
-    //pass this over to the covnerter
-    console.log('stuff: ', data[0].value);
-  })
-});
+const HomeComponent = () => {
+const [todayData, setTodayData] = useState<Book[]>([]);
+
+const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
+  id,
+  img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash}`,
+  title: metadata.title,
+  AuthorId: metadata.authorName || '',
+  nameAuthor: metadata.authorName || '',
+  price: metadata.price,
+  description: metadata.description
+})
+
+useEffect(() => {
+  getContractData('token_metadata').then(id => {
+    getIPFSHash(id).then(data => {
+      const newObj = JSON.parse(Object.keys(data[0].value.token_info)[0]);
+      const book = [setNewBookData(data[0].id, newObj)]
+      console.log('b: ', book);
+      setTodayData(book)
+    })
+  });
+}, [])
+
 
   return (
     <div className="home-5">
@@ -37,7 +55,7 @@ getContractData('token_metadata').then(id => {
       />
       {/* <CategorySelect /> */}
       {/* <LiveAuction /> */}
-      <TodayPicks data={todayPickData} />
+      <TodayPicks data={todayData} />
       {/* <PopularCollection /> */}
       {/* <TopSeller /> */}
       <Create />
