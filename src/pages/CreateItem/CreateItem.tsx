@@ -94,22 +94,30 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   };
 
   const mintForm = async () => {
-    let formData = new FormData();
-    if (frontCover) formData.append('file', frontCover);
-    if (bookUpload) formData.append('file', bookUpload);
-    if (price) formData.append('price', price.toString());
-    if (title) formData.append('title', title);
-    if (description) formData.append('description', description);
-    if (category) formData.append('category', category);
-    formData.append('bookType', bookType);
+// TODO: Add a loadng screen
+// route user to see book once mint completes
+
+    const bookCover = new FormData();
+    if (frontCover) {
+      bookCover.append('file', frontCover);
+      bookCover.append('title', title + authorName + new Date().toISOString());
+    }
+
+    const bookFile = new FormData();
+    if (bookUpload) {
+      bookFile.append('file', bookUpload);
+      bookFile.append('title', title + authorName + new Date().toISOString());
+    }
 
     // send form to IPFS
-    if (formData.has('file')) {
-      const { data } = await pinFileToIPFS(formData);
+    if (bookCover.has('file') && bookFile.has('file')) {
+      const { data: coverIPFS } = await pinFileToIPFS(bookCover);
+      const { data: bookIPFS } = await pinFileToIPFS(bookFile);
 
-      if(data) {
+      if ((coverIPFS.PinSize > 0) && (bookIPFS.PinSize > 0)) {
         const nftInfo = {
-          IpfsHash: data.IpfsHash,
+          coverIpfsHash: coverIPFS.IpfsHash,
+          bookIpfsHash: bookIPFS.IpfsHash,
           price,
           title,
           description,
@@ -119,12 +127,11 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
           quantity,
           authorName,
         };
-        
+
         if (Tezos && activeAccount) {
           Originate({ Tezos, nftInfo, owner: activeAccount?.address });
         }
       }
-
     }
   };
 
@@ -142,7 +149,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
           type="file"
           className="inputfile form-control"
           name="fileUpload"
-          onBlur={props.onBlur}
+          onChange={props.onBlur}
           style={{ right: '1em' }}
         />
       </label>
@@ -247,7 +254,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
               />
               <FileUpload
                 title="Upload book"
-                description={backCover?.name || '.jpg or .png. Max 300mb.'}
+                description={bookUpload?.name || '.jpg or .png. Max 300mb.'}
                 onBlur={handleBookUpload}
               />
             </div>
