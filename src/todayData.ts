@@ -2,8 +2,8 @@ import axios from "axios"
 
 
 
-export const getContractData = (prop: string) => {
-  const storageURL = 'https://api.jakartanet.tzkt.io/v1/contracts/KT1DdKVXB6g3gnr3NQByMmJTNX6MDt1UMudY/storage'
+export const getContractData = (prop: string, contract: string) => {
+  const storageURL = `https://api.jakartanet.tzkt.io/v1/contracts/${contract}/storage`
   return axios.get(storageURL).then(response => response.data[prop])
 }
 

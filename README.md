@@ -93,3 +93,8 @@ https://api.jakartanet.tzkt.io/v1/bigmaps/34445/keys?active=true&offset=0&limit=
 ```
 
 parse the return of this call with a npm module
+
+3. Lookup IPFS Hash and pull back image info
+```
+https://gateway.ipfs.io/ipfs/QmXhqhBZrjUjg1yNj6ofJ1E8RtxXPPYXWSdRAeFcWTsEuq
+```

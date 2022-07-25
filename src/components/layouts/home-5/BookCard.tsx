@@ -14,6 +14,10 @@ export type Book = {
     id?: string;
     AuthorId: string; // TODO: REVISIT HOW THIS IS DEFINED FOR A GIVEN USER
     description: string | null;
+    bonusContent?: {
+      backCover: string;
+      exerpts
+    }
 }
 
 interface BookProps {

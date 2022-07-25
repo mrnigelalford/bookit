@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import { Link, useParams } from 'react-router-dom';
-import Countdown from 'react-countdown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import liveAuctionData from '../../assets/fake-data/data-live-auction';
@@ -13,16 +12,22 @@ import img4 from '../../assets/images/avatar/avt-5.jpg';
 import img5 from '../../assets/images/avatar/avt-7.jpg';
 import img6 from '../../assets/images/avatar/avt-8.jpg';
 import ninja from '../../assets/images/avatar/ninja.png';
-import todayPickData from '../../assets/fake-data/data-today-pick';
 
 import './ItemDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
+import {
+  ContractBookData,
+  getContractData,
+  getIPFSHash,
+} from '../../todayData';
+import { Book } from '../../components/layouts/home-5/BookCard';
+import { contract } from '../../App';
 
 interface OwnerProps {
-  img: string;
-  name: string;
-  id: string;
+  img?: string;
+  name?: string;
+  id?: string;
   title: string;
   className?: string;
   children?: React.ReactChild;
@@ -79,6 +84,16 @@ const PriceComponent = (props: PriceProps) => {
   );
 };
 
+const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
+  id,
+  img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash}`,
+  title: metadata.title,
+  AuthorId: metadata.authorName || '',
+  nameAuthor: metadata.authorName || '',
+  price: metadata.price,
+  description: metadata.description,
+});
+
 const ItemDetails02 = () => {
   const [dataHistory] = useState([
     {
@@ -125,14 +140,25 @@ const ItemDetails02 = () => {
     },
   ]);
 
+  const [book, setBook] = useState<Book>();
+
   let { id } = useParams();
 
   const [price, setPrice] = useState<number>(0);
 
-  const book = todayPickData.filter((b) => b.id === id)[0];
-
   useEffect(() => {
     getTezosPrice().then((p) => setPrice(p));
+  }, []);
+
+  useEffect(() => {
+    getContractData('token_metadata', contract).then((id) => {
+      getIPFSHash(id).then((data) => {
+        const newObj = JSON.parse(Object.keys(data[0].value.token_info)[0]);
+        const book = setNewBookData(data[0].id, newObj);
+        console.log('b: ', book);
+        setBook(book);
+      });
+    });
   }, []);
 
   return (
@@ -148,25 +174,43 @@ const ItemDetails02 = () => {
           <div className="row">
             {/* cover image */}
             <div className="col-sm-6 col-l-12 coverImage">
-              <img src={book.img} style={{marginBottom: '1em'}} alt="Axies" />
-              <div style={{paddingLeft: '1em'}}>
+              <img
+                src={book?.img}
+                style={{ marginBottom: '1em' }}
+                alt="Axies"
+              />
+              <div style={{ paddingLeft: '1em' }}>
                 {/* {book.bonusContent && book.bonusContent.frontCover && (
                   <div className="col-3">
                   <img src={book.bonusContent.frontCover} alt="Axies" />
                   </div>
                 )} */}
-                <h4 style={{marginBottom: '1em'}}>Additional Images</h4>
-                {book.bonusContent && book.bonusContent.backCover && (
-                  <div style={{display: 'inline-block'}}>
-                    <img style={{marginBottom: '2em'}} src={book.bonusContent.backCover} alt="Axies" />
+                <h4 style={{ marginBottom: '1em' }}>Additional Images</h4>
+                {book?.bonusContent && book.bonusContent.backCover && (
+                  <div style={{ display: 'inline-block' }}>
+                    <img
+                      style={{ marginBottom: '2em' }}
+                      src={book.bonusContent.backCover}
+                      alt="Axies"
+                    />
                     <h6>back cover</h6>
                   </div>
                 )}
-                {book.bonusContent && book.bonusContent.exerpts.length && (
-                  <div style={{display: 'inline-block'}}>
+                {book?.bonusContent && book.bonusContent.exerpts.length && (
+                  <div style={{ display: 'inline-block' }}>
                     {book.bonusContent.exerpts.slice(0, 3).map((b, i) => (
-                      <div style={{ display: 'inline-block', width: '8em', marginLeft: '4em' }}>
-                        <img style={{marginBottom: '2em'}} src={b.img} alt="Axies" />
+                      <div
+                        style={{
+                          display: 'inline-block',
+                          width: '8em',
+                          marginLeft: '4em',
+                        }}
+                      >
+                        <img
+                          style={{ marginBottom: '2em' }}
+                          src={b.img}
+                          alt="Axies"
+                        />
                         <h6>excerpt {i}</h6>
                       </div>
                     ))}
@@ -176,13 +220,13 @@ const ItemDetails02 = () => {
             </div>
             {/* /cover image */}
             <div className="col-sm-6 col-l-12 metadata">
-              <h2>{book.title}</h2>
+              <h2>{book?.title}</h2>
 
               <div className="topBar">
                 <OwnerComponent
-                  img={book.imgAuthor}
-                  name={book.nameAuthor}
-                  id={book.nameAuthor}
+                  img={book?.imgAuthor}
+                  name={book?.nameAuthor}
+                  id={book?.nameAuthor}
                   title="Owned By"
                   className="col-12"
                 />
@@ -193,11 +237,14 @@ const ItemDetails02 = () => {
                   title="Created By"
                   className="col-12"
                 >
-                  <PriceComponent
-                    book={book}
-                    currentPrice={price}
-                    className="priceComponent"
-                  />
+                  {book &&
+                  (
+                    <PriceComponent
+                      book={book}
+                      currentPrice={price}
+                      className="priceComponent"
+                    />
+                  )}
                 </OwnerComponent>
               </div>
 

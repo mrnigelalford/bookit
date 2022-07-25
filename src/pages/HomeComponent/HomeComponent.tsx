@@ -12,6 +12,7 @@ import Create from '../../components/layouts/home-5/Create-alt';
 import './HomeComponent';
 import { ContractBookData, getContractData, getIPFSHash } from '../../todayData';
 import { Book } from '../../components/layouts/home-5/BookCard';
+import { contract } from '../../App';
 
 // this component will pull its data from the blockchain.
 // mock data is being used for no iternent development
@@ -35,7 +36,7 @@ const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
 })
 
 useEffect(() => {
-  getContractData('token_metadata').then(id => {
+  getContractData('token_metadata', contract).then(id => {
     getIPFSHash(id).then(data => {
       const newObj = JSON.parse(Object.keys(data[0].value.token_info)[0]);
       const book = [setNewBookData(data[0].id, newObj)]

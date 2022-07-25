@@ -12,6 +12,8 @@ interface AppProps {
   Tezos?: TezosToolkit;
 }
 
+export const contract = 'KT1DdKVXB6g3gnr3NQByMmJTNX6MDt1UMudY';
+
 function App({ Tezos, wallet }: AppProps) {
   const routes = setRoutes({ Tezos, wallet });
   return (
