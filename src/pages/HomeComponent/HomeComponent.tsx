@@ -27,7 +27,7 @@ const [todayData, setTodayData] = useState<Book[]>([]);
 
 const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
   id,
-  img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash}`,
+  img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash || metadata.coverIpfsHash}`,
   title: metadata.title,
   AuthorId: metadata.authorName || '',
   nameAuthor: metadata.authorName || '',
@@ -37,11 +37,15 @@ const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
 
 useEffect(() => {
   getContractData('token_metadata', contract).then(id => {
+    const _books: Book[] = [];
     getIPFSHash(id).then(data => {
-      const newObj = JSON.parse(Object.keys(data[0].value.token_info)[0]);
-      const book = [setNewBookData(data[0].id, newObj)]
-      console.log('b: ', book);
-      setTodayData(book)
+      console.log('data: ', data);
+      data.forEach(token => {
+        const _book = JSON.parse(Object.keys(token.value.token_info)[0]);
+        console.log('b: ', _book)
+        _books.push(setNewBookData(data[0].id, _book))
+      })
+      if(_books.length) setTodayData(_books)
     })
   });
 }, [])

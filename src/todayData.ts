@@ -23,4 +23,6 @@ export interface ContractBookData {
   quantity?: number;
   royalties?: number;
   title: string;
+  coverIpfsHash: string;
+  bookIpfsHash: string;
 }

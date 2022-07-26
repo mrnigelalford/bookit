@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
 import Countdown from 'react-countdown';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import avt from '../assets/images/avatar/avt-9.jpg';
 import { Dropdown } from 'react-bootstrap';
 import { pinFileToIPFS } from '../../global/pinata';
-import { Originate } from '../../global/smartContract';
+import { mintToken } from '../../global/smartContract';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
 import BookCards from '../../components/layouts/home-5/BookCard';
@@ -46,16 +44,15 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   const [bookType, setBookType] = useState<BookType>(BookType.epub);
   const [royalties, setRoyalty] = useState<number>(2);
   const [quantity, setQuantity] = useState<number>(1);
-  const [authorName, setAuthorName] = useState<string>('test author');
   const [activeAccount, setActiveAccount] = useState<any>();
 
   const previewBookCard = [
     {
       title,
       img: frontCover ? URL.createObjectURL(frontCover) : img3,
-      nameAuthor: authorName,
+      nameAuthor: activeAccount?.address,
       price,
-      AuthorId: authorName,
+      AuthorId: activeAccount?.address,
       description,
     },
   ];
@@ -100,13 +97,15 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
     const bookCover = new FormData();
     if (frontCover) {
       bookCover.append('file', frontCover);
-      bookCover.append('title', title + authorName + new Date().toISOString());
+      const _title = title?.replace(/ /g, '');
+      bookCover.append('title',  _title + '_' + Date.now());
     }
 
     const bookFile = new FormData();
     if (bookUpload) {
       bookFile.append('file', bookUpload);
-      bookFile.append('title', title + authorName + new Date().toISOString());
+      const _title = title?.replace(/ /g, '');
+      bookFile.append('title',  _title + '_' + Date.now());
     }
 
     // send form to IPFS
@@ -125,11 +124,12 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
           bookType,
           royalties,
           quantity,
-          authorName,
+          authorName: activeAccount.address,
         };
 
         if (Tezos && activeAccount) {
-          Originate({ Tezos, nftInfo, owner: activeAccount?.address });
+          // Originate({ Tezos, nftInfo, owner: activeAccount?.address });
+          mintToken({Tezos, nftInfo, owner: activeAccount?.address})
         }
       }
     }
@@ -301,7 +301,7 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
                           type="number"
                           placeholder="e.g. “# of books to be minted”"
                           value={quantity}
-                          onBlur={(e) => setQuantity(Number(e.target.value))}
+                          onChange={(e) => setQuantity(Number(e.target.value))}
                         />
                       </div>
                     </div>

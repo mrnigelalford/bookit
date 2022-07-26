@@ -8,7 +8,7 @@ import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { Network, NetworkType } from '@airgap/beacon-sdk';
 
-const Tezos = new TezosToolkit('https://ithacanet.smartpy.io/');
+const Tezos = new TezosToolkit('https://jakartanet.ecadinfra.com');
 const network: Network = { type: NetworkType.JAKARTANET };
 
 const wallet = new BeaconWallet({

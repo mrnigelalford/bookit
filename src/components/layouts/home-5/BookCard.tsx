@@ -31,6 +31,7 @@ const longText =
 const tempStyle = 'col-xl-3 col-lg-4 col-md-4 col-sm-6';
 
 const BookCards = (props: BookProps) => {
+  console.log('props: ', props);
   return (
     <Fragment>
       {props.books.slice(0, props.maxCards).map((book, index) => (
@@ -51,7 +52,7 @@ const BookCards = (props: BookProps) => {
                 {/* if not defined make the link disabled */}
                 <p style={{ fontWeight: 600 }}>
                   <Link to={`/authors/${book.AuthorId}`}>
-                    {book.nameAuthor + longText}
+                    {book.nameAuthor}
                   </Link>{' '}
                 </p>
                 <h6> price</h6>

@@ -2,7 +2,8 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
 // import { code } from './contracts/ts/fa2';
 import { code } from './contracts/ts/multiple_nft_private';
-import { char2Bytes } from "@taquito/utils";
+import { char2Bytes } from '@taquito/utils';
+import { contract } from '../App';
 
 interface ConnectProps {
   Tezos: TezosToolkit;
@@ -58,15 +59,13 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     metadata.set(k, char2Bytes(nftInfo[k].toString().toLowerCase()));
   });
 
-  // metadata.set(JSON.stringify(nftInfo), '01');
-
   return Tezos.wallet
     .originate({
       code,
       storage: {
         owner,
         minters: [owner],
-        itokenid: 'abcd123',
+        itokenid: 2,
         royalties,
         ledger,
         operators,
@@ -85,5 +84,28 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     .then((contract) => {
       console.log(`Origination completed for ${contract.address}.`);
     })
+    .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
+};
+
+export const mintToken = async ({
+  Tezos,
+  nftInfo,
+  owner,
+}: ConnectProps) => {
+  const token_info = new MichelsonMap();
+  token_info.set(JSON.stringify(nftInfo), '01');
+
+  const royalties = [{ partAccount: owner, partValue: nftInfo.royalties }];
+
+  return Tezos.wallet
+    .at(contract)
+    .then((contract) => {
+      console.log('starting mint...')
+      return contract.methods.mint(Date.now(), owner, nftInfo.quantity, token_info, royalties).send()})
+    .then((op) => {
+      console.log(`Waiting for ${op} to be confirmed...`);
+      return op.confirmation(3).then(() => op);
+    })
+    .then((hash) => console.log(`Operation injected: https://jakarta.tzstats.com/${hash}`))
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
