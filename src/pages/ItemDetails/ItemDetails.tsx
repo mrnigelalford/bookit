@@ -142,7 +142,7 @@ const ItemDetails02 = () => {
 
   const [book, setBook] = useState<Book>();
 
-  let { id } = useParams();
+  let { id: bookID } = useParams();
 
   const [price, setPrice] = useState<number>(0);
 
@@ -152,11 +152,13 @@ const ItemDetails02 = () => {
 
   useEffect(() => {
     getContractData('token_metadata', contract).then((id) => {
+      //NOTE: This logic is borrowed from HomeComponent:41
+      //TODO: clean this by re-use or simplification
+
       getIPFSHash(id).then((data) => {
-        const newObj = JSON.parse(Object.keys(data[0].value.token_info)[0]);
-        const book = setNewBookData(data[0].id, newObj);
-        console.log('b: ', book);
-        setBook(book);
+        const token = data.filter(_token => _token.id === Number(bookID))[0];
+        const _book = JSON.parse(Object.keys(token.value.token_info)[0]);
+        if(_book) setBook(setNewBookData(id, _book))
       });
     });
   }, []);

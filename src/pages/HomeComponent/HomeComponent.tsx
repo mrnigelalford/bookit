@@ -39,11 +39,9 @@ useEffect(() => {
   getContractData('token_metadata', contract).then(id => {
     const _books: Book[] = [];
     getIPFSHash(id).then(data => {
-      console.log('data: ', data);
       data.forEach(token => {
         const _book = JSON.parse(Object.keys(token.value.token_info)[0]);
-        console.log('b: ', _book)
-        _books.push(setNewBookData(data[0].id, _book))
+        _books.push(setNewBookData(token.id, _book))
       })
       if(_books.length) setTodayData(_books)
     })

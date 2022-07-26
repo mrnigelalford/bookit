@@ -26,12 +26,7 @@ interface BookProps {
   cardClassName?: string;
 }
 
-const longText =
-  "I'm baby salvia fingerstache thundercats pug. Sartorial next level asymmetrical man braid. Yuccie enamel pin lumbersexual unicorn ennui, taxidermy sustainable venmo put a bird on it helvetica tbh";
-const tempStyle = 'col-xl-3 col-lg-4 col-md-4 col-sm-6';
-
 const BookCards = (props: BookProps) => {
-  console.log('props: ', props);
   return (
     <Fragment>
       {props.books.slice(0, props.maxCards).map((book, index) => (
