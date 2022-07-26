@@ -23,6 +23,7 @@ import {
 } from '../../todayData';
 import { Book } from '../../components/layouts/home-5/BookCard';
 import { contract } from '../../App';
+import { setNewBookData } from '../HomeComponent/HomeComponent';
 
 interface OwnerProps {
   img?: string;
@@ -83,16 +84,6 @@ const PriceComponent = (props: PriceProps) => {
     </div>
   );
 };
-
-const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
-  id,
-  img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash}`,
-  title: metadata.title,
-  AuthorId: metadata.authorName || '',
-  nameAuthor: metadata.authorName || '',
-  price: metadata.price,
-  description: metadata.description,
-});
 
 const ItemDetails02 = () => {
   const [dataHistory] = useState([
@@ -187,7 +178,7 @@ const ItemDetails02 = () => {
                   <img src={book.bonusContent.frontCover} alt="Axies" />
                   </div>
                 )} */}
-                <h4 style={{ marginBottom: '1em' }}>Additional Images</h4>
+                {/* <h4 style={{ marginBottom: '1em' }}>Additional Images</h4> */}
                 {book?.bonusContent && book.bonusContent.backCover && (
                   <div style={{ display: 'inline-block' }}>
                     <img
@@ -227,15 +218,15 @@ const ItemDetails02 = () => {
               <div className="topBar">
                 <OwnerComponent
                   img={book?.imgAuthor}
-                  name={book?.nameAuthor}
+                  name={book?.AuthorId}
                   id={book?.nameAuthor}
                   title="Owned By"
                   className="col-12"
                 />
                 <OwnerComponent
                   img={ninja}
-                  name={'Freddie-Carpenter'}
-                  id={'Freddie-Carpenter'}
+                  name={book?.AuthorId}
+                  id={book?.id}
                   title="Created By"
                   className="col-12"
                 >
@@ -253,15 +244,11 @@ const ItemDetails02 = () => {
               <div className="description topBar">
                 <h6>Description </h6>
                 <p>
-                  Habitant sollicitudin faucibus cursus lectus pulvinar dolor
-                  non ultrices eget. Facilisi lobortisal morbi fringilla urna
-                  amet sed ipsum vitae ipsum malesuada. Habitant sollicitudin
-                  faucibus cursus lectus pulvinar dolor non ultrices eget.
-                  Facilisi lobortisal morbi fringilla urna amet sed ipsum
+                  {book?.description}
                 </p>
               </div>
 
-              <div className="row details topBar">
+              <div className="row details topBar" style={{display: 'none'}}>
                 {/* <h6>Tech Details </h6> */}
                 <div className="col-6">
                   <h6>Artist</h6>
@@ -283,6 +270,7 @@ const ItemDetails02 = () => {
               <Link
                 to="/wallet-connect"
                 className="sc-button loadmore style bag fl-button pri-3"
+                style={{ display: 'none'}}
               >
                 <span>Place a bid</span>
               </Link>
@@ -387,7 +375,7 @@ const ItemDetails02 = () => {
           </div>
         </div>
       </div>
-      <LiveAuction data={liveAuctionData} />
+      {/* <LiveAuction data={liveAuctionData} /> */}
       <Footer />
     </div>
   );

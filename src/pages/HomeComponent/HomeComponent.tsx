@@ -22,10 +22,7 @@ import { contract } from '../../App';
 // the sass styles are overriding this page also
 
 
-const HomeComponent = () => {
-const [todayData, setTodayData] = useState<Book[]>([]);
-
-const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
+export const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
   id,
   img: `https://gateway.ipfs.io/ipfs/${metadata.IpfsHash || metadata.coverIpfsHash}`,
   title: metadata.title,
@@ -34,6 +31,10 @@ const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
   price: metadata.price,
   description: metadata.description
 })
+
+const HomeComponent = () => {
+const [todayData, setTodayData] = useState<Book[]>([]);
+
 
 useEffect(() => {
   getContractData('token_metadata', contract).then(id => {
