@@ -21,7 +21,7 @@ import {
   getContractData,
   getIPFSHash,
 } from '../../todayData';
-import { Book } from '../../components/layouts/home-5/BookCard';
+import { Book } from "../../components/layouts/home-5/Book";
 import { contract } from '../../App';
 import { setNewBookData } from '../HomeComponent/HomeComponent';
 

@@ -9,10 +9,10 @@
 - [x] Homepage unused sections are removed
 - [x] create item card uses new home page card component
 - [ ] walk user flow for v1 completeness:
-  1. user can create book []
-  2. user can view book on home page []
+  1. user can create book [x]
+  2. user can view book on home page [x]
   3. user can buy book []
-  4. user can navigate to book via routing []
+  4. user can navigate to book via routing [x]
 
 ### Item Details
 
@@ -51,7 +51,7 @@
 
 ### Homepage
 
-- [ ] Today's pick item filter needs to work
+- [x] Today's pick item filter needs to work
   - items should load from data vs hardcoded data in each component
 - [ ] Top Sellers and Buyers logic?
 - [x] Today's Pick (styling)

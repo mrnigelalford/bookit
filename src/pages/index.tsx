@@ -23,11 +23,12 @@ import FAQ from './FAQ';
 import Contact02 from './Contact';
 
 interface RouteProps {
-  wallet?: BeaconWallet;
-  Tezos?: TezosToolkit;
+  wallet: BeaconWallet;
+  Tezos: TezosToolkit;
+  toast: any;
 }
 
-export const setRoutes = ({ wallet, Tezos }: RouteProps) => [
+export const setRoutes = ({ wallet, Tezos, toast }: RouteProps) => [
   // { path: '/', component: <Home01 /> },
   { path: '/', component: <HomeComponent /> },
   { path: '/explore', component: <Explore01 /> },
@@ -41,7 +42,7 @@ export const setRoutes = ({ wallet, Tezos }: RouteProps) => [
   { path: '/wallet-connect', component: <WalletConnect /> },
   {
     path: '/create-book',
-    component: <CreateItem wallet={wallet} Tezos={Tezos} />,
+    component: <CreateItem wallet={wallet} Tezos={Tezos} toast={toast} />,
   },
   { path: '/edit-profile', component: <EditProfile /> },
   { path: '/ranking', component: <Ranking /> },

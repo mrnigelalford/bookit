@@ -106,6 +106,6 @@ export const mintToken = async ({
       console.log(`Waiting for ${op} to be confirmed...`);
       return op.confirmation(3).then(() => op);
     })
-    .then((hash) => console.log(`Operation injected: https://jakarta.tzstats.com/${hash}`))
+    .then((op) => op.receipt)
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };

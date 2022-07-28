@@ -8,6 +8,9 @@ import { TezosToolkit } from '@taquito/taquito';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { Network, NetworkType } from '@airgap/beacon-sdk';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Tezos = new TezosToolkit('https://jakartanet.ecadinfra.com');
 const network: Network = { type: NetworkType.JAKARTANET };
 
@@ -21,8 +24,9 @@ Tezos.setWalletProvider(wallet);
 ReactDOM.render(
   <BrowserRouter>
     <ScrollToTop />
+    <ToastContainer />
     <Header wallet={wallet} Tezos={Tezos} />
-    <App wallet={wallet} Tezos={Tezos} />
+    <App wallet={wallet} Tezos={Tezos} toast={toast}/>
   </BrowserRouter>,
   document.getElementById('root')
 );

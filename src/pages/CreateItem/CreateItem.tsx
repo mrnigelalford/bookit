@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
-import Countdown from 'react-countdown';
+import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Dropdown } from 'react-bootstrap';
@@ -28,9 +28,10 @@ interface UploadProps {
 interface CreateItemProps {
   wallet?: BeaconWallet;
   Tezos?: TezosToolkit;
+  toast: any;
 }
 
-const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
+const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [frontCover, setFrontCover] = useState<File>(); // also tried <string | Blob>
   const [backCover, setBackCover] = useState<File>(); // also tried <string | Blob>
   const [bookUpload, setBookUpload] = useState<File>(); // also tried <string | Blob>
@@ -45,6 +46,8 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
   const [royalties, setRoyalty] = useState<number>(2);
   const [quantity, setQuantity] = useState<number>(1);
   const [activeAccount, setActiveAccount] = useState<any>();
+
+  let navigate = useNavigate();
 
   const previewBookCard = [
     {
@@ -129,7 +132,18 @@ const CreateItem = ({ wallet, Tezos }: CreateItemProps) => {
 
         if (Tezos && activeAccount) {
           // Originate({ Tezos, nftInfo, owner: activeAccount?.address });
-          mintToken({Tezos, nftInfo, owner: activeAccount?.address})
+          toast.info("Starting mint....page will go home upon completion", {
+            position: toast.POSITION.TOP_CENTER,
+            hideProgressBar: false,
+            autoClose: 8000,
+          });
+          await mintToken({Tezos, nftInfo, owner: activeAccount?.address});
+          toast.success("Confirmations have completed, congrats!", {
+            position: toast.POSITION.TOP_CENTER,
+            pauseOnHover: true,
+
+          })
+          navigate(`/`, { replace: true });
         }
       }
     }

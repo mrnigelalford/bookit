@@ -11,7 +11,7 @@ import Create from '../../components/layouts/home-5/Create-alt';
 
 import './HomeComponent';
 import { ContractBookData, getContractData, getIPFSHash } from '../../todayData';
-import { Book } from '../../components/layouts/home-5/BookCard';
+import { Book } from "../../components/layouts/home-5/Book";
 import { contract } from '../../App';
 
 // this component will pull its data from the blockchain.
