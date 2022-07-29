@@ -20,10 +20,3 @@ export const sampleData = [
   },
 ];
 
-const HeroSliderProps = {
-  title: 'Discover your next favorite author',
-  description: 'book NFT Marketplace',
-  data: sampleData,
-};
-
-export default HeroSliderProps;

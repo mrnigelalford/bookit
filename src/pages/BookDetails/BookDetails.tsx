@@ -13,11 +13,10 @@ import img5 from '../../assets/images/avatar/avt-7.jpg';
 import img6 from '../../assets/images/avatar/avt-8.jpg';
 import ninja from '../../assets/images/avatar/ninja.png';
 
-import './ItemDetails.scss';
+import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
 import {
-  ContractBookData,
   getContractData,
   getIPFSHash,
 } from '../../todayData';
@@ -85,7 +84,7 @@ const PriceComponent = (props: PriceProps) => {
   );
 };
 
-const ItemDetails02 = () => {
+const BookDetails = () => {
   const [dataHistory] = useState([
     {
       img: img1,
@@ -381,4 +380,4 @@ const ItemDetails02 = () => {
   );
 };
 
-export default ItemDetails02;
+export default BookDetails;
