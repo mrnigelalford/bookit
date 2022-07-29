@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
-import SliderComponent from '../../components/slider/SliderComponent';
-import heroSliderProps from '../../assets/fake-data/data-slider';
+import SliderComponent, { SliderImage } from '../../components/slider/SliderComponent';
+import { sampleData } from '../../assets/fake-data/data-slider';
 
 import TopSeller from '../../components/layouts/home-5/TopSeller';
 import TodayPicks from '../../components/layouts/home-5/TodayPicks';
@@ -21,6 +21,10 @@ import { contract } from '../../App';
 
 // the sass styles are overriding this page also
 
+const HeroSliderProps = {
+  title: 'Discover your next favorite author',
+  description: 'book NFT Marketplace',
+};
 
 export const setNewBookData = (id: string, metadata: ContractBookData): Book => ({
   id,
@@ -49,13 +53,29 @@ useEffect(() => {
   });
 }, [])
 
+const setSliderImage = (books: Book[]): SliderImage[] => {
+  const _images: SliderImage[] = [];  
+
+  books.forEach(book => {
+    if(book.img && book.title) {
+      _images.push({
+        title: book.title,
+        img: book.img
+      })
+    }
+  })
+  console.log('img length: ', _images.length)
+  if(_images.length) return _images;
+  return sampleData;
+}
+
 
   return (
     <div className="home-5">
       <SliderComponent
-        data={heroSliderProps.data}
-        title={heroSliderProps.title}
-        description={heroSliderProps.description}
+        data={setSliderImage(todayData)}
+        title={HeroSliderProps.title}
+        description={HeroSliderProps.description}
       />
       {/* <CategorySelect /> */}
       {/* <LiveAuction /> */}

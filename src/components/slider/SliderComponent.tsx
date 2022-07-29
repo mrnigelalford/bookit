@@ -5,21 +5,42 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
+export interface SliderImage {
+  title: string;
+  img: any;
+  class?: string;
+}
+
 interface SliderProps {
   title: string;
   description: string;
-  data: {
-    title_1: string;
-    title_2: string;
-    title_3: string;
-    description: string;
-    img: any;
-    imgbg: any;
-    class: string;
-  }[];
+  data: SliderImage[];
 }
 
+const Row = ({ data }) => (
+  <Swiper
+    modules={[Autoplay]}
+    direction={'vertical'}
+    spaceBetween={10}
+    slidesPerView={5}
+    loop
+    autoplay={{
+      delay: 1,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    }}
+    speed={2000}
+  >
+    {data?.map((prop: { img: string | undefined; title: string | undefined; }) => (
+      <SwiperSlide key={data.title}>
+        <img src={prop.img} alt={prop.title} />
+      </SwiperSlide>
+    ))}
+  </Swiper>
+);
+
 const SliderComponent = (props: SliderProps) => {
+  console.log('props: ', props.data.length);
   return (
     <section className="flat-title-page home5">
       <div className="overlay"></div>
@@ -43,124 +64,9 @@ const SliderComponent = (props: SliderProps) => {
               </a>
             </div>
           </div>
-
-          <Swiper
-            modules={[Autoplay]}
-            direction={'vertical'}
-            spaceBetween={10}
-            slidesPerView={5}
-            loop
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={2000}
-          >
-            <SwiperSlide>
-              <img src={props.data[0].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-          </Swiper>
-          <Swiper
-            modules={[Autoplay]}
-            direction={'vertical'}
-            spaceBetween={10}
-            slidesPerView={5}
-            loop
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={2100}
-          >
-            <SwiperSlide>
-              <img src={props.data[0].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-          </Swiper>
-          <Swiper
-            modules={[Autoplay]}
-            direction={'vertical'}
-            spaceBetween={10}
-            slidesPerView={5}
-            loop
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={2200}
-          >
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[0].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-          </Swiper>
-          <Swiper
-            modules={[Autoplay]}
-            direction={'vertical'}
-            spaceBetween={10}
-            slidesPerView={5}
-            loop
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={2000}
-            className="end"
-          >
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[0].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[2].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[1].img} alt="Axies" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={props.data[0].img} alt="Axies" />
-            </SwiperSlide>
-          </Swiper>
+          <Row data={props.data} />
+          <Row data={props.data} />
+          <Row data={props.data} />
         </div>
       </div>
     </section>
