@@ -151,7 +151,7 @@ const BookDetails = () => {
         if(_book) setBook(setNewBookData(id, _book))
       });
     });
-  }, []);
+  }, [bookID]);
 
   return (
     <div className="item-details">
@@ -269,7 +269,6 @@ const BookDetails = () => {
               <Link
                 to="/wallet-connect"
                 className="sc-button loadmore style bag fl-button pri-3"
-                style={{ display: 'none'}}
               >
                 <span>Place a bid</span>
               </Link>

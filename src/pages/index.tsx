@@ -13,7 +13,7 @@ import BlogDetails from './BlogDetails';
 import HelpCenter from './HelpCenter';
 import Author from './Author';
 import WalletConnect from './WalletConnect';
-import CreateItem from './CreateItem/CreateItem';
+import CreateBook from './CreateBook/CreateBook';
 import EditProfile from './EditProfile';
 import Ranking from './Ranking';
 import Login from './Login';
@@ -42,7 +42,7 @@ export const setRoutes = ({ wallet, Tezos, toast }: RouteProps) => [
   { path: '/wallet-connect', component: <WalletConnect /> },
   {
     path: '/create-book',
-    component: <CreateItem wallet={wallet} Tezos={Tezos} toast={toast} />,
+    component: <CreateBook wallet={wallet} Tezos={Tezos} toast={toast} />,
   },
   { path: '/edit-profile', component: <EditProfile /> },
   { path: '/ranking', component: <Ranking /> },
