@@ -1,6 +1,9 @@
 {
   "name": "axies-reactjs",
-  "homepage": "https://axiesreact.surielementor.com",
+  "homepage": "https://bookdapp.xyz",
+  "engines": {
+    "node": ">=16.4"
+  },
   "version": "1.0.1",
   "private": true,
   "dependencies": {
