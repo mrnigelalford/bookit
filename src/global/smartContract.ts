@@ -2,7 +2,7 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
 // import { code } from './contracts/ts/fa2';
 import { code } from './contracts/ts/multiple_nft_private';
-import { char2Bytes } from '@taquito/utils';
+import { char2Bytes, validateAddress } from '@taquito/utils';
 import { contract } from '../App';
 
 interface ConnectProps {
@@ -87,11 +87,7 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
 
-export const mintToken = async ({
-  Tezos,
-  nftInfo,
-  owner,
-}: ConnectProps) => {
+export const mintToken = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const token_info = new MichelsonMap();
   token_info.set(JSON.stringify(nftInfo), '01');
 
@@ -100,8 +96,39 @@ export const mintToken = async ({
   return Tezos.wallet
     .at(contract)
     .then((contract) => {
-      console.log('starting mint...')
-      return contract.methods.mint(Date.now(), owner, nftInfo.quantity, token_info, royalties).send()})
+      console.log('starting mint...');
+      return contract.methods
+        .mint(Date.now(), owner, nftInfo.quantity, token_info, royalties)
+        .send();
+    })
+    .then((op) => {
+      console.log(`Waiting for ${op} to be confirmed...`);
+      return op.confirmation(3).then(() => op);
+    })
+    .then((op) => op.receipt)
+    .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
+};
+
+export const transferBook = async ({ Tezos }) => {
+  const _owner = 'tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y';
+  const _buyer = 'tz1fcw6J12ArA1zLG2ATLsenfjYPb7b95SKB';
+  const _sample_token_id = '1658967535073';
+
+  // { to: _buyer, token_id: _sample_token_id, amount: 1 }
+
+  return Tezos.wallet
+    .at(contract)
+    .then((contract) => contract.methods
+    .transfer([{
+      0: _owner,
+      1: [{
+        amount: 0,
+        to: _buyer,
+        token_id_dest: _buyer,
+        token_id: _sample_token_id
+      }]
+    }]
+    ).send().send())
     .then((op) => {
       console.log(`Waiting for ${op} to be confirmed...`);
       return op.confirmation(3).then(() => op);

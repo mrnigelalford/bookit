@@ -33,7 +33,7 @@ export const setRoutes = ({ wallet, Tezos, toast }: RouteProps) => [
   { path: '/', component: <HomeComponent /> },
   { path: '/explore', component: <Explore01 /> },
   { path: '/live-auctions', component: <LiveAuctions /> },
-  { path: '/item-details/:id', component: <BookDetails /> },
+  { path: '/item-details/:id', component: <BookDetails wallet={wallet} Tezos={Tezos} toast={toast} /> },
   { path: '/activity', component: <Activity02 /> },
   { path: '/blog', component: <Blog /> },
   { path: '/blog-details', component: <BlogDetails /> },

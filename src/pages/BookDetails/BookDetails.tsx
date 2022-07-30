@@ -16,13 +16,14 @@ import ninja from '../../assets/images/avatar/ninja.png';
 import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
-import {
-  getContractData,
-  getIPFSHash,
-} from '../../todayData';
-import { Book } from "../../components/layouts/home-5/Book";
+import { getContractData, getIPFSHash } from '../../todayData';
+import { Book } from '../../components/layouts/home-5/Book';
 import { contract } from '../../App';
 import { setNewBookData } from '../HomeComponent/HomeComponent';
+import { BeaconWallet } from '@taquito/beacon-wallet';
+import { TezosToolkit } from '@taquito/taquito';
+import { transferBook } from '../../global/smartContract';
+import { Button } from 'react-bootstrap';
 
 interface OwnerProps {
   img?: string;
@@ -37,6 +38,12 @@ interface PriceProps {
   book: any;
   currentPrice: number;
   className: string;
+}
+
+interface CreateItemProps {
+  wallet?: BeaconWallet;
+  Tezos?: TezosToolkit;
+  toast: any;
 }
 
 // TODO: Re-add this component once the supporting DB logic is added
@@ -84,7 +91,7 @@ const PriceComponent = (props: PriceProps) => {
   );
 };
 
-const BookDetails = () => {
+const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [dataHistory] = useState([
     {
       img: img1,
@@ -146,12 +153,25 @@ const BookDetails = () => {
       //TODO: clean this by re-use or simplification
 
       getIPFSHash(id).then((data) => {
-        const token = data.filter(_token => _token.id === Number(bookID))[0];
+        const token = data.filter((_token) => _token.id === Number(bookID))[0];
         const _book = JSON.parse(Object.keys(token.value.token_info)[0]);
-        if(_book) setBook(setNewBookData(id, _book))
+        if (_book) setBook(setNewBookData(id, _book));
       });
     });
   }, [bookID]);
+
+  const buyBook = async () => {
+    toast.info('Starting mint....page will go home upon completion', {
+      position: toast.POSITION.TOP_CENTER,
+      hideProgressBar: false,
+      autoClose: 8000,
+    });
+    await transferBook({ Tezos });
+    toast.success('Confirmations have completed, congrats!', {
+      position: toast.POSITION.TOP_CENTER,
+      pauseOnHover: true,
+    });
+  };
 
   return (
     <div className="item-details">
@@ -229,8 +249,7 @@ const BookDetails = () => {
                   title="Created By"
                   className="col-12"
                 >
-                  {book &&
-                  (
+                  {book && (
                     <PriceComponent
                       book={book}
                       currentPrice={price}
@@ -242,12 +261,10 @@ const BookDetails = () => {
 
               <div className="description topBar">
                 <h6>Description </h6>
-                <p>
-                  {book?.description}
-                </p>
+                <p>{book?.description}</p>
               </div>
 
-              <div className="row details topBar" style={{display: 'none'}}>
+              <div className="row details topBar" style={{ display: 'none' }}>
                 {/* <h6>Tech Details </h6> */}
                 <div className="col-6">
                   <h6>Artist</h6>
@@ -266,12 +283,9 @@ const BookDetails = () => {
                   <p>04 April , 2021</p>{' '}
                 </div>
               </div>
-              <Link
-                to="/wallet-connect"
-                className="sc-button loadmore style bag fl-button pri-3"
-              >
-                <span>Place a bid</span>
-              </Link>
+              <Button onClick={buyBook}>
+                <span>Buy a book</span>
+              </Button>
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
                   <TabList>

@@ -1,10 +1,10 @@
 {
-  "name": "axies-reactjs",
+  "name": "bookit",
   "homepage": "https://bookdapp.xyz",
   "engines": {
     "node": ">=16.4"
   },
-  "version": "1.0.1",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@airgap/beacon-sdk": "^3.1.2",

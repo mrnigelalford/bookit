@@ -1,0 +1,72 @@
+.create-book {
+  h4 {
+    margin-bottom: 1em;
+  }
+
+  form {
+    h4 {
+      margin-top: 1em;
+    }
+  }
+
+  .flat-title-page.inner {
+    background: revert;
+  }
+}
+
+.uploadFile {
+  padding: 2em 1em !important;
+
+  p {
+    font-size: 1em;
+  }
+}
+
+.react-tabs {
+  li {
+    font-size: 1.8em;
+    color: silver;
+
+    span {
+      margin-right: 0.5em;
+    }
+  }
+
+  .row-form {
+    justify-content: revert;
+    flex-direction: row;
+
+    .col-4 {
+      padding: revert;
+    }
+    .last {
+      margin-left: 1em;
+    }
+  }
+}
+
+.react-tabs__tab--selected {
+  color: rgb(26, 26, 26) !important;
+}
+
+.previewCard {
+  margin-top: 3em;
+  text-align: center;
+  text-align: -webkit-center;
+
+  button {
+    width: 100%;
+    height: 4em;
+    border-radius: 1em;
+    color: white !important;
+  }
+
+  .bookCard {
+    padding-left: revert;
+    text-align: left;
+  }
+}
+
+.form-create-book {
+  margin-bottom: 2em;
+}

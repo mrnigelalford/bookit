@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import SliderComponent, { SliderImage } from '../../components/slider/SliderComponent';
-import { sampleData } from '../../assets/fake-data/data-slider';
 
 import TopSeller from '../../components/layouts/home-5/TopSeller';
 import TodayPicks from '../../components/layouts/home-5/TodayPicks';
@@ -64,9 +63,7 @@ const setSliderImage = (books: Book[]): SliderImage[] => {
       })
     }
   })
-  console.log('img length: ', _images.length)
-  if(_images.length) return _images;
-  return sampleData;
+  return _images;
 }
 
 
