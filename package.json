@@ -73,6 +73,7 @@
     "sass": "^1.45.1",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
+    "serve": "^14.0.1",
     "source-map-loader": "^3.0.0",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
@@ -87,7 +88,8 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "serve -s build",
+    "dev-start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
