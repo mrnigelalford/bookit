@@ -2,7 +2,7 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
 // import { code } from './contracts/ts/fa2';
 import { code } from './contracts/ts/multiple_nft_private';
-import { char2Bytes, validateAddress } from '@taquito/utils';
+import { char2Bytes } from '@taquito/utils';
 import { contract } from '../App';
 
 interface ConnectProps {
@@ -86,6 +86,11 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     })
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
+
+// TODO: 
+  // 1. ORIGINATE exchange | transfer manager | royalties
+  // 2. send calls to each contract in order (https://github.com/rarible/tezos-protocol-contracts/blob/9c83e34ec41ef66f3ac4f286d2dce8002ccda70e/exchange-v2/README.md)
+  // 3. crack open beer :-)
 
 export const mintToken = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
   const token_info = new MichelsonMap();
