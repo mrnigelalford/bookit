@@ -2,7 +2,6 @@
  * The Exchange contract provides the main entrypoints: match_orders and cancel
  * It validates that orders match and then calls the Transfer Manager contract
  */
-
 archetype exchange(
   owner             : address,
   transfer_manager  : address,

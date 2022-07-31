@@ -23,7 +23,7 @@ Here's the github [project management page](https://github.com/users/mrnigelalfo
 There are components added to to this project from Tezos that cause errors in Webpack. We have to add resolve support to help webpack read specific node_modules
 
 ```
-// node_modules/react-scripts/config/webpack.config.js:308
+// webpack.config.js:308
 
 ...
 resolve: {
@@ -32,6 +32,9 @@ resolve: {
   ...
 
 ```
+
+#### Completium-CLI
+This project uses Archetype and completium. For now version archetype.1.2.11 is being used
 
 You'll need funds for most interactions with smart contracts. The testing for this project is based on Ithacanet
 

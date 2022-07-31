@@ -5,6 +5,12 @@ import { code } from './contracts/ts/multiple_nft_private';
 import { char2Bytes } from '@taquito/utils';
 import { contract } from '../App';
 
+interface MintProps {
+  Tezos: TezosToolkit;
+  storage: any;
+  code: any
+}
+
 interface ConnectProps {
   Tezos: TezosToolkit;
   nftInfo: {
@@ -88,7 +94,12 @@ export const Originate = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
 };
 
 // TODO: 
-  // 1. ORIGINATE exchange | transfer manager | royalties
+  // 1. ORIGINATE exchange [x] | transfer manager [x] | royalties [x]
+
+  // NOTE: The supporting contracts needs to be set in order
+  // proxy, manager, royalties. 
+  // The proxy address will be sent to the manager
+  // manager will need exchange addresses
   // 2. send calls to each contract in order (https://github.com/rarible/tezos-protocol-contracts/blob/9c83e34ec41ef66f3ac4f286d2dce8002ccda70e/exchange-v2/README.md)
   // 3. crack open beer :-)
 
@@ -113,6 +124,23 @@ export const mintToken = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     .then((op) => op.receipt)
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
+
+export const setOriginate = async ({ Tezos, storage, code }: MintProps) => {
+  return Tezos.wallet
+  .originate({
+    code,
+    storage,
+  })
+  .send()
+  .then((originationOp) => {
+    console.log('OO', originationOp);
+    return originationOp.contract();
+  })
+  .then((contract) => {
+    console.log(`Origination completed for ${contract.address}.`);
+  })
+  .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
+}
 
 export const transferBook = async ({ Tezos }) => {
   const _owner = 'tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y';

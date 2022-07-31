@@ -13,6 +13,10 @@ import img5 from '../../assets/images/avatar/avt-7.jpg';
 import img6 from '../../assets/images/avatar/avt-8.jpg';
 import ninja from '../../assets/images/avatar/ninja.png';
 
+import { code as transfer_proxy } from '../../global/contracts/exchange-v2/transfer_proxy';
+import { code as tmanCode } from '../../global/contracts/exchange-v2/transfer_manager';
+import { code as royaltiesCode } from '../../global/contracts/exchange-v2/royalties';
+
 import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
@@ -21,8 +25,8 @@ import { Book } from '../../components/layouts/home-5/Book';
 import { contract } from '../../App';
 import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
-import { TezosToolkit } from '@taquito/taquito';
-import { transferBook } from '../../global/smartContract';
+import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
+import { setOriginate, transferBook } from '../../global/smartContract';
 import { Button } from 'react-bootstrap';
 
 interface OwnerProps {
@@ -57,6 +61,8 @@ interface CreateItemProps {
 //     </div>
 //   );
 // };
+
+const metadata = new MichelsonMap();
 
 const OwnerComponent = (props: OwnerProps) => (
   <div className={'author ' + props.className}>
@@ -161,6 +167,16 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       });
     });
   }, [bookID]);
+  
+  useEffect(() => {
+    wallet?.client.getActiveAccount().then((activeAccount) => {
+      if (activeAccount) {
+        setActiveAccount(activeAccount);
+      }
+    });
+  }, [wallet]);
+
+  const [activeAccount, setActiveAccount] = useState<any>();
 
   const buyBook = async () => {
     toast.info('Starting mint....page will go home upon completion', {
@@ -174,6 +190,61 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       pauseOnHover: true,
     });
   };
+
+  // works
+  const originateTransferProxy = async () => {
+    const owner = activeAccount?.address;
+    if(Tezos) {
+      const storage = {
+        owner,
+        owner_candidate: owner,
+        user: [owner],
+        metadata
+      };
+
+      await setOriginate({Tezos, storage, code: transfer_proxy })
+      console.log('done');
+    }
+  }
+
+  // works
+  const tmanOriginate = async () => {
+    const owner = activeAccount?.address;
+    const fee_receivers = new MichelsonMap();
+    fee_receivers.set(owner, owner)
+
+    if(Tezos) {
+      const storage = {
+        owner,
+        default_fee_receiver: owner,
+        protocol_fee: 2,
+        exchange: ['KT1WPTFNriBBhmxy5J5RA6q1EcFUiCzwPpmw'],
+        transfer_proxy: 'KT1PruZrV3Agq8ZPL5uSzsMHdka2EbE6NVj5',
+        fee_receivers,
+        metadata
+      };
+
+      await setOriginate({Tezos, storage, code: tmanCode })
+      console.log('done');
+    }
+  }
+  const royaltiesOriginate = async () => {
+    const owner = activeAccount?.address;
+
+    const royalties = new MichelsonMap();
+    royalties.set([owner, 100], [{ partAccount: owner, partValue: 2 }]);
+
+    if(Tezos) {
+      const storage = {
+        owner,
+        user: [owner],
+        royalties,
+        metadata
+      }
+      await setOriginate({Tezos, storage, code: royaltiesCode })
+      console.log('done');
+    }
+  }
 
   return (
     <div className="item-details">
@@ -285,9 +356,15 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   <p>04 April , 2021</p>{' '}
                 </div>
               </div>
-              {/* <Button onClick={buyBook}>
-                <span>Buy a book</span>
-              </Button> */}
+              <Button onClick={originateTransferProxy}>
+                <span>originate transfer proxy</span>
+              </Button>
+              <Button onClick={tmanOriginate}>
+                <span>originate transfer manager</span>
+              </Button>
+              <Button onClick={royaltiesOriginate}>
+                <span>originate royalty</span>
+              </Button>
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
                   <TabList>
