@@ -92,6 +92,8 @@ const PriceComponent = (props: PriceProps) => {
 };
 
 const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
+  //TODO: remove mock data
+
   const [dataHistory] = useState([
     {
       img: img1,
@@ -283,9 +285,9 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   <p>04 April , 2021</p>{' '}
                 </div>
               </div>
-              <Button onClick={buyBook}>
+              {/* <Button onClick={buyBook}>
                 <span>Buy a book</span>
-              </Button>
+              </Button> */}
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
                   <TabList>
