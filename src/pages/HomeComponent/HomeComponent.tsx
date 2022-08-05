@@ -11,7 +11,7 @@ import Create from '../../components/layouts/home-5/Create-alt';
 import './HomeComponent';
 import { ContractBookData, getContractData, getIPFSHash } from '../../todayData';
 import { Book } from "../../components/layouts/home-5/Book";
-import { contract } from '../../App';
+import { Contracts } from '../../App';
 
 // this component will pull its data from the blockchain.
 // mock data is being used for no iternent development
@@ -40,7 +40,7 @@ const [todayData, setTodayData] = useState<Book[]>([]);
 
 
 useEffect(() => {
-  getContractData('token_metadata', contract).then(id => {
+  getContractData('token_metadata', Contracts.NFT).then(id => {
     const _books: Book[] = [];
     getIPFSHash(id).then(data => {
       data.forEach(token => {

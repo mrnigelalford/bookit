@@ -11,7 +11,7 @@ import { Network, NetworkType } from '@airgap/beacon-sdk';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Tezos = new TezosToolkit('https://rpczero.tzbeta.net/');
+const Tezos = new TezosToolkit('https://jakartanet.ecadinfra.com');
 const network: Network = { type: NetworkType.JAKARTANET };
 
 const wallet = new BeaconWallet({

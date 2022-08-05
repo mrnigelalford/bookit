@@ -22,11 +22,11 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
 import { getContractData, getIPFSHash } from '../../todayData';
 import { Book } from '../../components/layouts/home-5/Book';
-import { contract } from '../../App';
+import { Contracts } from '../../App';
 import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
-import { setOriginate, transferBook } from '../../global/smartContract';
+import { originateContract, marketBuyBook } from '../../global/smartContract';
 import { Button } from 'react-bootstrap';
 
 interface OwnerProps {
@@ -156,7 +156,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   }, []);
 
   useEffect(() => {
-    getContractData('token_metadata', contract).then((id) => {
+    getContractData('token_metadata', Contracts.NFT).then((id) => {
       //NOTE: This logic is borrowed from HomeComponent:41
       //TODO: clean this by re-use or simplification
 
@@ -167,7 +167,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       });
     });
   }, [bookID]);
-  
+
   useEffect(() => {
     wallet?.client.getActiveAccount().then((activeAccount) => {
       if (activeAccount) {
@@ -184,7 +184,8 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       hideProgressBar: false,
       autoClose: 8000,
     });
-    await transferBook({ Tezos });
+
+    await marketBuyBook({ Tezos });
     toast.success('Confirmations have completed, congrats!', {
       position: toast.POSITION.TOP_CENTER,
       pauseOnHover: true,
@@ -194,26 +195,26 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   // works
   const originateTransferProxy = async () => {
     const owner = activeAccount?.address;
-    if(Tezos) {
+    if (Tezos) {
       const storage = {
         owner,
         owner_candidate: owner,
         user: [owner],
-        metadata
+        metadata,
       };
 
-      await setOriginate({Tezos, storage, code: transfer_proxy })
+      await originateContract({ Tezos, storage, code: transfer_proxy });
       console.log('done');
     }
-  }
+  };
 
   // works
   const tmanOriginate = async () => {
     const owner = activeAccount?.address;
     const fee_receivers = new MichelsonMap();
-    fee_receivers.set(owner, owner)
+    fee_receivers.set(owner, owner);
 
-    if(Tezos) {
+    if (Tezos) {
       const storage = {
         owner,
         default_fee_receiver: owner,
@@ -221,30 +222,31 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
         exchange: ['KT1WPTFNriBBhmxy5J5RA6q1EcFUiCzwPpmw'],
         transfer_proxy: 'KT1PruZrV3Agq8ZPL5uSzsMHdka2EbE6NVj5',
         fee_receivers,
-        metadata
+        metadata,
       };
 
-      await setOriginate({Tezos, storage, code: tmanCode })
+      await originateContract({ Tezos, storage, code: tmanCode });
       console.log('done');
     }
-  }
+  };
+  // works
   const royaltiesOriginate = async () => {
     const owner = activeAccount?.address;
 
     const royalties = new MichelsonMap();
     royalties.set([owner, 100], [{ partAccount: owner, partValue: 2 }]);
 
-    if(Tezos) {
+    if (Tezos) {
       const storage = {
         owner,
         user: [owner],
         royalties,
-        metadata
-      }
-      await setOriginate({Tezos, storage, code: royaltiesCode })
+        metadata,
+      };
+      await originateContract({ Tezos, storage, code: royaltiesCode });
       console.log('done');
     }
-  }
+  };
 
   return (
     <div className="item-details">
@@ -356,14 +358,11 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   <p>04 April , 2021</p>{' '}
                 </div>
               </div>
-              <Button onClick={originateTransferProxy}>
+              <Button
+                className="sc-button style-place-bid style bag fl-button pri-3"
+                onClick={buyBook}
+              >
                 <span>originate transfer proxy</span>
-              </Button>
-              <Button onClick={tmanOriginate}>
-                <span>originate transfer manager</span>
-              </Button>
-              <Button onClick={royaltiesOriginate}>
-                <span>originate royalty</span>
               </Button>
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>

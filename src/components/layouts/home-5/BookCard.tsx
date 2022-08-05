@@ -17,7 +17,7 @@ const BookCards = (props: BookProps) => {
             <div className="card-title">
               <h4 className="style2">
                 {/* if not defined make the link disabled */}
-                <Link to={`/item-details/${book.id}`}>{book.title}</Link>
+                <Link to={`/book-details/${book.id}`}>{book.title}</Link>
               </h4>
               {/* <div className="tags">{item.tags}</div> */}
             </div>
@@ -40,7 +40,7 @@ const BookCards = (props: BookProps) => {
               </div>
               {/* card image */}
               {/* if not defined make the link disabled */}
-              <Link to={`/item-details/${book.id}`}>
+              <Link to={`/book-details/${book.id}`}>
                 <img
                   src={book.img}
                   alt="axies"
@@ -56,7 +56,7 @@ const BookCards = (props: BookProps) => {
               <p>{book.description}</p>
               <h6 className="more-details">
                 {/* if not defined make the link disabled */}
-                <Link to={`/item-details/${book.id}`}>more details</Link>
+                <Link to={`/book-details/${book.id}`}>more details</Link>
               </h6>
             </div>
           </div>

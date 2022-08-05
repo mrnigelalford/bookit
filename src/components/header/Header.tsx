@@ -263,7 +263,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                                 Balance
                               </p>
                               <p className="w-full text-sm font-bold text-green-500">
-                                16.58 ETH
+                              {accountBalance} <strong>xtz</strong>{' '}
                               </p>
                             </div>
                           </div>

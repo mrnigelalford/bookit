@@ -36,6 +36,14 @@ resolve: {
 #### Completium-CLI
 This project uses Archetype and completium. For now version archetype.1.2.11 is being used
 
+### originating the contracts used here
+  The supporting contracts needs to be set in order
+  proxy, manager, royalties. 
+  The proxy address will be sent to the manager
+  manager will need exchange addresses
+
+  [extra documentation](https://github.com/rarible/tezos-protocol-contracts/blob/9c83e34ec41ef66f3ac4f286d2dce8002ccda70e/exchange-v2/README.md)
+
 You'll need funds for most interactions with smart contracts. The testing for this project is based on Ithacanet
 
 #### Faucet
