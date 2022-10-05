@@ -11,9 +11,9 @@ const CardModal = (props) => {
         <h3>Place a Bid</h3>
         <p className="text-center">
           You must bid at least{' '}
-          <span className="price color-popup">4.89 ETH</span>
+          <span className="price color-popup">4.89 xtz</span>
         </p>
-        <input type="text" className="form-control" placeholder="00.00 ETH" />
+        <input type="text" className="form-control" placeholder="00.00 xtz" />
         <p>
           Enter quantity. <span className="color-popup">5 available</span>
         </p>
@@ -21,15 +21,15 @@ const CardModal = (props) => {
         <div className="hr"></div>
         <div className="d-flex justify-content-between">
           <p> You must bid at least:</p>
-          <p className="text-right price color-popup"> 4.89 ETH </p>
+          <p className="text-right price color-popup"> 4.89 xtz </p>
         </div>
         <div className="d-flex justify-content-between">
           <p> Service free:</p>
-          <p className="text-right price color-popup"> 0,89 ETH </p>
+          <p className="text-right price color-popup"> 0,89 xtz </p>
         </div>
         <div className="d-flex justify-content-between">
           <p> Total bid amount:</p>
-          <p className="text-right price color-popup"> 4 ETH </p>
+          <p className="text-right price color-popup"> 4 xtz </p>
         </div>
         <Link
           to="/wallet-connect"

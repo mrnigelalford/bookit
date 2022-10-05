@@ -24,7 +24,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga1,
       nameAuthor: 'SalvadorDali',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
     {
@@ -33,7 +33,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga2,
       nameAuthor: 'Trista Francis',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
     {
@@ -42,7 +42,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga3,
       nameAuthor: 'Trista Francis',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
     {
@@ -51,7 +51,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga1,
       nameAuthor: 'SalvadorDali',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
     {
@@ -60,7 +60,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga2,
       nameAuthor: 'Trista Francis',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
     {
@@ -69,7 +69,7 @@ const LiveAuction = () => {
       tags: 'bsc',
       imgAuthor: imga3,
       nameAuthor: 'Trista Francis',
-      price: '4.89 ETH',
+      price: '4.89 xtz',
       wishlist: '100',
     },
   ])

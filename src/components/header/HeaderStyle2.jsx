@@ -185,7 +185,7 @@ const HeaderStyle2 = () => {
                     <div className="header_avatar">
                       <div className="price">
                         <span>
-                          2.45 <strong>ETH</strong>{' '}
+                          2.45 <strong>xtz</strong>{' '}
                         </span>
                       </div>
                       <img className="avatar" src={avt} alt="avatar" />
@@ -203,7 +203,7 @@ const HeaderStyle2 = () => {
                               Balance
                             </p>
                             <p className="w-full text-sm font-bold text-green-500">
-                              16.58 ETH
+                              16.58 xtz
                             </p>
                           </div>
                         </div>
