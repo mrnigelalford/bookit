@@ -12,10 +12,10 @@ const BookCards = (props: BookProps) => {
   return (
     <Fragment>
       {props.books.slice(0, props.maxCards).map((book, index) => (
-        <div key={index} className={`fl-item ${props.cardClassName}`}>
+        <div data-testid="bookCard" key={index} className={`fl-item ${props.cardClassName}`}>
           <div className={`sc-card-product comingsoon`}>
             <div className="card-title">
-              <h4 className="style2">
+              <h4 data-testid="card-title" className="style2">
                 {/* if not defined make the link disabled */}
                 <Link to={`/book-details/${book.id}`}>{book.title}</Link>
               </h4>
@@ -23,17 +23,17 @@ const BookCards = (props: BookProps) => {
             </div>
             <div className="media">
               {/* card details */}
-              <div className="metadata">
+              <div data-testid="card-author" className="metadata">
                 <h6> author</h6>
 
                 {/* if not defined make the link disabled */}
                 <p style={{ fontWeight: 600 }}>
-                  <Link to={`/authors/${book.AuthorId}`}>
+                  <Link data-testid="card-authorId" to={`/authors/${book.AuthorId}`}>
                     {book.nameAuthor}
                   </Link>{' '}
                 </p>
                 <h6> price</h6>
-                <p>{book.price} xtz</p>
+                <p data-testid="card-price">{book.price} xtz</p>
                 {/* <div className="avatar">
                       <img src={book.imgAuthor} alt="axies" />
                     </div> */}
@@ -53,7 +53,7 @@ const BookCards = (props: BookProps) => {
             </div>
             <div className="description">
               <h6>Description</h6>
-              <p>{book.description}</p>
+              <p data-testid="card-description">{book.description}</p>
               <h6 className="more-details">
                 {/* if not defined make the link disabled */}
                 <Link to={`/book-details/${book.id}`}>more details</Link>
