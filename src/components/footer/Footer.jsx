@@ -115,7 +115,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-2 col-md-4 col-sm-5 col-5">
               <div className="widget widget-menu style-1">
-                <h5 className="title-widget">My Account</h5>
+                <h5 data-testid="accountTitle" className="title-widget">My Account</h5>
                 <ul>
                   {accountList.map((item, index) => (
                     <li key={index}>
