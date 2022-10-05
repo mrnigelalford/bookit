@@ -109,3 +109,29 @@ parse the return of this call with a npm module
 ```
 https://gateway.ipfs.io/ipfs/QmXhqhBZrjUjg1yNj6ofJ1E8RtxXPPYXWSdRAeFcWTsEuq
 ```
+
+### Get account info
+
+```
+GET request https://api.jakartanet.tzkt.io/v1/accounts/tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y?metadata=true
+```
+Should return public account info
+
+{
+    "id": 218487,
+    "type": "user",
+    "address": "tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y",
+    "publicKey": "edpkuPDZ28Z2VPjDSksxjkqe9kiETwyjBTfyhqVuWGpo4KReRxopxf",
+    "revealed": true,
+    "balance": 9475183168,
+    "rollupBonds": 0,
+    "counter": 395046,
+    "numContracts": 7,
+    "rollupsCount": 0,
+...
+
+
+TODO:
+originate new contract (new_fa2.js)
+send up a new token
+test transfer

@@ -4,7 +4,8 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 import { code } from './contracts/ts/multiple_nft_private';
 import { char2Bytes } from '@taquito/utils';
 import { Contracts } from '../App';
-import { sampleTransfer } from './sampleContract';
+import { payloadBytes, sampleTransfer } from './sampleContract';
+import { RequestSignPayloadInput, SigningType } from '@airgap/beacon-sdk';
 
 interface MintProps {
   Tezos: TezosToolkit;
@@ -148,23 +149,24 @@ export const originateContract = async ({
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
 
-export const marketBuyBook = async ({ Tezos }) => {
-  // {
-  //   "signature_left": "edsigtvaveRzvBJTWKETtTxzrzLDibgf86sZMHbMMPoh1kEkrw15jZhtZSBt8PLFWEDL2xbPkdM4BLky77UPvUAxjUPaD6qD9AV",
-  //   "signature_right": null
-  // }
 
-  const makerAddress = 'edpkuPDZ28Z2VPjDSksxjkqe9kiETwyjBTfyhqVuWGpo4KReRxopxf';
-  const takerAddress = 'edpkubYYqddzgeEsHNMcBxDaLT4gH5iXd2ByfrAaWEvNqajY4a6dcg';
-//tz1Y1eg4zzwzBTFrr7DRmdw2DDZRa339Qw9Y
-// sampleTransfer
-
+//TODO: Delete this once you get transfer working
+export const marketBuyBook = async ({ Tezos, activeAccount, wallet }) => {
   console.clear();
+
+  const payload: RequestSignPayloadInput = {
+    signingType: SigningType.MICHELINE,
+    payload: payloadBytes,
+    sourceAddress: activeAccount.address,
+  };
+  const signedPayload = await wallet.client.requestSignPayload(payload);
+  const { signature } = signedPayload;
+
   return Tezos.wallet
     .at(Contracts.Exchange)
-    .then((contract) => {
-        contract.methods.match_orders([]).send();
-  })
+    .then((contract) =>
+      contract.methodsObject.match_orders(sampleTransfer(signature)).send()
+    )
     .then((op) => {
       console.log(`Waiting for ${op} to be confirmed...`);
       return op.confirmation(3).then(() => op);

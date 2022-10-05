@@ -5,7 +5,6 @@ const tzkt = 'https://api.jakartanet.tzkt.io'
 
 export const getContractData = (prop: string, contract: string) => {
   const storageURL = `${tzkt}/v1/contracts/${contract}/storage`
-  // https://api.jakartanet.tzkt.io/v1/contracts/{address}/storage
   return axios.get(storageURL).then(response => response.data[prop])
 }
 

@@ -487,6 +487,8 @@ function is_caller(k : option<key>) : bool {
   end
 }
 
+// improve the error messaging
+
 function validateFull(iorder : order, isignature : option<signature>) : bool {
   dorequire(validateDate(iorder.start, PAST), ORDER_START_VALID_FAILED);
   dorequire(validateDate(iorder.%end, FUTURE), ORDER_END_VALID_FAILED);

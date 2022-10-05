@@ -16,6 +16,7 @@ import ninja from '../../assets/images/avatar/ninja.png';
 import { code as transfer_proxy } from '../../global/contracts/exchange-v2/transfer_proxy';
 import { code as tmanCode } from '../../global/contracts/exchange-v2/transfer_manager';
 import { code as royaltiesCode } from '../../global/contracts/exchange-v2/royalties';
+import { code as fa2Code } from '../../global/contracts/arl/new_fa2';
 
 import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -179,17 +180,28 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [activeAccount, setActiveAccount] = useState<any>();
 
   const buyBook = async () => {
-    toast.info('Starting mint....page will go home upon completion', {
-      position: toast.POSITION.TOP_CENTER,
-      hideProgressBar: false,
-      autoClose: 8000,
-    });
+    // toast.info('Starting mint....page will go home upon completion', {
+    //   position: toast.POSITION.TOP_CENTER,
+    //   hideProgressBar: false,
+    //   autoClose: 8000,
+    // });
 
-    await marketBuyBook({ Tezos });
-    toast.success('Confirmations have completed, congrats!', {
-      position: toast.POSITION.TOP_CENTER,
-      pauseOnHover: true,
-    });
+    await marketBuyBook({ Tezos, activeAccount, wallet });
+    // toast.success('Confirmations have completed, congrats!', {
+    //   position: toast.POSITION.TOP_CENTER,
+    //   pauseOnHover: true,
+    // });
+  };
+
+  const originate = async () => {
+    console.log('aa: ', activeAccount.address);
+
+    if (Tezos && wallet)
+      return originateContract({
+        Tezos,
+        storage: {admin: activeAccount.address},
+        code: fa2Code,
+      });
   };
 
   // works
@@ -363,6 +375,13 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                 onClick={buyBook}
               >
                 <span>originate transfer proxy</span>
+              </Button>
+
+              <Button
+                className="sc-button style-place-bid style bag fl-button pri-3"
+                onClick={originate}
+              >
+                <span>originate</span>
               </Button>
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
