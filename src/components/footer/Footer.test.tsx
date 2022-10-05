@@ -1,18 +1,26 @@
 /* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable testing-library/no-node-access */
+
 import { render } from '@testing-library/react';
 import React from 'react';
 import Footer from './Footer';
 import { MemoryRouter } from 'react-router-dom';
 
-describe('Home Component', () => {
-  it('changes the class when hovered', () => {
-    const { queryByTestId } = render(
+describe('Footer Component', () => {
+  it('has `my account` title', () => {
+    const { getByTestId } = render(
       <MemoryRouter initialEntries={['/test']}>
         <Footer />
       </MemoryRouter>
     )
+    expect(getByTestId('accountTitle')?.textContent).toBe('My Account');
+  });
 
-    expect(queryByTestId('accountTitle')?.textContent).toBe('My Account');
+  it('has twitter link', () => {
+    const { getByTestId } = render(
+      <MemoryRouter initialEntries={['/test']}>
+        <Footer />
+      </MemoryRouter>
+    )
+    expect(getByTestId('socialIcon-twitter')).toBeTruthy();
   });
 })

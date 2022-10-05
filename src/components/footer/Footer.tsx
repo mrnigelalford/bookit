@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logodark from '../../assets/images/logo/logo_dark.png';
-import logofooter from '../../assets/images/logo/logo2.png';
-import ModalComponent from './ModalComponent';
+import logodark from '../../assets/images/logo/bookit-logo.png';
+import logofooter from '../../assets/images/logo/logo-no-bg-dark.png';
+
 const Footer = () => {
   const accountList = [
     // {
@@ -54,10 +54,12 @@ const Footer = () => {
     {
       icon: 'fab fa-twitter', // twitter
       link: 'https://twitter.com/alforddesign',
+      testId: 'twitter'
     },
     {
       icon: 'icon-fl-vt', // discord
       link: '#',
+      testId: 'discord'
     },
   ];
 
@@ -86,7 +88,7 @@ const Footer = () => {
 
   return (
     <div>
-      <footer id="footer" className="footer-light-style clearfix bg-style">
+      <footer data-testid="footer" id="footer" className="footer-light-style clearfix bg-style">
         <div className="themesflat-container">
           <div className="row">
             <div className="col-lg-3 col-md-12 col-12">
@@ -98,19 +100,17 @@ const Footer = () => {
                       id="logo_footer"
                       src={logodark}
                       alt="nft-gaming"
+                      style={{marginLeft: '-1em'}}
                     />
                     <img
                       className="logo-light"
                       id="logo_footer"
                       src={logofooter}
                       alt="nft-gaming"
+                      style={{marginLeft: '-1em'}}
                     />
                   </Link>
                 </div>
-                <p className="sub-widget-logo">
-                  Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis
-                  non, fugit totam vel laboriosam vitae.
-                </p>
               </div>
             </div>
             <div className="col-lg-2 col-md-4 col-sm-5 col-5">
@@ -172,13 +172,13 @@ const Footer = () => {
                     </button>
                   </form>
                 </div>
-                <div className="widget-social style-1 mg-t32">
+                <div data-testid="hork" className="widget-social style-1 mg-t32">
                   <ul>
                     {socialList.map((item, index) => (
-                      <li key={index}>
-                        <Link to={item.link}>
+                      <li key={index} data-testid={`socialIcon-${item.testId}`}>
+                        <a href={item.link}>
                           <i className={item.icon}></i>
-                        </Link>
+                        </a>
                       </li>
                     ))}
                   </ul>

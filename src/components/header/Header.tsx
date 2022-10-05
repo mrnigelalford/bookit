@@ -2,10 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import menus from '../../pages/menu';
 import DarkMode from './DarkMode';
-import logoheader from '../../assets/images/logo/logo.png';
-import logoheader2x from '../../assets/images/logo/logo@2x.png';
-import logodark from '../../assets/images/logo/logo_dark.png';
-import logodark2x from '../../assets/images/logo/logo_dark@2x.png';
+import logoheader from '../../assets/images/logo/bookit-logo-transparent.png';
+import logoheader2x from '../../assets/images/logo/bookit-logo-transparent.png';
+import logodark from '../../assets/images/logo/bookit-logo-transparent.png';
+import logodark2x from '../../assets/images/logo/bookit-logo-transparent.png';
 import imgsun from '../../assets/images/icon/sun.png';
 import avt from '../../assets/images/avatar/avt-2.jpg';
 
