@@ -150,7 +150,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                 >
                   <span></span>
                 </div>
-                <nav id="main-nav" className="main-nav" ref={menuLeft}>
+                <nav id="main-nav" className="main-nav" ref={menuLeft} style={{ display: 'none'}}>
                   <ul id="menu-primary-menu" className="menu">
                     {menus.map((data, index) => (
                       <li
@@ -269,11 +269,11 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                           </div>
                           <div className="hr"></div>
                           <div className="links mt-20">
-                            <Link to="#">
+                            <Link style={{display: 'none'}}  to="#">
                               <i className="fab fa-accusoft"></i>{' '}
                               <span> My items</span>
                             </Link>
-                            <a className="mt-10" href="/edit-profile">
+                            <a style={{display: 'none'}}  className="mt-10" href="/edit-profile">
                               <i className="fas fa-pencil-alt"></i>{' '}
                               <span> Edit Profile</span>
                             </a>

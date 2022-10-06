@@ -48,7 +48,7 @@ const SliderComponent = (props: SliderProps) => {
         <div className="wrap-heading flat-slider d-flex align-items-center">
           <div>
             <h1 className="heading">{props.title}</h1>
-            <p className="sub-heading mg-t-7 mg-bt-39">{props.description}</p>
+            {/* <p className="sub-heading mg-t-7 mg-bt-39">{props.description}</p> */}
             <div className="flat-bt-slider style2 flex">
               <a
                 href="/create-book"
@@ -59,6 +59,7 @@ const SliderComponent = (props: SliderProps) => {
               <a
                 href="/explore"
                 className="sc-button header-slider style style-1 note fl-button pri-1"
+                style={{display: 'none'}}
               >
                 <span>Explore</span>
               </a>
