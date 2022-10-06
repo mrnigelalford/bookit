@@ -40,7 +40,7 @@ const [todayData, setTodayData] = useState<Book[]>([]);
 
 
 useEffect(() => {
-  getContractData('token_metadata', Contracts.NFT).then(id => {
+  getContractData('token_metadata', Contracts.Exchange).then(id => {
     const _books: Book[] = [];
     getIPFSHash(id).then(data => {
       data.forEach(token => {

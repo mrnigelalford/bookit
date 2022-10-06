@@ -23,7 +23,7 @@ const BookCards = (props: BookProps) => {
             </div>
             <div className="media">
               {/* card details */}
-              <div data-testid="card-author" className="metadata">
+              <div className="metadata">
                 <h6> author</h6>
 
                 {/* if not defined make the link disabled */}

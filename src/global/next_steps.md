@@ -1,6 +1,6 @@
 Add tests
   smart contract (done)
-  UI
+  UI (eh, done)
 
 tests
   - how much should gas prices
@@ -11,10 +11,6 @@ compelete UI flow
 
 direct the changes to the operation/IT teams
 direct updates inside the grant platform
-
-
-
-
 
 
 pw: pqCSe2r0@sU8

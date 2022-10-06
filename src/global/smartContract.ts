@@ -1,8 +1,7 @@
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 // import { code } from './contracts/single_nft_marketplace';
 // import { code } from './contracts/ts/fa2';
-import { code } from './contracts/ts/multiple_nft_private';
-import { char2Bytes } from '@taquito/utils';
+// import { char2Bytes } from '@taquito/utils';
 import { Contracts } from '../App';
 import { payloadBytes, sampleTransfer } from './sampleContract';
 import { RequestSignPayloadInput, SigningType } from '@airgap/beacon-sdk';
@@ -116,11 +115,6 @@ export const mintToken = async ({ Tezos, nftInfo, owner }: ConnectProps) => {
     .then((op) => op.receipt)
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
-
-// TODO:
-// 1. ORIGINATE exchange [x] | transfer manager [x] | royalties [x]
-// 2. call the exchange contract
-// 3. crack open beer :-)
 
 /**
   @description will originate a set of michelson code into a new contract

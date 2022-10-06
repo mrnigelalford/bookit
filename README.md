@@ -46,6 +46,11 @@ This project uses Archetype and completium. For now version archetype.1.2.11 is 
 
 You'll need funds for most interactions with smart contracts. The testing for this project is based on Ithacanet
 
+Ex. Deploy contract via completium
+```
+completium-cli deploy src/global/contracts/arl/multiple_nft_public.arl --parameters '{"owner": "tz1fcw6J12ArA1zLG2ATLsenfjYPb7b95SKB"}' 
+```
+
 #### Faucet
 
 Access the appropriate faucet start [here](https://teztnets.xyz/)
@@ -129,9 +134,3 @@ Should return public account info
     "numContracts": 7,
     "rollupsCount": 0,
 ...
-
-
-TODO:
-originate new contract (new_fa2.js)
-send up a new token
-test transfer

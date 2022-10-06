@@ -127,7 +127,6 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
         };
 
         if (Tezos && activeAccount) {
-          // Originate({ Tezos, nftInfo, owner: activeAccount?.address });
           toast.info("Starting mint....page will go home upon completion", {
             position: toast.POSITION.TOP_CENTER,
             hideProgressBar: false,

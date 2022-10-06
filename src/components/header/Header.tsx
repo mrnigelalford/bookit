@@ -263,7 +263,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                                 Balance
                               </p>
                               <p className="w-full text-sm font-bold text-green-500">
-                              {accountBalance} <strong>xtz</strong>{' '}
+                              {accountBalance ? Math.ceil(accountBalance / 100000 ): accountBalance } <strong>xtz</strong>{' '}
                               </p>
                             </div>
                           </div>

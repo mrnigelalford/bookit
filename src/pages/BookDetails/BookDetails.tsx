@@ -16,7 +16,6 @@ import ninja from '../../assets/images/avatar/ninja.png';
 import { code as transfer_proxy } from '../../global/contracts/exchange-v2/transfer_proxy';
 import { code as tmanCode } from '../../global/contracts/exchange-v2/transfer_manager';
 import { code as royaltiesCode } from '../../global/contracts/exchange-v2/royalties';
-import { code as fa2Code } from '../../global/contracts/arl/new_fa2';
 
 import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -157,7 +156,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   }, []);
 
   useEffect(() => {
-    getContractData('token_metadata', Contracts.NFT).then((id) => {
+    getContractData('token_metadata', Contracts.Exchange).then((id) => {
       //NOTE: This logic is borrowed from HomeComponent:41
       //TODO: clean this by re-use or simplification
 
@@ -191,17 +190,6 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     //   position: toast.POSITION.TOP_CENTER,
     //   pauseOnHover: true,
     // });
-  };
-
-  const originate = async () => {
-    console.log('aa: ', activeAccount.address);
-
-    if (Tezos && wallet)
-      return originateContract({
-        Tezos,
-        storage: {admin: activeAccount.address},
-        code: fa2Code,
-      });
   };
 
   // works
@@ -377,12 +365,6 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                 <span>originate transfer proxy</span>
               </Button>
 
-              <Button
-                className="sc-button style-place-bid style bag fl-button pri-3"
-                onClick={originate}
-              >
-                <span>originate</span>
-              </Button>
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>
                   <TabList>
