@@ -1,0 +1,24 @@
+.heading {
+  display: inline;
+}
+
+.descriptionBlock {
+  z-index: 2;
+  background-color: rgba(128, 128, 128, 0.498);
+  padding: 2.5em;
+  border-radius: 2em;
+  text-align: center;
+}
+
+.sc-button {
+  background-color: white !important;
+}
+
+.descriptionBlock.style2 {
+  text-align: center !important;
+  margin-top: 1em;
+}
+
+.swiper {
+  height: 65em !important;
+}

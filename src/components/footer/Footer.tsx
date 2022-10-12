@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import logodark from '../../assets/images/logo/bookit-logo.png';
 import logofooter from '../../assets/images/logo/logo-no-bg-dark.png';
 
+import './Footer.scss'
+
 const Footer = () => {
   const accountList = [
     // {
@@ -89,7 +91,6 @@ const Footer = () => {
   return (
     <div>
       <footer data-testid="footer" id="footer" className="footer-light-style clearfix bg-style">
-        <div className="themesflat-container">
           <div className="row">
             <div className="col-lg-3 col-md-12 col-12">
               <div className="widget widget-logo">
@@ -186,7 +187,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
       </footer>
       {isVisible && <Link onClick={scrollToTop} to="#" id="scroll-top"></Link>}
       {/* <ModalComponent /> */}

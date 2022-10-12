@@ -4,7 +4,7 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 
 // import Home01 from './Home01';
 import HomeComponent from './HomeComponent/HomeComponent';
-import Explore01 from './Explore01';
+import Explore01 from './Explore/Explore01';
 import LiveAuctions from './LiveAuctions';
 import BookDetails from './BookDetails/BookDetails';
 import Activity02 from './Activity02';

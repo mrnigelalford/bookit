@@ -249,13 +249,8 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   };
 
   return (
-    <div className="item-details">
-      <section className="flat-title-page inner">
-        <div className="themesflat-container">
-          <Breadcrumbs />
-          <h1 className="heading text-center">Book Details</h1>
-        </div>
-      </section>
+    <div className="item-details pageBody">
+      <Breadcrumbs header="Book Details" />
       <div className="tf-section tf-item-details style-2">
         <div className="themesflat-container">
           <div className="row">
@@ -467,7 +462,6 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
         </div>
       </div>
       {/* <LiveAuction data={liveAuctionData} /> */}
-      <Footer />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../../components/footer/Footer';
 import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -147,10 +146,9 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const FileUpload: React.FC<UploadProps> = (props: UploadProps) => (
     <form style={{ marginTop: '1em' }} action="#" className="col-6">
       <h4 className="title-create-book">{props.title}</h4>
-      <label className="uploadFile" style={{ padding: '2em' }}>
+      <label className="uploadFile">
         <p
           className="filename"
-          style={{ width: '65%', overflowWrap: 'break-word' }}
         >
           {props.description}
         </p>
@@ -159,7 +157,6 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
           className="inputfile form-control"
           name="fileUpload"
           onChange={props.onBlur}
-          style={{ right: '1em' }}
         />
       </label>
     </form>
@@ -247,11 +244,10 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
   }, [wallet]);
 
   return (
-    <div className="create-book">
+    <div className="create-book pageBody">
       <section className="flat-title-page inner">
         <h1 className="heading text-center">Mint Book</h1>
       </section>
-      <div className="themesflat-container">
         <div className="row mintForm">
           {/* Mint Form */}
           <div className="col-lg-6 col-sm-12 form-create-book">
@@ -263,7 +259,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
               />
               <FileUpload
                 title="Upload book"
-                description={bookUpload?.name || '.jpg or .png. Max 300mb.'}
+                description={bookUpload?.name || '.epub or .pdf. Max 300mb.'}
                 onBlur={handleBookUpload}
               />
             </div>
@@ -428,8 +424,6 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
           </div>
           {/* /Preview Card */}
         </div>
-      </div>
-      <Footer />
     </div>
   );
 };

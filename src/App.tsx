@@ -22,18 +22,20 @@ export const Contracts = {
 function App({ Tezos, wallet, toast }: AppProps) {
   const routes = setRoutes({ Tezos, wallet, toast });
   return (
-    <Routes>
-      {routes.map(({ path, component }, index) => (
-        <Route
-          // @ts-ignore
-          onUpdate={() => window.scrollTo(0, 0)}
-          exact={true}
-          path={path}
-          element={component}
-          key={index}
-        />
-      ))}
-    </Routes>
+    <div>
+      <Routes>
+        {routes.map(({ path, component }, index) => (
+          <Route
+            // @ts-ignore
+            onUpdate={() => window.scrollTo(0, 0)}
+            exact={true}
+            path={path}
+            element={component}
+            key={index}
+          />
+        ))}
+      </Routes>
+    </div>
   );
 }
 

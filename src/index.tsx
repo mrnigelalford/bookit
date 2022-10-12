@@ -10,6 +10,7 @@ import { Network, NetworkType } from '@airgap/beacon-sdk';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './components/footer/Footer';
 
 const Tezos = new TezosToolkit('https://jakartanet.ecadinfra.com');
 const network: Network = { type: NetworkType.JAKARTANET };
@@ -25,8 +26,11 @@ ReactDOM.render(
   <BrowserRouter>
     <ScrollToTop />
     <ToastContainer />
+  <div id="root">
     <Header wallet={wallet} Tezos={Tezos} />
     <App wallet={wallet} Tezos={Tezos} toast={toast}/>
+    <Footer />
+  </div>
   </BrowserRouter>,
   document.getElementById('root')
 );

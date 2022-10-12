@@ -5,6 +5,8 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
+import './Slider.scss'
+
 export interface SliderImage {
   title: string;
   img: any;
@@ -40,16 +42,15 @@ const Row = ({ data }) => (
 );
 
 const SliderComponent = (props: SliderProps) => {
-  console.log('props: ', props.data.length);
   return (
     <section className="flat-title-page home5">
       <div className="overlay"></div>
       <div className="themesflat-container">
         <div className="wrap-heading flat-slider d-flex align-items-center">
-          <div>
+          <div className="descriptionBlock">
             <h1 className="heading">{props.title}</h1>
             {/* <p className="sub-heading mg-t-7 mg-bt-39">{props.description}</p> */}
-            <div className="flat-bt-slider style2 flex">
+            <div className="style2">
               <a
                 href="/create-book"
                 className="sc-button header-slider style style-1 rocket fl-button pri-1"

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../../components/footer/Footer';
 import SliderComponent, { SliderImage } from '../../components/slider/SliderComponent';
 
 import TopSeller from '../../components/layouts/home-5/TopSeller';
@@ -80,7 +79,6 @@ const setSliderImage = (books: Book[]): SliderImage[] => {
       {/* <PopularCollection /> */}
       {/* <TopSeller /> */}
       <Create />
-      <Footer />
     </div>
   );
 };

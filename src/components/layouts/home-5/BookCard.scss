@@ -14,7 +14,7 @@
 @mixin truncateText($lineClamp) {
   padding-bottom: 0.1em;
   text-overflow: ellipsis;
-  overflow: hidden;
+  // overflow: hidden;
   -webkit-line-clamp: $lineClamp;
   -webkit-box-orient: vertical;
   display: -webkit-box;

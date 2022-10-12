@@ -11,14 +11,25 @@
 
   .flat-title-page.inner {
     background: revert;
+    padding: revert;
   }
 }
 
 .uploadFile {
-  padding: 2em 1em !important;
+  padding-top: 1.5em;
+  position: revert;
+
+  input {
+    margin-top: 3em;
+  }
+
+  input[type='file'] {
+    position: revert;
+  }
 
   p {
     font-size: 1em;
+    // overflowWrap: 'break-word'
   }
 }
 
