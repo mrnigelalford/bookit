@@ -26,7 +26,7 @@ ReactDOM.render(
   <BrowserRouter>
     <ScrollToTop />
     <ToastContainer />
-  <div id="root">
+  <div>
     <Header wallet={wallet} Tezos={Tezos} />
     <App wallet={wallet} Tezos={Tezos} toast={toast}/>
     <Footer />

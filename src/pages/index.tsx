@@ -4,7 +4,7 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 
 // import Home01 from './Home01';
 import HomeComponent from './HomeComponent/HomeComponent';
-import Explore01 from './Explore/Explore01';
+import Explore from './Explore/Explore';
 import LiveAuctions from './LiveAuctions';
 import BookDetails from './BookDetails/BookDetails';
 import Activity02 from './Activity02';
@@ -31,7 +31,7 @@ interface RouteProps {
 export const setRoutes = ({ wallet, Tezos, toast }: RouteProps) => [
   // { path: '/', component: <Home01 /> },
   { path: '/', component: <HomeComponent /> },
-  { path: '/explore', component: <Explore01 /> },
+  { path: '/explore', component: <Explore /> },
   { path: '/live-auctions', component: <LiveAuctions /> },
   { path: '/book-details/:id', component: <BookDetails wallet={wallet} Tezos={Tezos} toast={toast} /> },
   { path: '/activity', component: <Activity02 /> },

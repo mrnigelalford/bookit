@@ -1,15 +1,15 @@
 import React from 'react'
-import TodayPicks from '../../components/layouts/explore-01/TodayPicks'
+import TodayPicks from '../../components/TodaysPicks/TodayPicks'
 import todayPickData from '../../assets/fake-data/data-today-pick'
 import { Breadcrumbs } from '../BookDetails/Breadcrumbs'
 
-const Explore01 = () => {
+const Explore = () => {
   return (
-    <div>
+    <div id="explore" className="explore pageBody">
       <Breadcrumbs header="Explore" />
       <TodayPicks data={todayPickData} />
     </div>
   )
 }
 
-export default Explore01
+export default Explore
