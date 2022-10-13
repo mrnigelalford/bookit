@@ -5765,6 +5765,7 @@ button.accordion-button {
   overflow: hidden;
   background-color: #fff;
   padding: 0;
+  height: 30vh;
 }
 .flat-title-page.home5 .overlay {
   background: linear-gradient(227.3deg, #8a208c 0%, #181b81 100.84%);

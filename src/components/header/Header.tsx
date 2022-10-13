@@ -75,7 +75,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
 
   const setWalletBalance = async (account: AccountInfo) => {
     const balance = await Tezos?.tz.getBalance(account.address);
-    setAccountBalance(balance?.toNumber());
+    setAccountBalance(balance ? Number((balance?.toNumber() *.000001).toFixed(2)) : balance);
   };
 
   useEffect(() => {
@@ -263,7 +263,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                                 Balance
                               </p>
                               <p className="w-full text-sm font-bold text-green-500">
-                              {accountBalance ? Math.ceil(accountBalance / 100000 ): accountBalance } <strong>xtz</strong>{' '}
+                              { accountBalance } <strong>xtz</strong>{' '}
                               </p>
                             </div>
                           </div>

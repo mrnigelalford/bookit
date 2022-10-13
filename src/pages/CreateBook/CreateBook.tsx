@@ -263,23 +263,8 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
                 onBlur={handleBookUpload}
               />
             </div>
-            <div className="flat-tabs tab-create-book">
-              <h4 className="title-create-book">Select method</h4>
-              <Tabs>
-                <TabList>
-                  <Tab>
-                    <span className="icon-fl-tag"></span>Fixed Price
-                  </Tab>
-                  <Tab>
-                    <span className="icon-fl-clock"></span>Time Auctions
-                  </Tab>
-                  <Tab>
-                    <span className="icon-fl-icon-22"></span>Open For Bids
-                  </Tab>
-                </TabList>
-
-                <TabPanel>
-                  <form action="#">
+            <div className="flat-tabs create-book">
+            <form action="#">
                     <div className="row">
                       <div className="col-4">
                         <h4 className="title-create-book">Price</h4>
@@ -331,82 +316,8 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
                       <CategoryDropdown />
                     </div>
                   </form>
-                </TabPanel>
-                <TabPanel>
-                  <form action="#">
-                    <h4 className="title-create-book">Minimum bid</h4>
-                    <input type="text" placeholder="enter minimum bid" />
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h5 className="title-create-book">Starting date</h5>
-                        <input
-                          type="date"
-                          name="bid_starting_date"
-                          id="bid_starting_date"
-                          className="form-control"
-                          min="1997-01-01"
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <h4 className="title-create-book">Expiration date</h4>
-                        <input
-                          type="date"
-                          name="bid_expiration_date"
-                          id="bid_expiration_date"
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-
-                    <h4 className="title-create-book">Title</h4>
-                    <input type="text" placeholder="Item Name" />
-
-                    <h4 className="title-create-book">Description</h4>
-                    <textarea placeholder="e.g. “This is very limited item”"></textarea>
-                  </form>
-                </TabPanel>
-                <TabPanel>
-                  <form action="#">
-                    <h4 className="title-create-book">Price</h4>
-                    <input
-                      type="number"
-                      placeholder="Enter price for one item (xtz)"
-                    />
-
-                    <h4 className="title-create-book">Minimum bid</h4>
-                    <input type="text" placeholder="enter minimum bid" />
-
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h5 className="title-create-book">Starting date</h5>
-                        <input
-                          type="date"
-                          name="bid_starting_date"
-                          id="bid_starting_date2"
-                          className="form-control"
-                          min="1997-01-01"
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <h4 className="title-create-book">Expiration date</h4>
-                        <input
-                          type="date"
-                          name="bid_expiration_date"
-                          id="bid_expiration_date2"
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-
-                    <h4 className="title-create-book">Title</h4>
-                    <input type="text" placeholder="Item Name" />
-
-                    <h4 className="title-create-book">Description</h4>
-                    <textarea placeholder="e.g. “This is very limited item”"></textarea>
-                  </form>
-                </TabPanel>
-              </Tabs>
             </div>
+            <button className="btn-Mint" onClick={() => mintForm()}> Mint Book </button>
           </div>
           {/* /Mint Form */}
 
@@ -415,12 +326,6 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
             <h4 className="title-create-book">Preview book</h4>
 
             <BookCards books={previewBookCard} cardClassName="col-6 bookCard" />
-            <button
-              className="sc-button style bag fl-button pri-3 col-6"
-              onClick={() => mintForm()}
-            >
-              Mint Book
-            </button>
           </div>
           {/* /Preview Card */}
         </div>

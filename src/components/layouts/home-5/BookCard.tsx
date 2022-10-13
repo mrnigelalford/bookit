@@ -27,7 +27,7 @@ const BookCards = (props: BookProps) => {
                 <h6> author</h6>
 
                 {/* if not defined make the link disabled */}
-                <p style={{ fontWeight: 600 }}>
+                <p className="cardTitle">
                   <Link data-testid="card-authorId" to={`/authors/${book.AuthorId}`}>
                     {book.nameAuthor}
                   </Link>{' '}

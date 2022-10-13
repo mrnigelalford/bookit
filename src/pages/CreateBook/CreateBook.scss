@@ -1,4 +1,5 @@
 .create-book {
+  margin-bottom: 3em;
   h4 {
     margin-bottom: 1em;
   }
@@ -69,7 +70,6 @@
     width: 100%;
     height: 4em;
     border-radius: 1em;
-    color: white !important;
   }
 
   .bookCard {
@@ -80,4 +80,13 @@
 
 .form-create-book {
   margin-bottom: 2em;
+
+  .btn-Mint {
+    padding: 1em;
+    border-radius: .6em;
+    font-size: 2em;
+    width: 12em;
+    background-color: #025aa5;
+    margin: auto 30%;
+  }
 }
