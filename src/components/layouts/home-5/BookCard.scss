@@ -12,12 +12,12 @@
 // }
 
 @mixin truncateText($lineClamp) {
-  padding-bottom: 0.1em;
-  text-overflow: ellipsis;
-  // overflow: hidden;
+  display: -webkit-box;
   -webkit-line-clamp: $lineClamp;
   -webkit-box-orient: vertical;
-  display: -webkit-box;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  padding-bottom: 0.1em;
 }
 
 a {
@@ -25,7 +25,7 @@ a {
 }
 
 .card-title {
-  margin-bottom: revert !important;
+  // margin-bottom: revert !important;
 
   h4 {
     font-weight: 600;
@@ -68,7 +68,7 @@ a {
 
   p {
     // margin: 0.4em revert;
-    @include truncateText(6);
+    @include truncateText(3)
   }
 
   .more-details {

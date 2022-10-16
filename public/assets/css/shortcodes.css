@@ -598,7 +598,6 @@
 
 .sc-card-article .card-media,
 .sc-card-product .card-media {
-  border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -882,7 +881,6 @@
   position: relative;
   margin-bottom: 21px;
   box-sizing: 20px;
-  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -1021,7 +1019,8 @@
   display: block;
 }
 .sc-card-product .card-media img {
-  width: 100%;
+  height: 20em !important;
+  border-radius: 1.5em;
 }
 
 .sc-card-product .card-title {

@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import CardModal from '../layouts/CardModal'
 
 import './TodayPicks.scss'
+import { BookCard } from '../layouts/home-5/BookCard'
 
 const TodayPicks = (props) => {
   const data = props.data
 
-  const [visible, setVisible] = useState(14)
+  const [visible, setVisible] = useState(4)
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 4)
   }
@@ -128,73 +129,20 @@ const TodayPicks = (props) => {
         <FilterComponent />
         <div className="row col-md-12 bookGrid">
           {data.slice(0, visible).map((item, index) => (
-            <div
-              key={index}
-              className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
-            >
-              <div
-                className={`sc-card-product ${item.feature ? 'comingsoon' : ''
-                  } `}
-              >
-                <div className="card-media">
-                  <Link to="/item-details-01">
-                    <img src={item.img} alt="axies" />
-                  </Link>
-                  <Link to="/login" className="wishlist-button heart">
-                    <span className="number-like">{item.wishlist}</span>
-                  </Link>
-                  <div className="coming-soon">{item.feature}</div>
-                </div>
-                <div className="card-title">
-                  <h5 className="style2">
-                    <Link to="/item-details-01">"{item.title}"</Link>
-                  </h5>
-                  <div className="tags">{item.tags}</div>
-                </div>
-                <div className="meta-info">
-                  <div className="author">
-                    <div className="avatar">
-                      <img src={item.imgAuthor} alt="axies" />
-                    </div>
-                    <div className="info">
-                      <span>Owned By</span>
-                      <h6>
-                        {' '}
-                        <Link to="/authors-02">{item.nameAuthor}</Link>{' '}
-                      </h6>
-                    </div>
-                  </div>
-                  <div className="price">
-                    <span>Current Bid</span>
-                    <h5> {item.price}</h5>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button
-                    onClick={() => setModalShow(true)}
-                    className="sc-button style bag fl-button pri-3 no-bg"
-                  >
-                    <span>Place Bid</span>
-                  </button>
-                  <Link to="/activity-01" className="view-history reload">
-                    View History
-                  </Link>
-                </div>
-              </div>
-            </div>
+              <BookCard book={item} key={index} cardClassName="col-xl-3 col-lg-4 col-md-6 col-sm-6" />
           ))}
-        {visible > data.length && (
-          <div className="col-md-12 wrap-inner load-more text-center">
-            <Link
-              to="#"
-              id="load-more"
-              className="sc-button loadmore fl-button pri-3"
-              onClick={showMoreItems}
-            >
-              <span>Load More</span>
-            </Link>
-          </div>
-        )}
+          {visible > data.length && (
+            <div className="col-md-12 wrap-inner load-more text-center">
+              <Link
+                to="#"
+                id="load-more"
+                className="sc-button loadmore fl-button pri-3"
+                onClick={showMoreItems}
+              >
+                <span>Load More</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       {/* </div>

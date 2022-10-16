@@ -24,6 +24,7 @@
 - [ ] book should show background image
 - [ ] book should show sample content image?
 - [ ] show bid history (read block chain data for this)
+- [ ] book should support wishlists
 
 ### App Routing
 
