@@ -1,5 +1,11 @@
 ### TODO
 
+- [ ] update Tezos to ghostnet
+- [ ] resubmit
+- [x] connect graphql
+- [x] retrieve author info to graphql
+
+
 ## Excerpt
 - [ ] dynamic page that shows excerpt data created by the user
 

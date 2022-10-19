@@ -13,6 +13,7 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { NetworkType, AccountInfo } from '@airgap/beacon-sdk';
 import { TezosToolkit } from '@taquito/taquito';
 import { PermissionScope } from '@airgap/beacon-sdk';
+import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client';
 
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
@@ -67,6 +68,35 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
   const [accountBalance, setAccountBalance] = useState<number>();
   const [activeAccount, setActiveAccount] = useState<any>();
   const [profileVisible, setProfileVisible] = useState<boolean>(false);
+  const [author, setAuthor] = useState<String>();
+
+
+  const GET_AUTHOR = gql`
+query Author($id: ID) {
+  author(id: $id) {
+    name
+  }
+}
+`;
+
+  const FethAuthorName = () => {
+    const { loading, error, data } = useQuery(GET_AUTHOR, {
+      variables: { "name": "Nigel Alford" },
+    });
+
+    if (loading) return null;
+
+    console.log('found: ', JSON.stringify(data))
+
+    return (
+      <div className="d-flex align-items-center copy-text justify-content-between">
+        <Link to="/" className="ml-2">
+        <h4> Name</h4>
+        <h5>{data.author.name}</h5>
+        </Link>
+      </div>
+    )
+  }
 
   const scopes: PermissionScope[] = [
     PermissionScope.OPERATION_REQUEST,
@@ -75,7 +105,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
 
   const setWalletBalance = async (account: AccountInfo) => {
     const balance = await Tezos?.tz.getBalance(account.address);
-    setAccountBalance(balance ? Number((balance?.toNumber() *.000001).toFixed(2)) : balance);
+    setAccountBalance(balance ? Number((balance?.toNumber() * .000001).toFixed(2)) : balance);
   };
 
   useEffect(() => {
@@ -150,15 +180,14 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                 >
                   <span></span>
                 </div>
-                <nav id="main-nav" className="main-nav" ref={menuLeft} style={{ display: 'none'}}>
+                <nav id="main-nav" className="main-nav" ref={menuLeft} style={{ display: 'none' }}>
                   <ul id="menu-primary-menu" className="menu">
                     {menus.map((data, index) => (
                       <li
                         key={index}
                         onClick={() => handleOnClick(index)}
-                        className={`menu-item ${
-                          data.namesub ? 'menu-item-has-children' : ''
-                        } ${activeIndex === index ? 'active' : ''} `}
+                        className={`menu-item ${data.namesub ? 'menu-item-has-children' : ''
+                          } ${activeIndex === index ? 'active' : ''} `}
                       >
                         <Link to={data.links}>{data.name}</Link>
                         {data.namesub && (
@@ -246,10 +275,10 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                           onClick={() => setProfileVisible(!profileVisible)}
                         />
                         <div
-                          className={`avatar_popup mt-20 ${
-                            profileVisible ? 'visible' : ''
-                          }`}
+                          className={`avatar_popup mt-20 ${profileVisible ? 'visible' : ''
+                            }`}
                         >
+                          <FethAuthorName />
                           <div className="d-flex align-items-center copy-text justify-content-between">
                             <span> {address}... </span>
                             <Link to="/" className="ml-2">
@@ -263,17 +292,17 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                                 Balance
                               </p>
                               <p className="w-full text-sm font-bold text-green-500">
-                              { accountBalance } <strong>xtz</strong>{' '}
+                                {accountBalance} <strong>xtz</strong>{' '}
                               </p>
                             </div>
                           </div>
                           <div className="hr"></div>
                           <div className="links mt-20">
-                            <Link style={{display: 'none'}}  to="#">
+                            <Link style={{ display: 'none' }} to="#">
                               <i className="fab fa-accusoft"></i>{' '}
                               <span> My items</span>
                             </Link>
-                            <a style={{display: 'none'}}  className="mt-10" href="/edit-profile">
+                            <a style={{ display: 'none' }} className="mt-10" href="/edit-profile">
                               <i className="fas fa-pencil-alt"></i>{' '}
                               <span> Edit Profile</span>
                             </a>
@@ -294,7 +323,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
             </div>
           </div>
         </div>
-      {/* <DarkMode /> */}
+        {/* <DarkMode /> */}
       </div>
     </header>
   );

@@ -1428,6 +1428,7 @@ header {
   opacity: 1;
   -webkit-transform: translateY(0);
   transform: translateY(0);
+  z-index: 2;
 }
 
 .header_1 .header_avatar .avatar_popup .links {
