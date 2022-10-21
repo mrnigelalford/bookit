@@ -2,7 +2,7 @@
   "name": "bookit",
   "homepage": "https://bookdapp.xyz",
   "engines": {
-    "node": ">=16.4"
+    "node": "14.19.1"
   },
   "version": "0.0.1",
   "private": true,
