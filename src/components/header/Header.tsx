@@ -15,6 +15,8 @@ import { TezosToolkit } from '@taquito/taquito';
 import { PermissionScope } from '@airgap/beacon-sdk';
 import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client';
 
+import './Header.scss';
+
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
 interface HeaderProps {
@@ -72,12 +74,12 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
 
 
   const GET_AUTHOR = gql`
-query Author($id: ID) {
-  author(id: $id) {
-    name
-  }
-}
-`;
+    query Author($id: ID) {
+      author(id: $id) {
+        name
+      }
+    }
+  `;
 
   const FethAuthorName = () => {
     const { loading, error, data } = useQuery(GET_AUTHOR, {
@@ -91,8 +93,8 @@ query Author($id: ID) {
     return (
       <div className="d-flex align-items-center copy-text justify-content-between">
         <Link to="/" className="ml-2">
-        <h4> Name</h4>
-        <h5>{data.author.name}</h5>
+          <h4> Name</h4>
+          <h5>{data.author.name}</h5>
         </Link>
       </div>
     )
@@ -128,7 +130,7 @@ query Author($id: ID) {
     } else {
       await wallet?.client.requestPermissions({
         network: {
-          type: NetworkType.JAKARTANET,
+          type: NetworkType.KATHMANDUNET,
         },
         scopes,
       });

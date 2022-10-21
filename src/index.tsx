@@ -18,7 +18,7 @@ const Tezos = new TezosToolkit(process.env.REACT_APP_TEZOS_ENDPOINT || '');
 
 const wallet = new BeaconWallet({
   name: 'Bookit - Book NFT marketplace',
-  preferredNetwork: (process.env.REACT_APP_TEZOS_NETWORK || '') as NetworkType
+  preferredNetwork: NetworkType.KATHMANDUNET
 });
 
 const client = new ApolloClient({

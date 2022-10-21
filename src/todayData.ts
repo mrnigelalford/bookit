@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const tzkt = 'https://api.jakartanet.tzkt.io'
+const tzkt = process.env.REACT_APP_TEZOS_API;
 
 
 export const getContractData = (prop: string, contract: string) => {

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../../components/footer/Footer';
-import { Link, useParams } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import liveAuctionData from '../../assets/fake-data/data-live-auction';
-import LiveAuction from '../../components/layouts/LiveAuction';
+// import liveAuctionData from '../../assets/fake-data/data-live-auction';
+// import LiveAuction from '../../components/layouts/LiveAuction';
 import img1 from '../../assets/images/avatar/avt-3.jpg';
 import img2 from '../../assets/images/avatar/avt-11.jpg';
 import img3 from '../../assets/images/avatar/avt-1.jpg';
@@ -14,20 +12,23 @@ import img6 from '../../assets/images/avatar/avt-8.jpg';
 import ninja from '../../assets/images/avatar/ninja.png';
 
 import { code as transfer_proxy } from '../../global/contracts/exchange-v2/transfer_proxy';
-import { code as tmanCode } from '../../global/contracts/exchange-v2/transfer_manager';
+import { code as contractTransferManager } from '../../global/contracts/exchange-v2/transfer_manager';
+import { code as exchangeCode } from '../../global/contracts/exchange-v2/exchange';
 import { code as royaltiesCode } from '../../global/contracts/exchange-v2/royalties';
+import { code as publicNFTCode } from '../../global/contracts/ts/multiple_nft_public';
 
 import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
-import { getContractData, getIPFSHash } from '../../todayData';
+// import { getContractData, getIPFSHash } from '../../todayData';
 import { Book } from '../../components/layouts/home-5/Book';
-import { Contracts } from '../../App';
-import { setNewBookData } from '../HomeComponent/HomeComponent';
+// import { Contracts } from '../../App';
+// import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
-import { originateContract, marketBuyBook } from '../../global/smartContract';
+import { originateContract, marketBuyBook, originatePublicNFT } from '../../global/smartContract';
 import { Button } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 
 interface OwnerProps {
   img?: string;
@@ -155,6 +156,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     getTezosPrice().then((p) => setPrice(p));
   }, []);
 
+  /*
   useEffect(() => {
     getContractData('token_metadata', Contracts.Exchange).then((id) => {
       //NOTE: This logic is borrowed from HomeComponent:41
@@ -167,6 +169,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       });
     });
   }, [bookID]);
+  */
 
   useEffect(() => {
     wallet?.client.getActiveAccount().then((activeAccount) => {
@@ -192,7 +195,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     // });
   };
 
-  // works
+  // step 1. - transfer proxy
   const originateTransferProxy = async () => {
     const owner = activeAccount?.address;
     if (Tezos) {
@@ -208,8 +211,8 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     }
   };
 
-  // works
-  const tmanOriginate = async () => {
+  // step 2. - exchange manager
+  const transferMangerOriginate = async () => {
     const owner = activeAccount?.address;
     const fee_receivers = new MichelsonMap();
     fee_receivers.set(owner, owner);
@@ -219,22 +222,44 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
         owner,
         default_fee_receiver: owner,
         protocol_fee: 2,
-        exchange: ['KT1WPTFNriBBhmxy5J5RA6q1EcFUiCzwPpmw'],
-        transfer_proxy: 'KT1PruZrV3Agq8ZPL5uSzsMHdka2EbE6NVj5',
+        exchange: [process.env.REACT_APP_CONTRACT_EXCHANGE],
+        transfer_proxy: process.env.REACT_APP_CONTRACT_TRANSFER_MANAGER,
         fee_receivers,
         metadata,
       };
 
-      await originateContract({ Tezos, storage, code: tmanCode });
+      await originateContract({ Tezos, storage, code: contractTransferManager });
       console.log('done');
     }
   };
-  // works
+
+  // step 3 - exchange
+  const originateExchange = async () => {
+    const owner = activeAccount?.address;
+    const metadata = new MichelsonMap();
+
+    if (Tezos) {
+      const storage = {
+        owner,
+        transfer_manager: 'KT1WjLWQS9R34mWySsrnE3L28bxcuvEHHyzL',
+        royalties: 'tz1ZiNYG7hxDFome58tuu6CTRm9Mc1R7bxuV',
+        fill: 'tz1ZiNYG7hxDFome58tuu6CTRm9Mc1R7bxuV',
+        paused: false,
+        metadata,
+      };
+
+      await originateContract({ Tezos, storage, code: exchangeCode });
+      console.log('done');
+    }
+  };
+
+  // step 4 - royalties
   const royaltiesOriginate = async () => {
     const owner = activeAccount?.address;
 
     const royalties = new MichelsonMap();
     royalties.set([owner, 100], [{ partAccount: owner, partValue: 2 }]);
+    const metadata = new MichelsonMap();
 
     if (Tezos) {
       const storage = {
@@ -246,6 +271,12 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       await originateContract({ Tezos, storage, code: royaltiesCode });
       console.log('done');
     }
+  };
+
+  const publicNFTOriginate = async () => {
+    if (!Tezos ) return
+      await originatePublicNFT({ Tezos, nftInfo: {}, owner: process.env.REACT_APP_ADDRESS_PROXY_MANAGER });
+      console.log('done');
   };
 
   return (
@@ -353,12 +384,38 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   <p>04 April , 2021</p>{' '}
                 </div>
               </div>
+              <div className="row justify-content-between publishRow">
               <Button
-                className="sc-button style-place-bid style bag fl-button pri-3"
-                onClick={buyBook}
+                className="sc-button col-md-3"
+                onClick={originateTransferProxy}
               >
-                <span>originate transfer proxy</span>
+                <span>Transfer Proxy</span>
               </Button>
+              <Button
+                className="sc-button col-md-3"
+                onClick={originateExchange}
+              >
+                <span>Gen Exchange</span>
+              </Button>
+              <Button
+                className="sc-button col-md-3"
+                onClick={transferMangerOriginate}
+              >
+                <span>Transfer Manager</span>
+              </Button>
+              <Button
+                className="sc-button col-md-3"
+                onClick={royaltiesOriginate}
+              >
+                <span>Royalties</span>
+              </Button>
+              <Button
+                className="sc-button col-md-3"
+                onClick={publicNFTOriginate}
+              >
+                <span>Public NFT Contract</span>
+              </Button>
+              </div>
 
               <div className="flat-tabs themesflat-tabs topBar">
                 <Tabs>

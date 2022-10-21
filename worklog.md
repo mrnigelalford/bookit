@@ -4,7 +4,10 @@
 - [ ] resubmit
 - [x] connect graphql
 - [x] retrieve author info to graphql
-
+- [] handle empty state
+  - home page, book details, author info, 
+- [ ] book creation - read price, royalties, quantity
+- [ ] NFT shows as 'unknown token' in Kukai
 
 ## Excerpt
 - [ ] dynamic page that shows excerpt data created by the user

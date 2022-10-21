@@ -38,13 +38,17 @@ This project uses Archetype and completium. For now version archetype.1.2.11 is 
 
 ### originating the contracts used here
   The supporting contracts needs to be set in order
-  proxy, manager, royalties. 
+  1. proxy
+  2. exchange (needs approx 6tez)
+  3. manager
+  4. royalties.
+
   The proxy address will be sent to the manager
   manager will need exchange addresses
 
   [extra documentation](https://github.com/rarible/tezos-protocol-contracts/blob/9c83e34ec41ef66f3ac4f286d2dce8002ccda70e/exchange-v2/README.md)
 
-You'll need funds for most interactions with smart contracts. The testing for this project is based on Ithacanet
+You'll need funds for most interactions with smart contracts. The testing for this project is based on Kathmandu
 
 Ex. Deploy contract via completium
 ```
@@ -54,20 +58,12 @@ completium-cli deploy src/global/contracts/arl/multiple_nft_public.arl --paramet
 #### Faucet
 
 Access the appropriate faucet start [here](https://teztnets.xyz/)
-After downloading the appropriate json file use the tezos-client to send funds to your test account
+
 
 #### Tezos client CLI
 
 [Tezos client info](https://assets.tqtezos.com/docs/setup/1-tezos-client/)
-set tezos-client to a different endpoint
-```
-tezos-client --endpoint https://jakartanet.tezos.marigold.dev config update
-```
 
-#### Testnet Wallet
-
-I use the kukai wallet for testing. This is the link to the ithacanet wallet. Create a new wallet/address here if needed.
-[Kukai Ithacanet](https://ithacanet.kukai.app/)
 
 ---
 ## Tezos Documentation

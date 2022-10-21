@@ -7,13 +7,8 @@ import Create from '../../components/layouts/home-5/Create-alt';
 import './HomeComponent';
 import { ContractBookData, getContractData, getIPFSHash } from '../../todayData';
 import { Book } from "../../components/layouts/home-5/Book";
-import { Contracts } from '../../App';
 
 // this component will pull its data from the blockchain.
-// mock data is being used for no iternent development
-
-// build a mock data model to represent data post blockchain add
-
 // the sass styles are overriding this page also
 
 const HeroSliderProps = {
@@ -36,7 +31,7 @@ const [todayData, setTodayData] = useState<Book[]>([]);
 
 
 useEffect(() => {
-  getContractData('token_metadata', Contracts.Exchange).then(id => {
+  getContractData('token_metadata', process.env.REACT_APP_CONTRACT_PUBLIC_NFT).then(id => {
     const _books: Book[] = [];
     getIPFSHash(id).then(data => {
       data.forEach(token => {

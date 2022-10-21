@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Dropdown } from 'react-bootstrap';
 import { pinFileToIPFS } from '../../global/pinata';
@@ -12,7 +11,6 @@ import BookCards from '../../components/layouts/home-5/BookCard';
 import './CreateBook.scss';
 
 import img3 from '../../assets/images/box-item/green-ottez.png';
-import { Contracts } from '../../App';
 
 enum BookType {
   epub = 'epub',
@@ -96,14 +94,14 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
     if (frontCover) {
       bookCover.append('file', frontCover);
       const _title = title?.replace(/ /g, '');
-      bookCover.append('title',  _title + '_' + Date.now());
+      bookCover.append('title', _title + '_' + Date.now());
     }
 
     const bookFile = new FormData();
     if (bookUpload) {
       bookFile.append('file', bookUpload);
       const _title = title?.replace(/ /g, '');
-      bookFile.append('title',  _title + '_' + Date.now());
+      bookFile.append('title', _title + '_' + Date.now());
     }
 
     // send form to IPFS
@@ -131,7 +129,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
             hideProgressBar: false,
             autoClose: 8000,
           });
-          await mintToken({Tezos, nftInfo, owner: activeAccount?.address});
+          await mintToken({ Tezos, nftInfo, owner: activeAccount?.address });
           toast.success("Confirmations have completed, congrats!", {
             position: toast.POSITION.TOP_CENTER,
             pauseOnHover: true,
@@ -248,87 +246,87 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
       <section className="flat-title-page inner">
         <h1 className="heading text-center">Mint Book</h1>
       </section>
-        <div className="row mintForm">
-          {/* Mint Form */}
-          <div className="col-lg-6 col-sm-12 form-create-book">
-            <div className="row">
-              <FileUpload
-                title="Upload front cover"
-                description={frontCover?.name || '.jpg or .png. Max 300mb.'}
-                onBlur={handleFrontCoverChange}
-              />
-              <FileUpload
-                title="Upload book"
-                description={bookUpload?.name || '.epub or .pdf. Max 300mb.'}
-                onBlur={handleBookUpload}
-              />
-            </div>
-            <div className="flat-tabs create-book">
+      <div className="row mintForm">
+        {/* Mint Form */}
+        <div className="col-lg-6 col-sm-12 form-create-book">
+          <div className="row">
+            <FileUpload
+              title="Upload front cover"
+              description={frontCover?.name || '.jpg or .png. Max 300mb.'}
+              onBlur={handleFrontCoverChange}
+            />
+            <FileUpload
+              title="Upload book"
+              description={bookUpload?.name || '.epub or .pdf. Max 300mb.'}
+              onBlur={handleBookUpload}
+            />
+          </div>
+          <div className="flat-tabs create-book">
             <form action="#">
-                    <div className="row">
-                      <div className="col-4">
-                        <h4 className="title-create-book">Price</h4>
-                        <input
-                          type="number"
-                          style={{ backgroundColor: 'transparent' }}
-                          placeholder="Enter price for one item (xtz)"
-                          onBlur={() => setPrice}
-                        />
-                      </div>
-                      <div className="col-4">
-                        <h4 className="title-create-book">Royalties</h4>
-                        <input
-                          type="number"
-                          placeholder="5%"
-                          value={royalties}
-                          onBlur={(e) => setRoyalty(Number(e.target.value))}
-                        />
-                      </div>
+              <div className="row">
+                <div className="col-4">
+                  <h4 className="title-create-book">Price</h4>
+                  <input
+                    type="number"
+                    style={{ backgroundColor: 'transparent' }}
+                    placeholder="Enter price for one item (xtz)"
+                    onBlur={() => setPrice}
+                  />
+                </div>
+                <div className="col-4">
+                  <h4 className="title-create-book">Royalties</h4>
+                  <input
+                    type="number"
+                    placeholder="5%"
+                    value={royalties}
+                    onBlur={(e) => setRoyalty(Number(e.target.value))}
+                  />
+                </div>
 
-                      <div className="col-4">
-                        <h4 className="title-create-book">Quantity</h4>
-                        <input
-                          type="number"
-                          placeholder="e.g. “# of books to be minted”"
-                          value={quantity}
-                          onChange={(e) => setQuantity(Number(e.target.value))}
-                        />
-                      </div>
-                    </div>
+                <div className="col-4">
+                  <h4 className="title-create-book">Quantity</h4>
+                  <input
+                    type="number"
+                    placeholder="e.g. “# of books to be minted”"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                  />
+                </div>
+              </div>
 
-                    <h4 className="title-create-book">Title</h4>
-                    <input
-                      type="text"
-                      placeholder="Item Name"
-                      onBlur={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                    />
+              <h4 className="title-create-book">Title</h4>
+              <input
+                type="text"
+                placeholder="Item Name"
+                onBlur={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
 
-                    <h4 className="title-create-book">Description</h4>
-                    <textarea
-                      placeholder="e.g. “This is very limited item”"
-                      onBlur={(e) => setDescription(e.target.value)}
-                    ></textarea>
+              <h4 className="title-create-book">Description</h4>
+              <textarea
+                placeholder="e.g. “This is very limited item”"
+                onBlur={(e) => setDescription(e.target.value)}
+              ></textarea>
 
-                    <div className="row-form style-3">
-                      <BookFormatPicker />
-                      <CategoryDropdown />
-                    </div>
-                  </form>
-            </div>
-            <button className="btn-Mint" onClick={() => mintForm()}> Mint Book </button>
+              <div className="row-form style-3">
+                <BookFormatPicker />
+                <CategoryDropdown />
+              </div>
+            </form>
           </div>
-          {/* /Mint Form */}
-
-          {/* Preview Card */}
-          <div className="col-lg-6 col-sm-12 previewCard">
-            <h4 className="title-create-book">Preview book</h4>
-
-            <BookCards books={previewBookCard} cardClassName="col-6 bookCard" />
-          </div>
-          {/* /Preview Card */}
+          <button className="btn-Mint" onClick={() => mintForm()}> Mint Book </button>
         </div>
+        {/* /Mint Form */}
+
+        {/* Preview Card */}
+        <div className="col-lg-6 col-sm-12 previewCard">
+          <h4 className="title-create-book">Preview book</h4>
+
+          <BookCards books={previewBookCard} cardClassName="col-6 bookCard" />
+        </div>
+        {/* /Preview Card */}
+      </div>
     </div>
   );
 };

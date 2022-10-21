@@ -103,6 +103,13 @@ section {
   padding-top: 2em;
 }
 
+.publishRow {
+  display: none;
+  .sc-button {
+    background-color: cornflowerblue !important;
+  }
+}
+
 .themesflat-tabs {
   display: none;
 }
