@@ -1,13 +1,19 @@
 ### TODO
 
-- [ ] update Tezos to ghostnet
 - [ ] resubmit
-- [x] connect graphql
-- [x] retrieve author info to graphql
 - [] handle empty state
   - home page, book details, author info, 
 - [ ] book creation - read price, royalties, quantity
 - [ ] NFT shows as 'unknown token' in Kukai
+- [ ] add unit tests
+- [ ] add contract tests
+- [ ] untangle the code in the book creation
+    - move the helper code to separate node.js project
+- [ ] book creation UI needs to show all info correctly
+- [x] update Tezos to kathmandu
+- [x] connect graphql
+- [x] retrieve author info to graphql
+
 
 ## Excerpt
 - [ ] dynamic page that shows excerpt data created by the user
