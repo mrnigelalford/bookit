@@ -13,9 +13,9 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { NetworkType, AccountInfo } from '@airgap/beacon-sdk';
 import { TezosToolkit } from '@taquito/taquito';
 import { PermissionScope } from '@airgap/beacon-sdk';
-import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client';
 
 import './Header.scss';
+import AuthorComponent from './AuthorComponent';
 
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
@@ -34,6 +34,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
       window.removeEventListener('scroll', isSticky);
     };
   });
+
   const isSticky = (e) => {
     const header = document.querySelector('.js-header');
     const scrollTop = window.scrollY;
@@ -71,34 +72,6 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
   const [activeAccount, setActiveAccount] = useState<any>();
   const [profileVisible, setProfileVisible] = useState<boolean>(false);
   const [author, setAuthor] = useState<String>();
-
-
-  const GET_AUTHOR = gql`
-    query Author($id: ID) {
-      author(id: $id) {
-        name
-      }
-    }
-  `;
-
-  const FethAuthorName = () => {
-    const { loading, error, data } = useQuery(GET_AUTHOR, {
-      variables: { "name": "Nigel Alford" },
-    });
-
-    if (loading) return null;
-
-    console.log('found: ', JSON.stringify(data))
-
-    return (
-      <div className="d-flex align-items-center copy-text justify-content-between">
-        <Link to="/" className="ml-2">
-          <h4> Name</h4>
-          <h5>{data.author.name}</h5>
-        </Link>
-      </div>
-    )
-  }
 
   const scopes: PermissionScope[] = [
     PermissionScope.OPERATION_REQUEST,
@@ -280,7 +253,8 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                           className={`avatar_popup mt-20 ${profileVisible ? 'visible' : ''
                             }`}
                         >
-                          <FethAuthorName />
+                          {/* this renders poorly, stop the unnecessary loading */}
+                          <AuthorComponent address={address} />
                           <div className="d-flex align-items-center copy-text justify-content-between">
                             <span> {address}... </span>
                             <Link to="/" className="ml-2">
