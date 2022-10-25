@@ -1,6 +1,5 @@
 ### TODO
 
-- [ ] resubmit
 - [] handle empty state
   - home page, book details, author info, 
 - [ ] book creation - read price, royalties, quantity
@@ -8,21 +7,15 @@
 - [ ] add unit tests
 - [ ] add contract tests
 - [ ] untangle the code in the book creation
-    - move the helper code to separate node.js project
+    - move the contract helper code to separate node.js project
 - [ ] book creation UI needs to show all info correctly
-- [x] update Tezos to kathmandu
-- [x] connect graphql
-- [x] retrieve author info to graphql
-
+- [ ] User should be able to update their Author info/profile info¬
 
 ## Excerpt
 - [ ] dynamic page that shows excerpt data created by the user
 
 ### In progress
 
-- [x] Homepage buttons route as expected
-- [x] Homepage unused sections are removed
-- [x] create item card uses new home page card component
 - [ ] walk user flow for v1 completeness:
   1. user can create book [x]
   2. user can view book on home page [x]
@@ -31,7 +24,6 @@
 
 ### Item Details
 
-- [x] 1. add backcover image support
 - [ ] 2. add buy button
 - [ ] add sample page support
 - [ ] likes and watch count component should show and work
@@ -44,8 +36,6 @@
 ### App Routing
 
 - [ ] clean back button history
-- [x] pass params to components via routing
-- [x] first component: item-details (item id?)
 - [ ] first component: author info (item id?)
 - [ ] first component: collection info (item id?)
 
@@ -66,16 +56,7 @@
 - move header to separate component (see item details and create book component)
 
 ### Homepage
-
-- [x] Today's pick item filter needs to work
-  - items should load from data vs hardcoded data in each component
 - [ ] Top Sellers and Buyers logic?
-- [x] Today's Pick (styling)
-  - Show book description
-  - Book title is too large
-  - shrink author name
-  - cards should be taller to show more text data
-  - center the cover image
 
 #### Popular Collection (v1)
 
@@ -88,5 +69,31 @@
 
 #### Footer
 
-- [x] Remove Resources Column
-- [x] Remove My Account (Authors, Author Profile, Collection)
+
+#### Completed
+
+- [x] resubmit milestone 1 documentation
+- [x] update Tezos to kathmandu
+- [x] connect graphql
+- [x] retrieve author info from graphql
+
+- [x] APP ROUTING - pass params to components via routing
+- [x] APP ROUTING - first component: item-details (item id?)
+
+- [x] ITEM DETAILS - add backcover image support
+
+- [x] FOOTER - Remove Resources Column
+- [x] FOOTER - Remove My Account (Authors, Author Profile, Collection)
+
+- [x] Homepage buttons route as expected
+- [x] Homepage unused sections are removed
+- [x] create item card uses new home page card component
+
+- [x] HOMEPAGE - Today's pick item filter needs to work
+  - items should load from data vs hardcoded data in each component
+- [x] HOMEPAGE - Today's Pick (styling)
+  - Show book description
+  - Book title is too large
+  - shrink author name
+  - cards should be taller to show more text data
+  - center the cover image
