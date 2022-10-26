@@ -52,7 +52,6 @@ const AuthorComponent = ({ address }: AuthorProps) => {
     return (
       <div className="d-flex align-items-center copy-text justify-content-between">
         <Link to="/" className="ml-2">
-          <h4> Name</h4>
           <h5>{data?.author?.name}</h5>
         </Link>
       </div>

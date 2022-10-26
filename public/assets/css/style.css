@@ -1345,9 +1345,6 @@ a:focus {
   width: 135px !important;
   height: 56px !important;
 }
-header {
-  padding-right: 0 !important;
-}
 
 .header_1 {
   height: 80px;
@@ -1503,11 +1500,6 @@ header {
 }
 
 .flat-search-btn {
-  display: flex;
-  padding: 16px 0;
-  position: absolute;
-  right: 15px;
-  top: 0;
   justify-content: end;
   align-items: center;
 }

@@ -6,8 +6,7 @@ import logoheader from '../../assets/images/logo/bookit-logo-transparent.png';
 import logoheader2x from '../../assets/images/logo/bookit-logo-transparent.png';
 import logodark from '../../assets/images/logo/bookit-logo-transparent.png';
 import logodark2x from '../../assets/images/logo/bookit-logo-transparent.png';
-import imgsun from '../../assets/images/icon/sun.png';
-import avt from '../../assets/images/avatar/avt-2.jpg';
+import avt from '../../assets/images/avatar/user.png';
 
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { NetworkType, AccountInfo } from '@airgap/beacon-sdk';
@@ -123,7 +122,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
 
   return (
     <header id="header_main" className="header_1 js-header" ref={headerRef}>
-      <div className="wrap-box flex">
+      <div className="wrap-box flex" style={{justifyContent: 'space-between'}}>
         <Link to="/" rel="home" className="main-logo">
           <img
             className="logo-dark"
@@ -140,13 +139,13 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
             alt="nft-gaming"
           />
         </Link>
-        <div
+        {/* <div
           className="mobile-button"
           ref={btnToggle}
           onClick={menuToggle}
         >
           <span></span>
-        </div>
+        </div> */}
         <nav id="main-nav" className="main-nav" ref={menuLeft} style={{ display: 'none' }}>
           <ul id="menu-primary-menu" className="menu">
             {menus.map((data, index) => (
@@ -220,7 +219,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
                     </Link>
                   </div>
                   <div className="d-flex align-items-center mt-10">
-                    <img className="coin" src={imgsun} alt="/" />
+                    <img className="coin" src={avt} alt="/" />
                     <div className="info ml-10">
                       <p className="text-sm font-book text-gray-400">
                         Balance
