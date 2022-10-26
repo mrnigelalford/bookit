@@ -29,6 +29,8 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 import { originateContract, marketBuyBook, originatePublicNFT } from '../../global/smartContract';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
+import { getContractData, getIPFSHash } from '../../todayData';
+import { setNewBookData } from '../HomeComponent/HomeComponent';
 
 interface OwnerProps {
   img?: string;
@@ -156,9 +158,9 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     getTezosPrice().then((p) => setPrice(p));
   }, []);
 
-  /*
+
   useEffect(() => {
-    getContractData('token_metadata', Contracts.Exchange).then((id) => {
+    getContractData('token_metadata', process.env.REACT_APP_CONTRACT_PUBLIC_NFT).then((id) => {
       //NOTE: This logic is borrowed from HomeComponent:41
       //TODO: clean this by re-use or simplification
 
@@ -169,7 +171,7 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
       });
     });
   }, [bookID]);
-  */
+
 
   useEffect(() => {
     wallet?.client.getActiveAccount().then((activeAccount) => {
