@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
@@ -20,6 +21,9 @@ interface SliderProps {
 }
 
 const Row = ({ data }) => (
+
+  // <Row data={props.data} />
+
   <Swiper
     modules={[Autoplay]}
     direction={'vertical'}
@@ -43,32 +47,22 @@ const Row = ({ data }) => (
 
 const SliderComponent = (props: SliderProps) => {
   return (
-    <section className="flat-title-page home5">
-      <div className="overlay"></div>
-      <div className="themesflat-container">
-        <div className="wrap-heading flat-slider d-flex align-items-center">
-          <div className="descriptionBlock">
-            <h1 className="heading">{props.title}</h1>
-            {/* <p className="sub-heading mg-t-7 mg-bt-39">{props.description}</p> */}
-            <div className="style2">
-              <a
-                href="/create-book"
-                className="sc-button header-slider style style-1 rocket fl-button pri-1"
-              >
-                <span>Create</span>
-              </a>
-              <a
-                href="/explore"
-                className="sc-button header-slider style style-1 note fl-button pri-1"
-                style={{display: 'none'}}
-              >
-                <span>Explore</span>
-              </a>
-            </div>
-          </div>
-          <Row data={props.data} />
-          <Row data={props.data} />
-          <Row data={props.data} />
+    <section>
+      <div className="descriptionBlock">
+        <h1 className="heading">{props.title}</h1>
+        <div className="style2">
+            <Link
+              to="/create-book"
+              className="sc-button style style-3 note"
+            >
+              <span>Create</span>
+            </Link>
+            <a
+              href="/explore"
+              style={{ display: 'none' }}
+            >
+              <h3>Explore</h3>
+            </a>
         </div>
       </div>
     </section>

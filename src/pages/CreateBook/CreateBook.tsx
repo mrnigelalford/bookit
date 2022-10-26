@@ -8,7 +8,7 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
 import BookCards from '../../components/layouts/home-5/BookCard';
 
-import './CreateBook.scss';
+import './CreateBook.module.scss';
 
 import img3 from '../../assets/images/box-item/green-ottez.png';
 
