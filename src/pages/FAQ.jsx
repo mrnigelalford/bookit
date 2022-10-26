@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 import { Accordion } from 'react-bootstrap-accordion'
 
 const FAQ = () => {
@@ -82,7 +81,6 @@ const FAQ = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

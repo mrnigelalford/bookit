@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 import img1 from '../assets/images/icon/icon-1.png'
 import img2 from '../assets/images/icon/icon-2.png'
 import img3 from '../assets/images/icon/icon-3.png'
@@ -184,7 +183,6 @@ const HelpCenter = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

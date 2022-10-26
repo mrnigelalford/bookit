@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 import avt from '../assets/images/avatar/avata_profile.jpg'
 import bg1 from '../assets/images/backgroup-secsion/option1_bg_profile.jpg'
 import bg2 from '../assets/images/backgroup-secsion/option2_bg_profile.jpg'
@@ -156,7 +155,6 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

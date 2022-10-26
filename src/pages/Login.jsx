@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 
 const Login = () => {
   return (
@@ -98,7 +97,6 @@ const Login = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

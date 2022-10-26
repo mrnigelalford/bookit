@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import blogData from '../assets/fake-data/data-blog'
-import Footer from '../components/footer/Footer'
 
 const Blog = () => {
   const [data] = useState(blogData)
@@ -56,7 +55,6 @@ const Blog = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

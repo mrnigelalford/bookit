@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import Footer from '../components/footer/Footer'
 import CardModal from '../components/layouts/CardModal'
 
 import avt from '../assets/images/avatar/avt-author-tab.jpg'
@@ -669,7 +668,6 @@ const Author = () => {
         </div>
       </section>
       <CardModal show={modalShow} onHide={() => setModalShow(false)} />
-      <Footer />
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../components/header/Header'
-import Footer from '../components/footer/Footer'
 import img1 from '../assets/images/box-item/imgactivity2.jpg'
 import img2 from '../assets/images/box-item/image-box-21.jpg'
 import img3 from '../assets/images/box-item/image-box-6.jpg'
@@ -286,7 +284,6 @@ const Activity02 = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

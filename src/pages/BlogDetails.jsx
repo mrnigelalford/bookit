@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 
 import img1 from '../assets/images/box-item/icon1-recont-post.jpg'
 import img2 from '../assets/images/box-item/icon2-recont-post.jpg'
@@ -301,7 +300,6 @@ const BlogDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

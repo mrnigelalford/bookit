@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Footer from '../components/footer/Footer'
 import { Link } from 'react-router-dom'
 import liveAuctionData from '../assets/fake-data/data-live-auction'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -228,7 +227,6 @@ const NoResult = () => {
         </div>
       </section>
       <CardModal show={modalShow} onHide={() => setModalShow(false)} />
-      <Footer />
     </div>
   )
 }

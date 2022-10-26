@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 
 const SignUp = () => {
   return (
@@ -107,7 +106,6 @@ const SignUp = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

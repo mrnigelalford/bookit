@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
 import img1 from '../assets/images/box-item/img3rank.jpg'
 import img2 from '../assets/images/box-item/img4rank.jpg'
 import img3 from '../assets/images/box-item/img5rank.jpg'
@@ -278,7 +277,6 @@ const Ranking = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

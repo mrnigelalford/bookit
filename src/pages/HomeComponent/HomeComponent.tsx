@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SliderComponent, { SliderImage } from '../../components/slider/SliderComponent';
 
-import TodayPicks from '../../components/layouts/home-5/TodayPicks';
+import TodayPicks from '../../components/TodaysPicks/TodayPicks';
 import Create from '../../components/layouts/home-5/Create-alt';
 
 import './HomeComponent';
