@@ -67,9 +67,10 @@ export const BookCard = ({book, cardClassName, key}: CardProps) => (
 )
 
 const BookCards = (props: BookProps) => {
+  console.log('b: ', props.books)
   return (
     <Fragment>
-      {props.books.slice(0, props.maxCards).filter(b => b.AuthorId.length).map((book, index) => (
+      {props.books.slice(0, props.maxCards).filter(b => b && b?.AuthorId?.length).map((book, index) => (
         <BookCard book={book} cardClassName={props.cardClassName} key={index} />
       ))}
     </Fragment>
