@@ -25,7 +25,7 @@ const TodayPicks = (props: {data: Book[]}) => {
           <div className="row">
             <div className="col-md-12 heading-live-auctions mg-bt-21">
               <h2 data-testid="pickHeader" className="tf-title">Today's Picks</h2>
-              <Link to="/explore" className="exp style2">
+              <Link to="/explore" className="exp style2" style={{display: 'none'}}>
                 EXPLORE MORE
               </Link>
             </div>
