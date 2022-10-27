@@ -731,12 +731,13 @@
   section.today-picks {
     padding: 0px 0px 70px 0px;
   }
-
+/* 
   .sub-title.pad-400,
   .uploadFile,
   .tab-create-item form input {
     padding: 0 15px;
-  }
+  } 
+*/
 
   .tab-authors .author-profile .feature-profile {
     padding-top: 22px;
@@ -833,6 +834,10 @@
   }
   .authors-2 .react-tabs__tab {
     padding: 2.2% 33px 2.5%;
+  }
+
+  .pageBody {
+    padding-bottom: 14em !important;
   }
 }
 
@@ -1401,11 +1406,6 @@
     margin-right: 10px !important;
   }
 
-  .uploadFile input[type='file'],
-  .tab-authors .menu-tab .tablinks.active::after {
-    display: none;
-  }
-
   .tab-create-item .tablinks,
   .row-form.style-3 .inner-row-form {
     width: 100%;
@@ -1474,6 +1474,10 @@
   }
   .sc-card-activity.style-2 .content .media {
     width: 140px;
+  }
+
+  .previewCard {
+    display: none;
   }
 }
 

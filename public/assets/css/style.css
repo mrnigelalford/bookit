@@ -2159,6 +2159,9 @@ a:focus {
 -------------------------------------------------------------- */
 #footer {
   padding: 2em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 #footer.style-2 {
@@ -3298,6 +3301,7 @@ a:focus {
 }
 
 .pageBody {
-  height: 82vh;
+/* height: 100vh; */
   padding: 4em;
 }
+

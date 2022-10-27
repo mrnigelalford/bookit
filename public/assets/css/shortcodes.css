@@ -4402,19 +4402,18 @@ section.today-picks {
 }
 
 .uploadFile {
-  width: 100%;
-  background-color: transparent;
   border: 1px solid rgba(138, 138, 160, 0.3);
   border-radius: 8px;
   color: var(--primary-color4);
   font-size: 14px;
-  line-height: 100px;
   overflow: hidden;
-  padding: 0px 59px;
-  position: relative;
-  resize: none;
-  cursor: pointer;
   margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: revert;
+  padding-top: 0.9em;
 }
 
 .uploadFile input[type='file'] {
@@ -4422,13 +4421,11 @@ section.today-picks {
   width: 152px;
   height: 48px;
   overflow: hidden;
-  position: absolute;
-  top: 50%;
-  right: 59px;
   transform: translateY(-50%);
   padding: 0 0;
   border: none;
   border-radius: 30px;
+  margin-top: 2em;
 }
 
 .uploadFile .inputfile:hover::before {

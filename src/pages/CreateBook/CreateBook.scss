@@ -1,5 +1,6 @@
 .create-book {
   margin-bottom: 3em;
+
   h4 {
     margin-bottom: 1em;
   }
@@ -10,10 +11,10 @@
     }
   }
 
-  .flat-title-page.inner {
-    // background: revert;
-    padding: revert;
-  }
+  // .flat-title-page.inner {
+  //   // background: revert;
+  //   padding: revert;
+  // }
 }
 
 .uploadFile {
@@ -81,12 +82,34 @@
 .form-create-book {
   margin-bottom: 2em;
 
+  h4 {
+    margin-left: .5em;
+  }
+
   .btn-Mint {
     padding: 1em;
     border-radius: .6em;
     font-size: 2em;
     width: 12em;
-    background-color: #025aa5;
-    margin: auto 30%;
+    background-color: #0275d8;
+
+    &:hover {
+      color: var(--toastify-color-info);
+    }
   }
+}
+
+section {
+  text-align: center;
+}
+
+.dropdownSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown button {
+  padding: 0.6em 4em !important;
+  font-size: large !important;
+  border-radius: 8px !important;
 }

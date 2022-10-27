@@ -1,0 +1,30 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "attach to localhost",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "browserAttachLocation": "workspace"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server (VS Server)",
+      "trace": true,
+      "program": "${workspaceFolder}/out/src/vsDebugServer.js",
+      "args": [
+        "4712"
+      ],
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
+      // "preLaunchTask": "npm: watch"
+    },
+  ]
+}

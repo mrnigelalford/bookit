@@ -8,7 +8,7 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
 import BookCards from '../../components/layouts/home-5/BookCard';
 
-import './CreateBook.module.scss';
+import './CreateBook.scss';
 
 import img3 from '../../assets/images/box-item/green-ottez.png';
 
@@ -145,11 +145,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
     <form style={{ marginTop: '1em' }} action="#" className="col-6">
       <h4 className="title-create-book">{props.title}</h4>
       <label className="uploadFile">
-        <p
-          className="filename"
-        >
-          {props.description}
-        </p>
+        <p> {props.description} </p>
         <input
           type="file"
           className="inputfile form-control"
@@ -161,7 +157,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
   );
 
   const CategoryDropdown: React.FC = () => (
-    <div className="col-4 last">
+    <div>
       <h4 className="title-create-book">Category</h4>
       <Dropdown
         id="categoryDropdown"
@@ -186,7 +182,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
   );
 
   const BookFormatPicker: React.FC = () => (
-    <div className="col-4">
+    <div>
       <h4 className="title-create-book">eBook Format</h4>
       <Dropdown
         id="outputDropdown"
@@ -243,7 +239,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
 
   return (
     <div className="create-book pageBody">
-      <section className="flat-title-page inner">
+      <section>
         <h1 className="heading text-center">Mint Book</h1>
       </section>
       <div className="row mintForm">
@@ -269,7 +265,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   <input
                     type="number"
                     style={{ backgroundColor: 'transparent' }}
-                    placeholder="Enter price for one item (xtz)"
+                    placeholder="ex. 10xtz"
                     onBlur={() => setPrice}
                   />
                 </div>
@@ -309,7 +305,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
                 onBlur={(e) => setDescription(e.target.value)}
               ></textarea>
 
-              <div className="row-form style-3">
+              <div className="dropdownSection">
                 <BookFormatPicker />
                 <CategoryDropdown />
               </div>
