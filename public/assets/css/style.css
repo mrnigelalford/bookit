@@ -113,7 +113,6 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
   padding: 0;
   border: 0;
   outline: 0;
@@ -932,10 +931,6 @@ label.error {
 
 .mg-t2 {
   margin-top: 2px;
-}
-
-.mg-t32 {
-  margin-top: 32px;
 }
 
 .mg-bt-24 {
@@ -2163,9 +2158,7 @@ a:focus {
 /* Footer
 -------------------------------------------------------------- */
 #footer {
-  padding: 2em 2em 2em 5em;
-  background: var(--bg-section);
-  border-top: 2px solid rgb(154, 154, 154);
+  padding: 2em;
 }
 
 #footer.style-2 {
@@ -2248,7 +2241,7 @@ a:focus {
 }
 
 #footer .title-widget {
-  line-height: 26px;
+  /* line-height: 26px; */
 }
 
 #side-bar .title-widget {
@@ -2325,6 +2318,8 @@ a:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .widget-social.style-1 a {

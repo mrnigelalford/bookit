@@ -1,4 +1,8 @@
-#footer {
-  position: fixed;
-  bottom: 0;
+#logo-footer {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 35em;
+  }
 }
