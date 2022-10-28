@@ -96,7 +96,7 @@ section {
 
 .topBar {
   border-top: 1px solid #e5e5e5;
-  padding-top: 2em;
+  padding: 2.5em 0;
 }
 
 .publishRow {
@@ -106,8 +106,11 @@ section {
   }
 }
 
-.themesflat-tabs {
-  display: none;
+.buyRow {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  padding: 0 1.5em;
 }
 
 .bonus-content {

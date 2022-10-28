@@ -21,6 +21,8 @@ import { mockDataHistory } from '../../assets/fake-data/mockData';
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 import { Book } from '../../components/layouts/home-5/Book';
 import { getTezosPrice } from '../../components/Breadcrumbs/coinPrice';
+import { truncateString } from '../../components/BookCard/BookCard';
+import { stringify } from 'querystring';
 
 
 interface OwnerProps {
@@ -65,7 +67,7 @@ const OwnerComponent = (props: OwnerProps) => (
       <h6>{props.title}</h6>
       <p>
         {' '}
-        <Link to={`/author/${props.id}`}>{props.id}</Link>{' '}
+        <Link to={`/author/${props.id}`}>{props.name}</Link>{' '}
       </p>
     </div>
 
@@ -91,6 +93,128 @@ const PriceComponent = (props: PriceProps) => {
   );
 };
 
+const BidHistoryComponent = (dataHistory) => (
+  <div className="flat-tabs themesflat-tabs topBar">
+    <Tabs>
+      <TabList>
+        <Tab>Bid History</Tab>
+        <Tab>Info</Tab>
+        <Tab>Provenance</Tab>
+      </TabList>
+
+      <TabPanel>
+        <ul className="bid-history-list">
+          {dataHistory.map((item, index) => (
+            // @ts-ignore
+            <li key={index} item={item}>
+              <div className="content">
+                <div className="client">
+                  <div className="sc-author-box style-2">
+                    <div className="author-avatar">
+                      <Link to="#">
+                        <img
+                          src={item.img}
+                          alt="Axies"
+                          className="avatar"
+                        />
+                      </Link>
+                      <div className="badge"></div>
+                    </div>
+                    <div className="author-infor">
+                      <div className="name">
+                        <h6>
+                          <Link to="/author-02">{item.name} </Link>
+                        </h6>{' '}
+                        <span> place a bid</span>
+                      </div>
+                      <span className="time">{item.time}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="price">
+                  <h5>{item.price}</h5>
+                  <span>= {item.priceChange}</span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </TabPanel>
+      <TabPanel>
+        <ul className="bid-history-list">
+          <li>
+            <div className="content">
+              <div className="client">
+                <div className="sc-author-box style-2">
+                  <div className="author-avatar">
+                    <Link to="#">
+                      <img
+                        src={ninja}
+                        alt="Axies"
+                        className="avatar"
+                      />
+                    </Link>
+                    <div className="badge"></div>
+                  </div>
+                  <div className="author-infor">
+                    <div className="name">
+                      <h6>
+                        {' '}
+                        <Link to="/author-02">Mason Woodward </Link>
+                      </h6>{' '}
+                      <span> place a bid</span>
+                    </div>
+                    <span className="time">8 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </TabPanel>
+      <TabPanel>
+        <div className="provenance">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and
+            typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has
+            survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged.
+            It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and
+            more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.
+          </p>
+        </div>
+      </TabPanel>
+    </Tabs>
+  </div>
+)
+
+const InfoComponent = () => (
+  <div className="row details topBar">
+    {/* <h6>Tech Details </h6> */}
+    <div className="col-6">
+      <h6>Artist</h6>
+      <p>Ralph Garraway</p>{' '}
+    </div>
+    <div className="col-6">
+      <h6>Collection</h6>
+      <p>Cyberpunk City Art</p>{' '}
+    </div>
+    <div className="col-6">
+      <h6>Size</h6>
+      <p>3000 x 3000</p>{' '}
+    </div>
+    <div className="col-6">
+      <h6>Create Date</h6>
+      <p>04 April , 2021</p>{' '}
+    </div>
+  </div>
+);
+
 const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [dataHistory] = useState(mockDataHistory);
 
@@ -104,13 +228,15 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     getTezosPrice().then((p) => setPrice(p));
   }, []);
 
-
   useEffect(() => {
     getContractData('token_metadata', process.env.REACT_APP_CONTRACT_PUBLIC_NFT).then((id) => {
       getIPFSHash(id).then((data) => {
         const token = data.filter((_token) => _token.id === Number(bookID))[0];
         const _book = JSON.parse(Object.keys(token.value.token_info)[0]);
-        if (_book) setBook(setNewBookData(id, _book));
+        if (_book) {
+          _book.authorName = truncateString(_book.authorName, 10);
+          setBook(setNewBookData(id, _book)); // transform book props, this should be refactored
+        }
       });
     });
   }, [bookID]);
@@ -139,6 +265,23 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     //   pauseOnHover: true,
     // });
   };
+
+  interface InputComponentProps {
+    title: String;
+    className: string;
+  }
+
+  const InputComponent = (props: InputComponentProps) => (
+    <div className={props.className}>
+      <h4 className="title-create-book">{props.title}</h4>
+      <input
+        type="number"
+        placeholder="5%"
+        value={10}
+        onBlur={(e) => {}}
+      />
+    </div>
+  )
 
   return (
     <div className="item-details pageBody">
@@ -219,129 +362,19 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                     />
                   )}
                 </OwnerComponent>
+                <div className="row buyRow">
+                  <InputComponent className="col-4" title="Buy" />
+                  <button className="btn-Mint" onClick={() => {}}> Buy Book </button>
+                </div>
+
               </div>
 
               <div className="description topBar">
                 <h6>Description </h6>
                 <p>{book?.description}</p>
               </div>
-
-              <div className="row details topBar" style={{ display: 'none' }}>
-                {/* <h6>Tech Details </h6> */}
-                <div className="col-6">
-                  <h6>Artist</h6>
-                  <p>Ralph Garraway</p>{' '}
-                </div>
-                <div className="col-6">
-                  <h6>Collection</h6>
-                  <p>Cyberpunk City Art</p>{' '}
-                </div>
-                <div className="col-6">
-                  <h6>Size</h6>
-                  <p>3000 x 3000</p>{' '}
-                </div>
-                <div className="col-6">
-                  <h6>Create Date</h6>
-                  <p>04 April , 2021</p>{' '}
-                </div>
-              </div>
-              <div className="flat-tabs themesflat-tabs topBar">
-                <Tabs>
-                  <TabList>
-                    <Tab>Bid History</Tab>
-                    <Tab>Info</Tab>
-                    <Tab>Provenance</Tab>
-                  </TabList>
-
-                  <TabPanel>
-                    <ul className="bid-history-list">
-                      {dataHistory.map((item, index) => (
-                        // @ts-ignore
-                        <li key={index} item={item}>
-                          <div className="content">
-                            <div className="client">
-                              <div className="sc-author-box style-2">
-                                <div className="author-avatar">
-                                  <Link to="#">
-                                    <img
-                                      src={item.img}
-                                      alt="Axies"
-                                      className="avatar"
-                                    />
-                                  </Link>
-                                  <div className="badge"></div>
-                                </div>
-                                <div className="author-infor">
-                                  <div className="name">
-                                    <h6>
-                                      <Link to="/author-02">{item.name} </Link>
-                                    </h6>{' '}
-                                    <span> place a bid</span>
-                                  </div>
-                                  <span className="time">{item.time}</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="price">
-                              <h5>{item.price}</h5>
-                              <span>= {item.priceChange}</span>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </TabPanel>
-                  <TabPanel>
-                    <ul className="bid-history-list">
-                      <li>
-                        <div className="content">
-                          <div className="client">
-                            <div className="sc-author-box style-2">
-                              <div className="author-avatar">
-                                <Link to="#">
-                                  <img
-                                    src={ninja}
-                                    alt="Axies"
-                                    className="avatar"
-                                  />
-                                </Link>
-                                <div className="badge"></div>
-                              </div>
-                              <div className="author-infor">
-                                <div className="name">
-                                  <h6>
-                                    {' '}
-                                    <Link to="/author-02">Mason Woodward </Link>
-                                  </h6>{' '}
-                                  <span> place a bid</span>
-                                </div>
-                                <span className="time">8 hours ago</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </TabPanel>
-                  <TabPanel>
-                    <div className="provenance">
-                      <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and
-                        more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum.
-                      </p>
-                    </div>
-                  </TabPanel>
-                </Tabs>
-              </div>
+              {/* <InfoComponent /> */}
+              {/* <BidHistoryComponent dataHistory={dataHistory} /> */}
             </div>
           </div>
         </div>
