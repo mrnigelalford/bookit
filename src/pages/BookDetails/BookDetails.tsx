@@ -6,10 +6,9 @@ import 'react-tabs/style/react-tabs.css';
 import ninja from '../../assets/images/avatar/user.png';
 
 import './BookDetails.scss';
-import { Breadcrumbs } from './Breadcrumbs';
-import { getTezosPrice } from './coinPrice';
+
 // import { getContractData, getIPFSHash } from '../../todayData';
-import { Book } from '../layouts/home-5/Book';
+
 // import { Contracts } from '../../App';
 // import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
@@ -18,7 +17,11 @@ import { marketBuyBook } from '../../global/smartContract';
 import { Link, useParams } from 'react-router-dom';
 import { getContractData, getIPFSHash } from '../../todayData';
 import { setNewBookData } from '../../pages/HomeComponent/HomeComponent';
-import { mockDataHistory } from './mockData';
+import { mockDataHistory } from '../../assets/fake-data/mockData';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
+import { Book } from '../../components/layouts/home-5/Book';
+import { getTezosPrice } from '../../components/Breadcrumbs/coinPrice';
+
 
 interface OwnerProps {
   img?: string;

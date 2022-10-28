@@ -29,7 +29,7 @@ import imgCollection7 from '../assets/images/avatar/avt-18.jpg'
 import img8 from '../assets/images/box-item/image-box-11.jpg'
 import imga8 from '../assets/images/avatar/avt-3.jpg'
 import imgCollection8 from '../assets/images/avatar/avt-18.jpg'
-import { Breadcrumbs } from '../components/BookDetails/Breadcrumbs'
+import { Breadcrumbs } from '../components/Breadcrumbs/Breadcrumbs'
 
 const Author = () => {
   const [menuTab] = useState([
