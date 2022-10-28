@@ -1026,9 +1026,8 @@
 
 .sc-card-product .card-title {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  flex-direction: column;
+  text-align: center;
 }
 
 .sc-card-product .card-title h5 {

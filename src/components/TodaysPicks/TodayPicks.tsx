@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CardModal from '../layouts/CardModal';
 import FilterComponent from '../layouts/home-5/FilterComponent';
-import BookCards from '../layouts/home-5/BookCard';
+import BookCards from '../BookCard/BookCard';
 import { Book } from "../layouts/home-5/Book";
 
 const TodayPicks = (props: {data: Book[]}) => {

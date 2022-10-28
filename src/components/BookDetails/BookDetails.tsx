@@ -9,7 +9,7 @@ import './BookDetails.scss';
 import { Breadcrumbs } from './Breadcrumbs';
 import { getTezosPrice } from './coinPrice';
 // import { getContractData, getIPFSHash } from '../../todayData';
-import { Book } from '../../components/layouts/home-5/Book';
+import { Book } from '../layouts/home-5/Book';
 // import { Contracts } from '../../App';
 // import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
@@ -17,7 +17,7 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 import { marketBuyBook } from '../../global/smartContract';
 import { Link, useParams } from 'react-router-dom';
 import { getContractData, getIPFSHash } from '../../todayData';
-import { setNewBookData } from '../HomeComponent/HomeComponent';
+import { setNewBookData } from '../../pages/HomeComponent/HomeComponent';
 import { mockDataHistory } from './mockData';
 
 interface OwnerProps {

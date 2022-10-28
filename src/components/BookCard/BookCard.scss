@@ -77,9 +77,8 @@ a {
   }
 }
 
-.cardTitle {
+.cardAuthor {
   font-weight: 600;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+
+  // @include truncateText(2)
 }

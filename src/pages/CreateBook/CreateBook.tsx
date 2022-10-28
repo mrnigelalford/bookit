@@ -6,7 +6,7 @@ import { pinFileToIPFS } from '../../global/pinata';
 import { mintToken } from '../../global/smartContract';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
-import BookCards from '../../components/layouts/home-5/BookCard';
+import BookCards from '../../components/BookCard/BookCard';
 
 import './CreateBook.scss';
 
@@ -55,6 +55,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
       price,
       AuthorId: activeAccount?.address,
       description,
+      isPreviewCard: true
     },
   ];
 
@@ -319,7 +320,7 @@ const CreateItem = ({ wallet, Tezos, toast }: CreateItemProps) => {
         <div className="col-lg-6 col-sm-12 previewCard">
           <h4 className="title-create-book">Preview book</h4>
 
-          <BookCards books={previewBookCard} cardClassName="col-6 bookCard" />
+          <BookCards books={previewBookCard} cardClassName="col-10 bookCard" />
         </div>
         {/* /Preview Card */}
       </div>

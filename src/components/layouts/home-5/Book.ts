@@ -15,4 +15,5 @@ export type Book = {
     backCover: string;
     exerpts;
   };
+  isPreviewCard?: boolean;
 };

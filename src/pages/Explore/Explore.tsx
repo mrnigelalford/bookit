@@ -1,7 +1,7 @@
 import React from 'react'
 import TodayPicks from '../../components/TodaysPicks/TodayPicks'
 import todayPickData from '../../assets/fake-data/data-today-pick'
-import { Breadcrumbs } from '../BookDetails/Breadcrumbs'
+import { Breadcrumbs } from '../../components/BookDetails/Breadcrumbs'
 
 const Explore = () => {
   return (
