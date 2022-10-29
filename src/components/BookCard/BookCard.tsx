@@ -22,7 +22,6 @@ export const truncateString = (string = '', maxLength = 50) =>
 
 export const BookCard = ({ book, cardClassName, key }: CardProps) => {
   book.nameAuthor = truncateString(book.nameAuthor, 10)
-  console.log('id: ', book.nameAuthor)
 return (
   <div data-testid="bookCard" key={key} className={`fl-item ${cardClassName}`}>
     <div className={`sc-card-product comingsoon`}>
@@ -97,7 +96,6 @@ return (
 )}
 
 const BookCards = (props: BookProps) => {
-  console.log('b: ', props.books)
   return (
     <Fragment>
       {props.books.slice(0, props.maxCards).filter(b => b && b?.AuthorId?.length).map((book, index) => (
