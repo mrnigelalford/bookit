@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Mocha Contract Tests
 
 on:
   push:
