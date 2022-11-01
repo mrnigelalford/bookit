@@ -26,10 +26,13 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         - run: npm ci --ignore-scripts
+        
+      - name: Build and test
         - run: npm run build --if-present
         - run: npm test
