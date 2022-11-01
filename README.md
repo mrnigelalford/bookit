@@ -1,6 +1,7 @@
 # Welcome to Bookit!
 ![logo](https://64.media.tumblr.com/0d1384f5926bf41dfa090ad86595346b/b2c02e89d3182d04-c3/s540x810/ae67933ba43db02d83e4be3c54deee60ba32c230.gif)
 
+[![Bookit UI Tests](https://github.com/mrnigelalford/bookit/actions/workflows/github-actions-test.yml/badge.svg)](https://github.com/mrnigelalford/bookit/actions/workflows/github-actions-test.yml)
 
 ## Available Scripts
 
