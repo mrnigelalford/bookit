@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 // import liveAuctionData from '../../assets/fake-data/data-live-auction';
 // import LiveAuction from '../../components/layouts/LiveAuction';
@@ -93,106 +92,6 @@ const PriceComponent = (props: PriceProps) => {
   );
 };
 
-const BidHistoryComponent = (dataHistory) => (
-  <div className="flat-tabs themesflat-tabs topBar">
-    <Tabs>
-      <TabList>
-        <Tab>Bid History</Tab>
-        <Tab>Info</Tab>
-        <Tab>Provenance</Tab>
-      </TabList>
-
-      <TabPanel>
-        <ul className="bid-history-list">
-          {dataHistory.map((item, index) => (
-            // @ts-ignore
-            <li key={index} item={item}>
-              <div className="content">
-                <div className="client">
-                  <div className="sc-author-box style-2">
-                    <div className="author-avatar">
-                      <Link to="#">
-                        <img
-                          src={item.img}
-                          alt="Axies"
-                          className="avatar"
-                        />
-                      </Link>
-                      <div className="badge"></div>
-                    </div>
-                    <div className="author-infor">
-                      <div className="name">
-                        <h6>
-                          <Link to="/author-02">{item.name} </Link>
-                        </h6>{' '}
-                        <span> place a bid</span>
-                      </div>
-                      <span className="time">{item.time}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="price">
-                  <h5>{item.price}</h5>
-                  <span>= {item.priceChange}</span>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </TabPanel>
-      <TabPanel>
-        <ul className="bid-history-list">
-          <li>
-            <div className="content">
-              <div className="client">
-                <div className="sc-author-box style-2">
-                  <div className="author-avatar">
-                    <Link to="#">
-                      <img
-                        src={ninja}
-                        alt="Axies"
-                        className="avatar"
-                      />
-                    </Link>
-                    <div className="badge"></div>
-                  </div>
-                  <div className="author-infor">
-                    <div className="name">
-                      <h6>
-                        {' '}
-                        <Link to="/author-02">Mason Woodward </Link>
-                      </h6>{' '}
-                      <span> place a bid</span>
-                    </div>
-                    <span className="time">8 hours ago</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </TabPanel>
-      <TabPanel>
-        <div className="provenance">
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged.
-            It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and
-            more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
-        </div>
-      </TabPanel>
-    </Tabs>
-  </div>
-)
-
 const InfoComponent = () => (
   <div className="row details topBar">
     {/* <h6>Tech Details </h6> */}
@@ -216,14 +115,15 @@ const InfoComponent = () => (
 );
 
 const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
-  const [dataHistory] = useState(mockDataHistory);
 
   const [book, setBook] = useState<Book>();
 
   let { id: bookID } = useParams();
 
   const [price, setPrice] = useState<number>(0);
+  const [buyPrice, setBuyPrice] = useState<number>(0);
 
+  // TODO: This component or Tezos API is erroring
   useEffect(() => {
     getTezosPrice().then((p) => setPrice(p));
   }, []);
@@ -268,17 +168,18 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
 
   interface InputComponentProps {
     title: String;
+    value: number;
     className: string;
   }
 
-  const InputComponent = (props: InputComponentProps) => (
+  const NumberInputComponent = (props: InputComponentProps) => (
     <div className={props.className}>
       <h4 className="title-create-book">{props.title}</h4>
       <input
         type="number"
         placeholder="5%"
-        value={10}
-        onBlur={(e) => {}}
+        value={props.value}
+        onChange={(e) => setBuyPrice(Number(e.target.value))}
       />
     </div>
   )
@@ -363,8 +264,8 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
                   )}
                 </OwnerComponent>
                 <div className="row buyRow">
-                  <InputComponent className="col-4" title="Buy" />
-                  <button className="btn-Mint" onClick={() => {}}> Buy Book </button>
+                  <NumberInputComponent className="col-4" title="Buy" value={buyPrice} />
+                  <button className="btn-Mint" onClick={buyBook}> Buy Book </button>
                 </div>
 
               </div>

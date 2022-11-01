@@ -33,7 +33,6 @@ return (
               : <Link to={`/book-details/${book.id}`}>{book.title}</Link>
             }
           </div>
-          {book?.id && <Link to={`/book-details/${book.id}`}>{book.title}</Link>}
         </h4>
         {/* <div className="tags">{item.tags}</div> */}
       </div>
