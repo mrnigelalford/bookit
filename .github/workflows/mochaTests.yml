@@ -28,7 +28,7 @@ jobs:
     - name: Install mocha
       run: npm install -g mocha
     - name: Install completium
-      run: npm i @completium/completium-cli -g
+      run: npm i @completium/completium-cli@0.3.19 -g
     - name: setup completium
       run: completium-cli init
     - name: 'set tezos endpoint'

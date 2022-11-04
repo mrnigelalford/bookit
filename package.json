@@ -10,7 +10,7 @@
     "@airgap/beacon-sdk": "^3.1.2",
     "@apollo/client": "^3.7.0",
     "@babel/core": "^7.16.0",
-    "@completium/completium-cli": "^0.4.44",
+    "@completium/completium-cli": "^0.3.19",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "@taquito/beacon-wallet": "^13.0.0",
