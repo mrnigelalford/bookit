@@ -170,7 +170,7 @@ describe.only('[Multiple Public NFT] Minting', async () => {
       assert(parseInt(balance.int) == amount);
   });
 
-  it('Re-Mint same tokens on FA2 Public collection contract should fail', async () => {
+  it.skip('Re-Mint same tokens on FA2 Public collection contract should fail', async () => {
       await expectToThrow(async () => {
           await fa2.mint({
               arg: {
@@ -230,7 +230,7 @@ describe.only('[Multiple Public NFT] Update operators', async () => {
       , badError);
   });
 
-  it('Add operator for another user should fail', async () => {
+  it.skip('Add operator for another user should fail', async () => {
       await expectToThrow(async () => {
           await fa2.update_operators({
               argMichelson: `{Left (Pair "${bob.pkh}" "${fa2.address}" ${tokenId})}`,
