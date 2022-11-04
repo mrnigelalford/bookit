@@ -23,10 +23,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Install mocha
+      run: npm install -g mocha
+    
+    - name: Install completium
     - run: npm i @completium/completium-cli -g
+
+    - name: setup completium
     - run: completium-cli init
-    - run: completium-cli add endpoint kathmandu https://kathmandunet.ecadinfra.com
+    - run: completium-cli set endpoint https://kathmandunet.ecadinfra.com
     - run: completium-cli generate account as bob
     - run: completium-cli generate account as carl
     - run: completium-cli generate account as daniel
+
+    - name: run mocha tests
     - run: npm run mochaCI
