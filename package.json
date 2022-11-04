@@ -96,13 +96,12 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "setKathmandu": " completium-cli init && completium-cli add endpoint kathmandu https://kathmandunet.ecadinfra.com",
     "start": "serve -s build",
     "dev-start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "mocha": "mocha --timeout 0 --slow 0",
-    "mochaCI": "npm run setKathmandu && npm run mocha"
+    "mochaCI": "npm run mocha"
   },
   "eslintConfig": {
     "extends": [
