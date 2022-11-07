@@ -60,23 +60,19 @@ async function expectToThrowMissigned(f, e) {
       }
   }
 }
-//TODO: mock user is not instantiated. setup and teardown of the user is needed here or a public testable address
-
-beforeEach(async () => {
-    console.log('alice :', alice);
-
-    [fa2, _] = await deploy(
-        './src/global/contracts/arl/multiple_nft_public.arl',
-        {
-            parameters: {
-                owner: alice.pkh,
-            },
-            as: alice.pkh,
-        }
-    );
-})
 
 describe('[Multiple Public NFT] Contract deployment', async () => {
+    beforeEach(async () => {
+        [fa2, _] = await deploy(
+            './src/global/contracts/arl/multiple_nft_public.arl',
+            {
+                parameters: {
+                    owner: alice.pkh,
+                },
+                as: alice.pkh,
+            }
+        );
+    })
   it('FA2 public collection contract deployment should succeed', async () => {
     assert.isDefined(fa2)
   });
@@ -1254,8 +1250,18 @@ describe('[Multiple Public NFT] Burn', async () => {
   });
 });
 
-describe('[Multiple Public NFT] Pause', async () => {
+describe.only('[Multiple Public NFT] Pause', async () => {
     beforeEach(async () => {
+        [fa2, _] = await deploy(
+            './src/global/contracts/arl/multiple_nft_public.arl',
+            {
+                parameters: {
+                    owner: alice.pkh,
+                },
+                as: alice.pkh,
+            }
+        );
+
       await fa2.pause({
         as: alice.pkh,
     });
