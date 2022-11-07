@@ -32,7 +32,7 @@ jobs:
     - name: setup completium
       run: completium-cli init
     - name: 'set tezos endpoint'
-      run: completium-cli set endpoint https://kathmandunet.ecadinfra.com
+      run: completium-cli set endpoint mockup
     - name: 'generate bob account'
       run: completium-cli generate account as bob
     - name: 'generate carl account'

@@ -64,6 +64,13 @@ completium-cli deploy src/global/contracts/arl/multiple_nft_public.arl --paramet
 Access the appropriate faucet start [here](https://teztnets.xyz/)
 
 
+#### Testing
+
+We use the completium cli to setup network testing.
+Be sure that the network is set to 'mockup mode' to ensure assertions pass
+`completium-cli set endpoint mockup`
+
+
 #### Tezos client CLI
 
 [Tezos client info](https://assets.tqtezos.com/docs/setup/1-tezos-client/)
