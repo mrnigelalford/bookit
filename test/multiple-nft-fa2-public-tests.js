@@ -63,6 +63,8 @@ async function expectToThrowMissigned(f, e) {
 //TODO: mock user is not instantiated. setup and teardown of the user is needed here or a public testable address
 
 beforeEach(async () => {
+    console.log('alice :', alice);
+
     [fa2, _] = await deploy(
         './src/global/contracts/arl/multiple_nft_public.arl',
         {
