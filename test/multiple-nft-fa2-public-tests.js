@@ -61,18 +61,21 @@ async function expectToThrowMissigned(f, e) {
   }
 }
 
+beforeEach(async () => {
+    [fa2, _] = await deploy(
+        './src/global/contracts/arl/multiple_nft_public.arl',
+        {
+            parameters: {
+                owner: alice.pkh,
+            },
+            as: alice.pkh,
+        }
+    ).catch(e => {
+        if(e) console.log('error: ', e);
+    });
+})
+
 describe('[Multiple Public NFT] Contract deployment', async () => {
-    beforeEach(async () => {
-        [fa2, _] = await deploy(
-            './src/global/contracts/arl/multiple_nft_public.arl',
-            {
-                parameters: {
-                    owner: alice.pkh,
-                },
-                as: alice.pkh,
-            }
-        );
-    })
   it('FA2 public collection contract deployment should succeed', async () => {
     assert.isDefined(fa2)
   });
@@ -1250,18 +1253,8 @@ describe('[Multiple Public NFT] Burn', async () => {
   });
 });
 
-describe.only('[Multiple Public NFT] Pause', async () => {
+describe('[Multiple Public NFT] Pause', async () => {
     beforeEach(async () => {
-        [fa2, _] = await deploy(
-            './src/global/contracts/arl/multiple_nft_public.arl',
-            {
-                parameters: {
-                    owner: alice.pkh,
-                },
-                as: alice.pkh,
-            }
-        );
-
       await fa2.pause({
         as: alice.pkh,
     });
