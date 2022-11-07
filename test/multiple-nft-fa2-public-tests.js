@@ -10,7 +10,6 @@ const {
 } = require('@completium/completium-cli');
 const { errors, mkTransferPermit, mkTransferGaslessArgs } = require('./utils');
 const { assert } = require('chai')
-// var expect = require('chai').expect
 
 require('mocha/package.json');
 const mochaLogger = require('mocha-logger');
@@ -62,7 +61,7 @@ async function expectToThrowMissigned(f, e) {
 }
 
 beforeEach(async () => {
-    [fa2, _] = await deploy(
+    [fa2 ] = await deploy(
         './src/global/contracts/arl/multiple_nft_public.arl',
         {
             parameters: {
