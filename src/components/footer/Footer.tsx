@@ -113,9 +113,9 @@ const Footer = () => {
 
   return (
     <div>
-      <footer data-testid="footer" id="footer" className="footer-light-style clearfix bg-style justify-content-evenly">
-        <div className="row">
-          <div id="logo-footer" className="col-sm-2 col-md-2">
+      <footer data-testid="footer" id="footer" style={{backgroundColor: 'white'}}>
+        <div className="row" style={{justifyContent: 'space-between', }}>
+          <div id="logo-footer" className="col-3">
             <Link to="/" className="logo-footer">
               <img
                 className="logo-dark"
@@ -129,7 +129,7 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <div className="col-sm-2 col-md-2 text-center">
+          <div className="col-2 text-center">
             <div className="widget widget-menu style-1">
               <h5 data-testid="accountTitle" className="title-widget">My Account</h5>
               <ul>
@@ -141,7 +141,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="col-sm-2 col-md-2 text-center">
+          <div className="col-2 text-center">
             <div className="widget widget-menu style-2">
               <h5 className="title-widget">Resources</h5>
               <ul>
@@ -153,7 +153,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="col-sm-2 col-md-2 text-center">
+          <div className="col-2 text-center">
             <div className="widget widget-menu fl-st-3">
               <h5 className="title-widget">Company</h5>
               <ul>
@@ -165,7 +165,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="col-sm-2 col-md-2 text-center">
+          <div className="col-2 text-center">
             <div className="widget widget-subcribe">
               <h5 className="title-widget">Follow us Social</h5>
               {/* <SubscribeForm /> */}
