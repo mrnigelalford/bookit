@@ -60,6 +60,29 @@ async function expectToThrowMissigned(f, e) {
   }
 }
 
+const mintToken = async () => {
+    await fa2.mint({
+        arg: {
+            itokenid: tokenId,
+            iowner: alice.pkh,
+            iamount: amount,
+            itokenMetadata: [{ key: '', value: '0x' }],
+            iroyalties: [
+                [alice.pkh, 1000],
+                [bob.pkh, 500],
+            ],
+        },
+        as: alice.pkh,
+    });
+    const storage = await fa2.getStorage();
+    var balance = await getValueFromBigMap(
+        parseInt(storage.ledger),
+        exprMichelineToJson(`(Pair ${tokenId} "${alice.pkh}")`),
+        exprMichelineToJson(`(pair nat address)'`)
+    );
+    assert(parseInt(balance.int) == amount);
+}
+
 beforeEach(async () => {
     [fa2 ] = await deploy(
         './src/global/contracts/arl/multiple_nft_public.arl',
@@ -82,26 +105,7 @@ describe('[Multiple Public NFT] Contract deployment', async () => {
 
 describe('[Multiple Public NFT] Minting', async () => {
   it('Mint tokens on FA2 Public collection contract as owner for ourself should succeed', async () => {
-      await fa2.mint({
-          arg: {
-              itokenid: tokenId,
-              iowner: alice.pkh,
-              iamount: amount,
-              itokenMetadata: [{ key: '', value: '0x' }],
-              iroyalties: [
-                  [alice.pkh, 1000],
-                  [bob.pkh, 500],
-              ],
-          },
-          as: alice.pkh,
-      });
-      const storage = await fa2.getStorage();
-      var balance = await getValueFromBigMap(
-          parseInt(storage.ledger),
-          exprMichelineToJson(`(Pair ${tokenId} "${alice.pkh}")`),
-          exprMichelineToJson(`(pair nat address)'`)
-      );
-      assert(parseInt(balance.int) == amount);
+        await mintToken();
   });
 
   // problem area
@@ -551,15 +555,26 @@ describe.skip('[Multiple Public NFT] Add permit', async () => {
 });
 
 describe.skip('[Multiple Public NFT] Transfers', async () => {
+
+    it('should market buy book', async () => {
+        // sampleTransfer(signature)
+        await fa2.match_orders({
+            arg: {
+                
+            }
+        });
+    });
+
   it('Transfer a token not owned should fail', async () => {
-      await expectToThrow(async () => {
-          await fa2.transfer({
-              arg: {
-                  txs: [[alice.pkh, [[bob.pkh, 666, 1]]]],
-              },
-              as: alice.pkh,
-          });
-      }, errors.FA2_NOT_OPERATOR);
+    await mintToken();
+    await expectToThrow(async () => {
+        await fa2.transfer({
+            arg: {
+                txs: [[alice.pkh, [[bob.pkh, 666, 1]]]],
+            },
+            as: bob.pkh,
+        });
+    }, errors.FA2_NOT_OPERATOR);
   });
 
   it('Transfer a token from another user without a permit or an operator should fail', async () => {

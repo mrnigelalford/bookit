@@ -1,7 +1,6 @@
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
 import { code as publicNFTCode } from './contracts/ts/multiple_nft_public';
 import { char2Bytes } from '@taquito/utils';
-import { Contracts } from '../App';
 import { payloadBytes, sampleTransfer } from './sampleContract';
 import { RequestSignPayloadInput, SigningType } from '@airgap/beacon-sdk';
 
@@ -141,6 +140,24 @@ export const originateContract = async ({
     })
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
 };
+// activeAccount?.address, 'tz1ZiNYG7hxDFome58tuu6CTRm9Mc1R7bxuV'
+
+// transferproxy address
+
+// {list: {0: "address", 1: "address"}}
+
+// NOTE: This should be run everytime a user mints
+export const updateOperators = async({Tezos, activeAccount, wallet}) => {
+  return Tezos.wallet
+    .at(process.env.REACT_APP_CONTRACT_PUBLIC_NFT) // address of exchange
+    .then((contract) => contract.methods.update_operators_for_all([{0: activeAccount.address}]).send())
+    .then((op) => {
+      console.log(`Waiting for ${op} to be confirmed...`);
+      return op?.confirmation(3)?.then(() => op);
+    })
+    .then((op) => op?.receipt)
+    .catch((error) => console.log('error: ', error));
+}
 
 
 //TODO: Delete this once you get transfer working
@@ -156,14 +173,12 @@ export const marketBuyBook = async ({ Tezos, activeAccount, wallet }) => {
   const { signature } = signedPayload;
 
   return Tezos.wallet
-    .at(Contracts.Exchange)
-    .then((contract) =>
-      contract.methodsObject.match_orders(sampleTransfer(signature)).send()
-    )
+    .at(process.env.REACT_APP_CONTRACT_EXCHANGE)
+    .then((contract) => contract.methodsObject.match_orders(sampleTransfer(signature)).send())
     .then((op) => {
       console.log(`Waiting for ${op} to be confirmed...`);
       return op.confirmation(3).then(() => op);
     })
     .then((op) => op.receipt)
-    .catch((error) => console.log(error.message));
+    .catch((error) => console.log('error: ', error));
 };

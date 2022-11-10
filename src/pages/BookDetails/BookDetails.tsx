@@ -12,7 +12,7 @@ import './BookDetails.scss';
 // import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
-import { marketBuyBook } from '../../global/smartContract';
+import { marketBuyBook, updateOperators } from '../../global/smartContract';
 import { Link, useParams } from 'react-router-dom';
 import { getContractData, getIPFSHash } from '../../todayData';
 import { setNewBookData } from '../../pages/HomeComponent/HomeComponent';
@@ -124,9 +124,9 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [buyPrice, setBuyPrice] = useState<number>(0);
 
   // TODO: This component or Tezos API is erroring
-  useEffect(() => {
-    getTezosPrice().then((p) => setPrice(p));
-  }, []);
+  // useEffect(() => {
+  //   getTezosPrice().then((p) => setPrice(p));
+  // }, []);
 
   useEffect(() => {
     getContractData('token_metadata', process.env.REACT_APP_CONTRACT_PUBLIC_NFT).then((id) => {
@@ -153,17 +153,17 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
   const [activeAccount, setActiveAccount] = useState<any>();
 
   const buyBook = async () => {
-    // toast.info('Starting mint....page will go home upon completion', {
-    //   position: toast.POSITION.TOP_CENTER,
-    //   hideProgressBar: false,
-    //   autoClose: 8000,
-    // });
+    toast.info('Starting mint....page will go home upon completion', {
+      position: toast.POSITION.TOP_CENTER,
+      hideProgressBar: false,
+      autoClose: 8000,
+    });
 
     await marketBuyBook({ Tezos, activeAccount, wallet });
-    // toast.success('Confirmations have completed, congrats!', {
-    //   position: toast.POSITION.TOP_CENTER,
-    //   pauseOnHover: true,
-    // });
+    toast.success('Confirmations have completed, congrats!', {
+      position: toast.POSITION.TOP_CENTER,
+      pauseOnHover: true,
+    });
   };
 
   interface InputComponentProps {

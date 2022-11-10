@@ -44,8 +44,8 @@ const AuthorComponent = ({ address }: AuthorProps) => {
   });
 
   if (data && !data.author) {
-    console.log('set new author');
-    SetAuthorMutation(address)
+    // console.log('set new author');
+    // SetAuthorMutation(address)
   }
 
   if (data) {
