@@ -141,3 +141,7 @@ Should return public account info
     "numContracts": 7,
     "rollupsCount": 0,
 ...
+
+
+### When a user mints
+- user address is added to the updateParams function @ smartContract.ts:150

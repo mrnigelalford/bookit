@@ -184,6 +184,24 @@ const BookDetails = ({ wallet, Tezos, toast }: CreateItemProps) => {
     </div>
   )
 
+
+const originateSales = async () => {
+  return Tezos?.wallet
+  .originate({
+    code: '',
+    storage: { },
+  })
+  .send()
+  .then((originationOp) => {
+    console.log('OO', originationOp);
+    return originationOp.contract();
+  })
+  .then((contract) => {
+    console.log(`Origination completed for ${contract.address}.`);
+  })
+  .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
+}
+
   return (
     <div className="item-details pageBody">
       <Breadcrumbs header="Book Details" />

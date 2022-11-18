@@ -21,6 +21,7 @@ import SignUp from './SignUp';
 import NoResult from './NoResult';
 import FAQ from './FAQ';
 import Contact02 from './Contact';
+import Originate from './Originate/Originate';
 
 interface RouteProps {
   wallet: BeaconWallet;
@@ -51,4 +52,5 @@ export const setRoutes = ({ wallet, Tezos, toast }: RouteProps) => [
   { path: '/no-result', component: <NoResult /> },
   { path: '/faq', component: <FAQ /> },
   { path: '/contact', component: <Contact02 /> },
+  { path: '/originate', component: <Originate wallet={wallet} Tezos={Tezos} toast={toast}/> },
 ];

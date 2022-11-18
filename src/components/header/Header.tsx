@@ -87,7 +87,7 @@ const Header = ({ wallet, Tezos }: HeaderProps) => {
       if (activeAccount) {
         setActiveAccount(activeAccount);
         setAddress(activeAccount?.address);
-        setWalletBalance(activeAccount);
+        setWalletBalance(activeAccount as AccountInfo);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,0 +1,148 @@
+archetype bookit_book(admin: address) with metadata `{
+  "name": "Bookit BookCollection contract",
+  "description": "Contract for bookit project",
+  "interfaces": ["TZIP-012", "TZIP-016"],
+  "symbol": "Bookit",
+  "decimals": 0,
+  "version": "0.1",
+  "license": "MIT",
+  "authors": [
+    "nigel alford <ngalford@gmail.com>"
+  ],
+  "homepage": "https://bookdapp.xyz"
+}`
+
+variable max_mint_length : nat = 128
+variable max_mint_amount : nat = 1000000
+
+variable max_max_report_url : nat = 512
+variable max_max_report_author : nat = 64
+
+enum book_state =
+| proposed
+| confirmed
+| rejected
+| abuse_copyright
+| copyright_approved
+
+enum book_license =
+| self_published
+| film
+| tv
+| copyright
+
+record royalty {
+  owner_address : address;
+  value   : nat;
+}
+
+// Similarly to a SQL table, an asset is a collection of data stored in the contract storage.
+// Organized in rows and columns and defined by an identifier and a list of fields.
+
+// set default values if not defined   ex. interest : rational = 2%;
+asset BookCollection identified by book_id creator {
+  book_id      : nat;
+  creator      : address;
+  quantity     : nat = 1;
+  state        : book_state;
+  create_date  : date;
+  license      : book_license;
+}
+
+asset ledger identified by lowner {
+  lowner        : address;
+  lbook_id      : nat;
+  lquantity       : nat = 0;
+}
+
+asset book_metadata identified by bm_id to big_map {
+  bm_id        : nat;
+  bm__book_metadata : map<string, string>;
+}
+
+asset royalties identified by r_book_id to big_map {
+  r_book_id   : nat;
+  r_royalties : list<royalty>;
+}
+
+record transfer_destination {
+  to_dest          : address;
+  book_id_dest     : nat;
+  book_amount_dest : nat;
+} as ((to_, (book_id, amount)))
+
+record transfer_param {
+  from_dest : address;
+  txs_dest  : list<transfer_destination>;
+} as ((from_, txs))
+
+record buy_from {
+  seller     : address;
+  buy_amount : nat;
+}
+
+/*  PAUSABLE ----------------------------------------------------------------- */
+
+variable paused : bool = false
+
+function is_not_paused() : bool {
+  do_fail_if(paused, "CONTRACT_PAUSED");
+  return true
+}
+
+entry pause() {
+  called by admin
+  require {
+    pausable_r1: is_not_paused()
+  }
+  effect {
+    paused := true
+  }
+}
+
+entry unpause() {
+  called by admin
+  require {
+    pausable_r2: paused otherwise "CONTRACT_NOT_PAUSED"
+  }
+  effect {
+    paused := false
+  }
+}
+
+//----------------------------------------------------------------------------
+// Mint
+//----------------------------------------------------------------------------
+
+/**
+  * Mint new book
+  * @param bookid book id to mint
+  * @param book_owner owner of the book
+  * @param quantity amount of book
+  * @param bookMetadata book metadata
+  * @param bookRoyalties book's royalties
+*/
+
+// 
+
+entry mint ( mint_book_owner : address, mint_quantity : nat, mint_license : book_license, mint_bookMetadata : map<string, string>, mint_royalties : list<royalty>, mint_state : book_state) {
+  require { r1: is_not_paused() }
+  effect {
+    var bookID : nat = 0;
+
+    BookCollection.add({
+      book_id     = bookID;
+      creator     = caller;
+      quantity    = mint_quantity;
+      state       = proposed;
+      create_date = now;
+      license     = mint_license
+    });
+
+    // mint_bookMetadata; 
+    book_metadata.add({ bm_id = bookID; bm__book_metadata = mint_bookMetadata });
+    royalties.add({ r_book_id = bookID; r_royalties = mint_royalties });
+    ledger.add({ lowner = caller; lbook_id = bookID; lquantity = mint_quantity });
+  }
+}
+
