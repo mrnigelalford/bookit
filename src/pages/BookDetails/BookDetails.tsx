@@ -8,7 +8,6 @@ import './BookDetails.scss';
 
 // import { getContractData, getIPFSHash } from '../../todayData';
 
-// import { Contracts } from '../../App';
 // import { setNewBookData } from '../HomeComponent/HomeComponent';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';

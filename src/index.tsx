@@ -17,8 +17,7 @@ import Footer from './components/footer/Footer';
 const Tezos = new TezosToolkit(process.env.REACT_APP_TEZOS_ENDPOINT || '');
 
 const wallet = new BeaconWallet({
-  name: 'Bookit - Book NFT marketplace',
-  preferredNetwork: NetworkType.MAINNET
+  name: 'Bookit - Book NFT marketplace'
 });
 
 const client = new ApolloClient({
@@ -26,19 +25,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
-  // .then((result) => console.log(result));
-
 Tezos.setWalletProvider(wallet);
 
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-        <ScrollToTop />
-        <ToastContainer />
+      <ScrollToTop />
+      <ToastContainer />
       <div>
         <Header wallet={wallet} Tezos={Tezos} />
-        <App wallet={wallet} Tezos={Tezos} toast={toast}/>
+        <App wallet={wallet} Tezos={Tezos} toast={toast} />
         <Footer />
       </div>
     </ApolloProvider>
